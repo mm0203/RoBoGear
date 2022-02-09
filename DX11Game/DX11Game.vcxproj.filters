@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{a30ef920-37f1-4881-849f-0df0becb9633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{3e7ce218-f09b-497e-8e54-1c35543c60f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Graphics">
+      <UniqueIdentifier>{68bca432-f470-443a-98fc-cc23fcb6f8db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ffb66614-08d7-498e-bc8b-3def54555530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{2ee3933c-6e7c-4009-a43d-259410b8f50f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Texture">
+      <UniqueIdentifier>{76403744-0621-4bc5-ac27-c3d8f4674c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Polygon">
+      <UniqueIdentifier>{a6fbc4c9-d0a7-4a84-abd4-54b7368e8376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Billboard">
+      <UniqueIdentifier>{1922ef10-1f7b-418e-b7fa-9c45b731eb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Mesh">
+      <UniqueIdentifier>{1728b144-3f3b-4544-8c8d-2d0126861dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{253bb2e4-7666-4d67-8f2c-31121f5c1e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{57ea078d-9126-4e2b-b0a6-107358aebc31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Debug">
+      <UniqueIdentifier>{c2e995da-6d1b-443a-8e57-5501bd579f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Input">
+      <UniqueIdentifier>{0339b4c7-c0d5-4f61-a031-37dd362bcf01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Math">
+      <UniqueIdentifier>{14e34b71-5361-44a7-80c1-05688d17552d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Light">
+      <UniqueIdentifier>{4b973d54-2487-41f8-8276-db216d88e9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Fade">
+      <UniqueIdentifier>{90f1f785-07e0-446b-afe6-a5b515785caa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Template">
+      <UniqueIdentifier>{4089f093-6225-41b0-bf97-3107010a3e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Singleton">
+      <UniqueIdentifier>{84dda9ab-a427-45e8-92c8-052c93b85cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Sound">
+      <UniqueIdentifier>{a889f831-9eec-4b00-b547-58c93614154b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Camera">
+      <UniqueIdentifier>{c9ed9c29-674e-4968-a2ff-eabba549878f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Game">
+      <UniqueIdentifier>{8333fa41-fa4e-4a0a-b029-ddb01e75c596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Select">
+      <UniqueIdentifier>{459894aa-f3ee-4098-aa85-860d6a713546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{6a1e44e0-a301-4439-a400-62ee91310a34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Pause">
+      <UniqueIdentifier>{89b59736-abc4-4487-b5bd-7497e8e4c611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Gimic">
+      <UniqueIdentifier>{78a012c1-eb45-4690-a6d1-ec90af7c9ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Cube">
+      <UniqueIdentifier>{1809ee6e-756b-4271-82b5-36a17f613a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Clear">
+      <UniqueIdentifier>{4e0ab067-6db5-4d71-9aed-b56cf58f0dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Field">
+      <UniqueIdentifier>{edf35d9c-1d17-4055-ae7f-863cd3936671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{a2f4b978-6ebd-4570-ba77-d02e9ecba2e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Key">
+      <UniqueIdentifier>{325d10a7-3fa1-416c-af67-aae4449ac60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Wall">
+      <UniqueIdentifier>{a180c0b7-cffe-4377-9eac-042077b0a6f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Assimp">
+      <UniqueIdentifier>{87bb2d0a-7b14-4239-aed6-877b3b80cff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shader">
+      <UniqueIdentifier>{0358bf9c-2d7e-4c34-8b37-ca2287b5e4bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shader\hlsl">
+      <UniqueIdentifier>{f2c81131-3fbb-446e-987b-41d1f2c94c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shader\Script">
+      <UniqueIdentifier>{7ec06819-840a-495b-a5bb-97dfa86d06c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Trap">
+      <UniqueIdentifier>{d2027748-9b1d-4c5e-adc5-6651cb51e71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Game\GameTexture">
+      <UniqueIdentifier>{ba1a133b-b673-4ace-add5-efa6022390c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Pause\PauseTexture">
+      <UniqueIdentifier>{e36fcaf6-75f7-4040-a37b-7bbca17174b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Select\SelectTexture">
+      <UniqueIdentifier>{da860e87-ad09-4506-988d-543ff94af9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title\TitleTextrue">
+      <UniqueIdentifier>{1b42e016-f84d-494e-ad32-f27b55727062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title\TitleObject">
+      <UniqueIdentifier>{b80cfd73-7d60-4065-b261-10a3f6e4d4a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Message">
+      <UniqueIdentifier>{63684888-41e0-4ed8-841d-c6669cf4cf4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Texture">
+      <UniqueIdentifier>{7e553f9d-3e31-450c-918d-b3a733f78aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Game\Instructions">
+      <UniqueIdentifier>{6c213ac5-3f5d-4bda-a164-f66748e3396b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Game\GameOver">
+      <UniqueIdentifier>{f856f54f-6921-4b6a-bc29-28199f139970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Game">
+      <UniqueIdentifier>{d3fa422d-28bc-4b34-98bf-1184e5f05a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Object">
+      <UniqueIdentifier>{7f98f143-a619-45f6-8e53-f0a7c660f1b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Stage">
+      <UniqueIdentifier>{a3286e23-63e9-4283-aeab-1ea81d47771a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Scene">
+      <UniqueIdentifier>{15360f75-064c-4010-a43f-c287582d2699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Sprite">
+      <UniqueIdentifier>{e641e8fc-cd22-45a4-beb5-eb4283ded2b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Edit">
+      <UniqueIdentifier>{e6bec951-71d6-418d-a583-8c4492758227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Effect">
+      <UniqueIdentifier>{9c50bbd7-c4b0-4b28-98c8-e8a70ab0e3a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\InputFile">
+      <UniqueIdentifier>{3eb6b043-b5bb-46ca-be5e-b596d17b97a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Texture">
+      <UniqueIdentifier>{6970902e-a1d0-42ec-92cd-1740d2670c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Helper">
+      <UniqueIdentifier>{f1b01952-8585-4246-932a-5f8f76d6a2cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{44378fd1-2c16-4430-8ad9-326f44cd4cef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Component\Texture\TextureColorChangeComponent.cpp">
+      <Filter>Component\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component\Texture\TextureFadeComponent.cpp">
+      <Filter>Component\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component\Texture\TextureMoveComponent.cpp">
+      <Filter>Component\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Clear.cpp">
+      <Filter>Object\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Cube.cpp">
+      <Filter>Object\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\StageGround.cpp">
+      <Filter>Object\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Gimic.cpp">
+      <Filter>Object\Gimic</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Key.cpp">
+      <Filter>Object\Key</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Trap.cpp">
+      <Filter>Object\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Wall.cpp">
+      <Filter>Object\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Assimp\AssimpModel.cpp">
+      <Filter>Renderer\Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Graphics\DepthStencilState.cpp">
+      <Filter>Renderer\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Graphics\DXBuffer.cpp">
+      <Filter>Renderer\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Graphics\Graphics.cpp">
+      <Filter>Renderer\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Graphics\SamplerState.cpp">
+      <Filter>Renderer\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Mesh\mesh.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Polygon\polygon.cpp">
+      <Filter>Renderer\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shader\Script\PostProcessing.cpp">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shader\Script\Shader.cpp">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shader\Script\ShaderList.cpp">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\RenderTarget.cpp">
+      <Filter>Renderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\Texture.cpp">
+      <Filter>Renderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\TextureFactory.cpp">
+      <Filter>Renderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\DepthStencil.cpp">
+      <Filter>Renderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameScene.cpp">
+      <Filter>Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\ClearLogo.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\GameTexture.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\GameBackGround.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\StartLogo.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Pause\PauseMenu.cpp">
+      <Filter>Scene\Pause</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuChoices.cpp">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuLogo.cpp">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuTexture.cpp">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\StageSelectScene.cpp">
+      <Filter>Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\SelectTexture\StageSelectCursor.cpp">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\SelectTexture\StageSelectLevel.cpp">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\SelectTexture\StageSelectLogo.cpp">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\SelectTexture\StageSelectTexture.cpp">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleScene.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleTexture\TitleTexture.cpp">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleObject\TitleCubeObj.cpp">
+      <Filter>Scene\Title\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleObject\TitlePlayerObj.cpp">
+      <Filter>Scene\Title\TitleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Debug\debugproc.cpp">
+      <Filter>System\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Fade\fade.cpp">
+      <Filter>System\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Fade\FadeTexture.cpp">
+      <Filter>System\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Input\input.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Light\Light.cpp">
+      <Filter>System\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Math\GLMath.cpp">
+      <Filter>System\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Message\Message.cpp">
+      <Filter>System\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Message\MessageManager.cpp">
+      <Filter>System\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Singleton\singleton.cpp">
+      <Filter>System\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Sound\Sound.cpp">
+      <Filter>System\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Template\Template.cpp">
+      <Filter>System\Template</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Camera\Camera.cpp">
+      <Filter>System\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Startup.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Scene\Game\Instructions\Instructions.cpp">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameOver\GameOver.cpp">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameOver\GameOverLogo.cpp">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\GameManager.cpp">
+      <Filter>Manager\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\Object.cpp">
+      <Filter>Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\ObjectManager.cpp">
+      <Filter>Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\StageManager.cpp">
+      <Filter>Manager\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\SpriteManager.cpp">
+      <Filter>Manager\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\Sprite.cpp">
+      <Filter>Manager\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Edit\Editor.cpp">
+      <Filter>Scene\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Edit\EditScene.cpp">
+      <Filter>Scene\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Caterpillar.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Gear.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Generare.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\SceneManager.cpp">
+      <Filter>Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Effect\Effect.cpp">
+      <Filter>Renderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Effect\EffectManager.cpp">
+      <Filter>Renderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Edit\Cursor.cpp">
+      <Filter>Scene\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component\DrawNumber.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Edit\ModeSelect.cpp">
+      <Filter>Scene\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\InputFile\InputFile.cpp">
+      <Filter>System\InputFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Edit\EditOperationUI.cpp">
+      <Filter>Scene\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleTexture\TitleMenuChoices.cpp">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleTexture\TitleBackGround.cpp">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleTexture\TitleLogo.cpp">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleTexture\TitleFrame.cpp">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Manager\BaseTexture.cpp">
+      <Filter>Manager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\GameStep.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameOver\GameOverBackGround.cpp">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\Instructions\InstructionsBackGround.cpp">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\Instructions\InstructionsCursor.cpp">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\Instructions\InstructionsScreen.cpp">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\SelectTexture\StageSelectBackGround.cpp">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuBackGround.cpp">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Component\Texture\TextureColorChangeComponent.h">
+      <Filter>Component\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component\Texture\TextureFadeComponent.h">
+      <Filter>Component\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component\Texture\TextureMoveComponent.h">
+      <Filter>Component\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component\Transform.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Clear.h">
+      <Filter>Object\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Cube.h">
+      <Filter>Object\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\StageGround.h">
+      <Filter>Object\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Gimic.h">
+      <Filter>Object\Gimic</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Key.h">
+      <Filter>Object\Key</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Trap.h">
+      <Filter>Object\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Wall.h">
+      <Filter>Object\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Assimp\AssimpModel.h">
+      <Filter>Renderer\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Billboard\BillBorad.h">
+      <Filter>Renderer\Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Graphics\DepthStencilState.h">
+      <Filter>Renderer\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Graphics\DXBuffer.h">
+      <Filter>Renderer\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Graphics\Graphics.h">
+      <Filter>Renderer\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Graphics\SamplerState.h">
+      <Filter>Renderer\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Mesh\mesh.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Polygon\CPolygon.h">
+      <Filter>Renderer\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Polygon\polygon.h">
+      <Filter>Renderer\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Shader\Script\PostProcessing.h">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Shader\Script\Shader.h">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Shader\Script\ShaderList.h">
+      <Filter>Renderer\Shader\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Texture\DepthStencil.h">
+      <Filter>Renderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Texture\RenderTarget.h">
+      <Filter>Renderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Texture\Texture.h">
+      <Filter>Renderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Texture\TextureFactory.h">
+      <Filter>Renderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameScene.h">
+      <Filter>Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\ClearLogo.h">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\GameTexture.h">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\GameBackGround.h">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\StartLogo.h">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Pause\PauseMenu.h">
+      <Filter>Scene\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuChoices.h">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuLogo.h">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuTexture.h">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\StageSelectScene.h">
+      <Filter>Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\SelectTexture\StageSelectCursor.h">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\SelectTexture\StageSelectLevel.h">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\SelectTexture\StageSelectLogo.h">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\SelectTexture\StageSelectTexture.h">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleScene.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleTexture\TitleTexture.h">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleObject\TitleCubeObj.h">
+      <Filter>Scene\Title\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleObject\TitlePlayerObj.h">
+      <Filter>Scene\Title\TitleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Debug\debugproc.h">
+      <Filter>System\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Fade\fade.h">
+      <Filter>System\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Fade\FadeTexture.h">
+      <Filter>System\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Input\input.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Light\Light.h">
+      <Filter>System\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Math\GLMath.h">
+      <Filter>System\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Math\Math.h">
+      <Filter>System\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Message\Message.h">
+      <Filter>System\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Singleton\singleton.h">
+      <Filter>System\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Sound\Sound.h">
+      <Filter>System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Sound\SoundData.h">
+      <Filter>System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Sound\SoundData.hpp">
+      <Filter>System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Template\Template.h">
+      <Filter>System\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Camera\Camera.h">
+      <Filter>System\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\main.h" />
+    <ClInclude Include="Source\Scene\Game\Instructions\Instructions.h">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameOver\GameOver.h">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameOver\GameOverLogo.h">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\GameManager.h">
+      <Filter>Manager\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\Object.h">
+      <Filter>Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\ObjectManager.h">
+      <Filter>Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\StageManager.h">
+      <Filter>Manager\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\SpriteManager.h">
+      <Filter>Manager\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\Sprite.h">
+      <Filter>Manager\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Edit\Editor.h">
+      <Filter>Scene\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Edit\EditScene.h">
+      <Filter>Scene\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Caterpillar.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Gear.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Generare.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\SceneManager.h">
+      <Filter>Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Effect\Effect.h">
+      <Filter>Renderer\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Edit\Cursor.h">
+      <Filter>Scene\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component\DrawNumber.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Edit\ModeSelect.h">
+      <Filter>Scene\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\InputFile\InputFile.h">
+      <Filter>System\InputFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Edit\EditOperationUI.h">
+      <Filter>Scene\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleTexture\TitleMenuChoices.h">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleTexture\TitleBackGround.h">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleTexture\TitleLogo.h">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleTexture\TitleFrame.h">
+      <Filter>Scene\Title\TitleTextrue</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Manager\BaseTexture.h">
+      <Filter>Manager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\GameStep.h">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameOver\GameOverBackGround.h">
+      <Filter>Scene\Game\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\Instructions\InstructionsBackGround.h">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\Instructions\InstructionsCursor.h">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\Instructions\InstructionsScreen.h">
+      <Filter>Scene\Game\Instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\SelectTexture\StageSelectBackGround.h">
+      <Filter>Scene\Select\SelectTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuBackGround.h">
+      <Filter>Scene\Pause\PauseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Helper\XMFLOAT_Helper.h">
+      <Filter>System\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component\Collision.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\AssimpPixel.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\AssimpVertex.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\Pixel.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\Pixel2D.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\PostPixel2D.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\PostVertex2D.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\ToonOutlinePS.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\ToonOutlineVS.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\Vertex.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Renderer\Shader\hlsl\Vertex2D.hlsl">
+      <Filter>Renderer\Shader\hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\RoBoGear.ico">
+      <Filter>Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DX11Game.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
