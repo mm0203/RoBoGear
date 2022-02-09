@@ -1,4 +1,1 @@
 # RoBoGear
-
-[RoBoGear]
-パズルゲーム。
