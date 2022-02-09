@@ -18,6 +18,7 @@
 
 constexpr auto MapChipSize = 100; // 1マスのサイズ
 
+// 各オブジェクト
 enum MapObject
 {
 	eObject_None = 0,
@@ -31,6 +32,7 @@ enum MapObject
 	eObject_Max
 };
 
+// ステージ番号
 enum  SelectStage
 {
 	eStage_1 = 0,
@@ -45,6 +47,15 @@ enum  SelectStage
 	eStage_10,
 	eTitleBack,
 	Max_Stage
+};
+
+// ステージタプルの情報
+enum StageInfo
+{
+	eStageNumber,
+	eStageName,
+	eStageStep,
+	eStageInfo
 };
 
 //=============================================================================
@@ -68,15 +79,6 @@ public:
 	static void StageCreate(std::string& fileName);
 	// CSVファイル読み込み
 	static void ReadCSV(std::string& fileName, std::vector<std::vector<int>>& map);
-	
-private:
-	enum StageInfo
-	{
-		eStageNumber,
-		eStageName,
-		eStageStep,
-		eStageInfo
-	};
 
 private:
 	// ステージの各情報

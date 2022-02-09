@@ -539,7 +539,7 @@ void CEditor::SaveStage()
 
 		// •à”XV
 		auto& Info = StageManager::GetStageInfo(m_nCurrentStage);
-		std::get<2>(Info) = m_nStepCount;
+		std::get<eStageStep>(Info) = m_nStepCount;
 	}
 }
 
@@ -587,7 +587,7 @@ void CEditor::LoadStage()
 		}
 		// •à”‰Šú’l“Ç‚İ‚İ
 		auto& Info = StageManager::GetStageInfo(m_nCurrentStage);
-		m_nStepCount = std::get<2>(Info);
+		m_nStepCount = std::get<eStageStep>(Info);
 
 		m_type = eObject_Wall;
 	}
