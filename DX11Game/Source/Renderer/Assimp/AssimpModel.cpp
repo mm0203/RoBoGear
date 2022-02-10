@@ -218,10 +218,13 @@ void AnimEvaluator::Evaluate(double pTime)
 
 		// ******** 拡縮 ********
 		aiVector3D presentScaling(1, 1, 1);
-		if (channel->mNumScalingKeys > 0) {
+		if (channel->mNumScalingKeys > 0) 
+		{
 			unsigned int frame = (time >= mLastTime) ? std::get<2>(mLastPositions[a]) : 0;
-			while (frame < channel->mNumScalingKeys - 1) {
-				if (time < channel->mScalingKeys[frame + 1].mTime) {
+			while (frame < channel->mNumScalingKeys - 1) 
+			{
+				if (time < channel->mScalingKeys[frame + 1].mTime)
+				{
 					break;
 				}
 				++frame;
@@ -257,9 +260,11 @@ SceneAnimator::SceneAnimator(const aiScene* pScene, size_t pAnimIndex)
 	, mRootNode(nullptr)
 {
 	// ボーンのノードテーブルを作成
-	for (unsigned int i = 0; i < pScene->mNumMeshes; ++i) {
+	for (unsigned int i = 0; i < pScene->mNumMeshes; ++i) 
+	{
 		const aiMesh* mesh = pScene->mMeshes[i];
-		for (unsigned int n = 0; n < mesh->mNumBones; ++n) {
+		for (unsigned int n = 0; n < mesh->mNumBones; ++n)
+		{
 			const aiBone* bone = mesh->mBones[n];
 
 			mBoneNodesByName[bone->mName.data] = pScene->mRootNode->FindNode(bone->mName);
@@ -291,9 +296,8 @@ SceneAnimator::~SceneAnimator()
 void SceneAnimator::SetAnimIndex(size_t pAnimIndex)
 {
 	// 変更無し?
-	if (pAnimIndex == static_cast<unsigned int>(mCurrentAnimIndex)) {
+	if (pAnimIndex == static_cast<unsigned int>(mCurrentAnimIndex)) 
 		return;
-	}
 
 	// 前回のアニメデータを削除
 	SAFE_DELETE(mRootNode);
@@ -307,9 +311,8 @@ void SceneAnimator::SetAnimIndex(size_t pAnimIndex)
 	mRootNode = CreateNodeTree(mScene->mRootNode, nullptr);
 
 	// アニメーションインデックスが無効?
-	if (static_cast<unsigned int>(mCurrentAnimIndex) >= mScene->mNumAnimations) {
+	if (static_cast<unsigned int>(mCurrentAnimIndex) >= mScene->mNumAnimations) 
 		return;
-	}
 
 	// このアニメーションの評価クラスを作成
 	mAnimEvaluator = new AnimEvaluator(mScene->mAnimations[mCurrentAnimIndex]);
@@ -322,9 +325,8 @@ void SceneAnimator::SetAnimIndex(size_t pAnimIndex)
 void SceneAnimator::Calculate(double pTime)
 {
 	// アニメーション無?
-	if (!mAnimEvaluator) {
+	if (!mAnimEvaluator)
 		return;
-	}
 
 	// 現在のローカル変換を計算
 	mAnimEvaluator->Evaluate(pTime);
@@ -341,9 +343,8 @@ void SceneAnimator::Calculate(double pTime)
 const aiMatrix4x4& SceneAnimator::GetLocalTransform(const aiNode* node) const
 {
 	NodeMap::const_iterator it = mNodesByName.find(node);
-	if (it == mNodesByName.end()) {
+	if (it == mNodesByName.end())
 		return IdentityMatrix;
-	}
 
 	return it->second->mLocalTransform;
 }
@@ -356,9 +357,8 @@ const aiMatrix4x4& SceneAnimator::GetLocalTransform(const aiNode* node) const
 const aiMatrix4x4& SceneAnimator::GetGlobalTransform(const aiNode* node) const
 {
 	NodeMap::const_iterator it = mNodesByName.find(node);
-	if (it == mNodesByName.end()) {
+	if (it == mNodesByName.end())
 		return IdentityMatrix;
-	}
 
 	return it->second->mGlobalTransform;
 }
@@ -384,7 +384,8 @@ const std::vector<aiMatrix4x4>& SceneAnimator::GetBoneMatrices(const aiNode* pNo
 
 	// バインドポーズのメッシュ座標からスキンポーズのメッシュ座標に変換するボーンマトリックスを生成
 	// 式は offsetMatrix * currentGlobalTransform * inverseCurrentMeshTransform となる
-	for (size_t a = 0; a < mesh->mNumBones; ++a) {
+	for (size_t a = 0; a < mesh->mNumBones; ++a) 
+	{
 		const aiBone* bone = mesh->mBones[a];
 		const aiMatrix4x4& currentGlobalTransform = GetGlobalTransform(mBoneNodesByName[bone->mName.data]);
 		mTransforms[a] = globalInverseMeshTransform * currentGlobalTransform * bone->mOffsetMatrix;
@@ -411,11 +412,13 @@ SceneAnimNode* SceneAnimator::CreateNodeTree(aiNode* pNode, SceneAnimNode* pPare
 	CalculateGlobalTransform(internalNode);
 
 	// このノードに影響を与えるアニメーショントラックのインデックスを探す
-	if (static_cast<unsigned int>(mCurrentAnimIndex) < mScene->mNumAnimations) {
+	if (static_cast<unsigned int>(mCurrentAnimIndex) < mScene->mNumAnimations)
+	{
 		internalNode->mChannelIndex = -1;
 		const aiAnimation* currentAnim = mScene->mAnimations[mCurrentAnimIndex];
 		for (unsigned int a = 0; a < currentAnim->mNumChannels; a++) {
-			if (currentAnim->mChannels[a]->mNodeName.data == internalNode->mName) {
+			if (currentAnim->mChannels[a]->mNodeName.data == internalNode->mName) 
+			{
 				internalNode->mChannelIndex = a;
 				break;
 			}
@@ -423,7 +426,8 @@ SceneAnimNode* SceneAnimator::CreateNodeTree(aiNode* pNode, SceneAnimNode* pPare
 	}
 
 	// 全ての子ノードに対して、作成された内部ノードを子として割り当て
-	for (unsigned int a = 0; a < pNode->mNumChildren; ++a) {
+	for (unsigned int a = 0; a < pNode->mNumChildren; ++a)
+	{
 		SceneAnimNode* childNode = CreateNodeTree(pNode->mChildren[a], internalNode);
 		internalNode->mChildren.push_back(childNode);
 	}
@@ -478,12 +482,11 @@ void SceneAnimator::CalculateGlobalTransform(SceneAnimNode* pInternalNode)
 CAssimpMesh::CAssimpMesh(ID3D11Device* pDevice, CAssimpModel* pModel, vector<TAssimpVertex> aVertex, vector<UINT> aIndex, TAssimpMaterial& material)
 {
 	m_pModel = pModel;
-	m_pConstantBuffer0 = nullptr;
-	m_pConstantBuffer1 = nullptr;
 	m_pConstantBufferOutLine = nullptr;
 	m_pConstantBufferBone = nullptr;
 	m_pAssimp = nullptr;
-	m_pConstantBuffer = nullptr;
+	m_pConstantBufferGlobal = nullptr;
+	m_pConstantBufferMaterial = nullptr;
 	m_pRampTex = nullptr;
 	m_aVertex = aVertex;
 	m_aIndex = aIndex;
@@ -499,12 +502,11 @@ CAssimpMesh::~CAssimpMesh()
 // 解放
 void CAssimpMesh::Release()
 {
-	SAFE_RELEASE(m_pConstantBuffer1);
-	SAFE_RELEASE(m_pConstantBuffer0);
 	SAFE_RELEASE(m_pConstantBufferOutLine);
 	SAFE_RELEASE(m_pRampTex);
 	SAFE_DELETE(m_pAssimp);
-	SAFE_DELETE(m_pConstantBuffer);
+	SAFE_DELETE(m_pConstantBufferGlobal);
+	SAFE_DELETE(m_pConstantBufferMaterial);
 	m_material.Release();
 }
 
@@ -530,28 +532,16 @@ bool CAssimpMesh::SetupMesh(ID3D11Device* pDevice)
 	m_pAssimp = new DXBuffer();
 	m_pAssimp->Create(desc);
 
-	//m_pConstantBuffer = new ConstantBuffer;
-	//m_pConstantBuffer->Create(sizeof(SHADER_GLOBAL));
+	// グローバル用
+	m_pConstantBufferGlobal = new ConstantBuffer;
+	m_pConstantBufferGlobal->Create(sizeof(SHADER_GLOBAL));
+
+	// マテリアル用
+	m_pConstantBufferMaterial = new ConstantBuffer;
+	m_pConstantBufferMaterial->Create(sizeof(SHADER_MATERIAL));
 
 	// コンスタントバッファ作成 変換行列渡し用
 	D3D11_BUFFER_DESC cb;
-	ZeroMemory(&cb, sizeof(cb));
-	cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cb.ByteWidth = sizeof(SHADER_GLOBAL);
-	cb.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cb.MiscFlags = 0;
-	cb.Usage = D3D11_USAGE_DYNAMIC;
-	hr = pDevice->CreateBuffer(&cb, nullptr, &m_pConstantBuffer0);
-	if (FAILED(hr)) { return false; }
-
-	// コンスタントバッファ作成 マテリアル渡し用
-	cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cb.ByteWidth = sizeof(SHADER_MATERIAL);
-	cb.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cb.MiscFlags = 0;
-	cb.Usage = D3D11_USAGE_DYNAMIC;
-	hr = pDevice->CreateBuffer(&cb, nullptr, &m_pConstantBuffer1);
-	if (FAILED(hr)) { return false; }
 
 	// コンスタントバッファ ボーン用 作成
 	ZeroMemory(&cb, sizeof(cb));
@@ -634,70 +624,55 @@ void CAssimpMesh::Draw(ID3D11DeviceContext* pDC, XMFLOAT4X4& m44World, EByOpacit
 	if (pMaterial->pTexture)
 	{
 		vFlags.x = 1;
-		if (pMaterial->pTexEmmisive)
-			vFlags.y = 1;
-		if (pMaterial->pTexTransparent)
-			vFlags.z = 1;
-		if (pMaterial->pTexSpecular)
-			vFlags.w = 1;
+		if (pMaterial->pTexEmmisive)	vFlags.y = 1;
+		if (pMaterial->pTexTransparent)	vFlags.z = 1;
+		if (pMaterial->pTexSpecular)	vFlags.w = 1;
 	}
 	else
-	{
 		mtxTexture._44 = 0.0f;
-	}
-	// 定数領域更新
-	D3D11_MAPPED_SUBRESOURCE pData;
-	if (SUCCEEDED(pDC->Map(m_pConstantBuffer0, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData)))
-	{
-		SHADER_GLOBAL sg;
-		CCamera* pCamera = &Singleton<CCamera>::GetInstance();
-		CLight* pLight = &Singleton<CLight>::GetInstance();
-		XMMATRIX mtxWorld = XMLoadFloat4x4(&m44World);
-		XMMATRIX mtxView = XMLoadFloat4x4(&pCamera->GetViewMatrix());
-		XMMATRIX mtxProj = XMLoadFloat4x4(&pCamera->GetProjMatrix());
-		sg.mW = XMMatrixTranspose(mtxWorld);
-		XMMATRIX mtxTex = XMLoadFloat4x4(&mtxTexture);
-		sg.mTex = XMMatrixTranspose(mtxTex);
-		sg.mWVP = mtxWorld * mtxView * mtxProj;
-		sg.mWVP = XMMatrixTranspose(sg.mWVP);
-		sg.vEye = XMLoadFloat3(&pCamera->GetPos());
-		mtxView = XMLoadFloat4x4(&pLight->GetViewMatrix());
-		sg.mLitWVP = mtxWorld * mtxView * mtxProj;
-		sg.mLitWVP = XMMatrixTranspose(sg.mLitWVP);
-		sg.vLightDir = XMLoadFloat3(&pLight->GetDir());
-		sg.vLd = XMLoadFloat4(&pLight->GetDiffuse());
-		sg.vLa = XMLoadFloat4(&pLight->GetAmbient());
-		sg.vLs = XMLoadFloat4(&pLight->GetSpecular());
-		memcpy_s(pData.pData, pData.RowPitch, (void*)&sg, sizeof(sg));
-		pDC->Unmap(m_pConstantBuffer0, 0);
-	}
-	//m_pConstantBuffer->Write(&sg);
-	//m_pConstantBuffer->BindVS(0);
-	//m_pConstantBuffer->BindPS(0);
 
-	pDC->VSSetConstantBuffers(0, 1, &m_pConstantBuffer0);
-	pDC->PSSetConstantBuffers(0, 1, &m_pConstantBuffer0);
+	// グローバルシェーダ設定
+	SHADER_GLOBAL sg;
+	CCamera* pCamera = &Singleton<CCamera>::GetInstance();
+	CLight* pLight = &Singleton<CLight>::GetInstance();
+	XMMATRIX mtxWorld = XMLoadFloat4x4(&m44World);
+	XMMATRIX mtxView = XMLoadFloat4x4(&pCamera->GetViewMatrix());
+	XMMATRIX mtxProj = XMLoadFloat4x4(&pCamera->GetProjMatrix());
+	sg.mW = XMMatrixTranspose(mtxWorld);
+	XMMATRIX mtxTex = XMLoadFloat4x4(&mtxTexture);
+	sg.mTex = XMMatrixTranspose(mtxTex);
+	sg.mWVP = mtxWorld * mtxView * mtxProj;
+	sg.mWVP = XMMatrixTranspose(sg.mWVP);
+	sg.vEye = XMLoadFloat3(&pCamera->GetPos());
+	mtxView = XMLoadFloat4x4(&pLight->GetViewMatrix());
+	sg.mLitWVP = mtxWorld * mtxView * mtxProj;
+	sg.mLitWVP = XMMatrixTranspose(sg.mLitWVP);
+	sg.vLightDir = XMLoadFloat3(&pLight->GetDir());
+	sg.vLd = XMLoadFloat4(&pLight->GetDiffuse());
+	sg.vLa = XMLoadFloat4(&pLight->GetAmbient());
+	sg.vLs = XMLoadFloat4(&pLight->GetSpecular());
 
-	// マテリアルの各要素をシェーダに渡す
-	if (SUCCEEDED(pDC->Map(m_pConstantBuffer1, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData)))
-	{
-		SHADER_MATERIAL sg;
-		sg.vAmbient = XMLoadFloat4(&pMaterial->Ka);
-		sg.vDiffuse = XMLoadFloat4(&pMaterial->Kd);
-		sg.vSpecular = XMLoadFloat4(&pMaterial->Ks);
-		sg.vEmissive = XMLoadFloat4(&pMaterial->Ke);
-		sg.vFlags = XMLoadUInt4(&vFlags);
+	// セット
+	m_pConstantBufferGlobal->Write(&sg);
+	m_pConstantBufferGlobal->BindVS(0);
+	m_pConstantBufferGlobal->BindPS(0);
 
-		// トゥーンシェーダ表示切り替え
-		// デバッグモードでZ押したらトゥーンシェーダ非表示
-		bool toon = false;
-		if (CGameManager::GetDebug() && GetKeyPress(VK_Z)) toon ^= 1;
-		sg.toon = toon;
+	// マテリアルシェーダー設定
+	SHADER_MATERIAL sm;
+	sm.vAmbient = XMLoadFloat4(&pMaterial->Ka);
+	sm.vDiffuse = XMLoadFloat4(&pMaterial->Kd);
+	sm.vSpecular = XMLoadFloat4(&pMaterial->Ks);
+	sm.vEmissive = XMLoadFloat4(&pMaterial->Ke);
+	sm.vFlags = XMLoadUInt4(&vFlags);
 
-		memcpy_s(pData.pData, pData.RowPitch, (void*)&sg, sizeof(sg));
-		pDC->Unmap(m_pConstantBuffer1, 0);
-	}
-	pDC->PSSetConstantBuffers(1, 1, &m_pConstantBuffer1);
+	// デバッグモードでトゥーンシェーダ表示切り替え
+	bool toon = false;
+	if (CGameManager::GetDebug() && GetKeyPress(VK_Z)) toon ^= 1;
+	sm.toon = toon;
+
+	// セット
+	m_pConstantBufferMaterial->Write(&sm);
+	m_pConstantBufferMaterial->BindPS(1);
 
 	// テクスチャをシェーダに渡す
 	if (pMaterial->pTexture)
@@ -744,17 +719,13 @@ void CAssimpMesh::DrawOutLine(ID3D11DeviceContext* pDC, XMFLOAT4X4& m44World, EB
 	if (pMaterial->pTexture)
 	{
 		vFlags.x = 1;
-		if (pMaterial->pTexEmmisive)
-			vFlags.y = 1;
-		if (pMaterial->pTexTransparent)
-			vFlags.z = 1;
-		if (pMaterial->pTexSpecular)
-			vFlags.w = 1;
+		if (pMaterial->pTexEmmisive)	vFlags.y = 1;
+		if (pMaterial->pTexTransparent) vFlags.z = 1;
+		if (pMaterial->pTexSpecular)	vFlags.w = 1;
 	}
 	else
-	{
 		mtxTexture._44 = 0.0f;
-	}
+
 	D3D11_MAPPED_SUBRESOURCE pData;
 	if (SUCCEEDED(pDC->Map(m_pConstantBufferOutLine, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData)))
 	{
@@ -982,14 +953,11 @@ void CAssimpModel::DrawNode(ID3D11DeviceContext* pDC, aiNode* piNode, const aiMa
 			helper.SetBoneMatrix(pDC, identity);
 		}
 
+		// 普通の描画とアウトライン描画
 		if (shadow)
-		{
 			helper.DrawOutLine(pDC, mtxWorld, byOpacity);
-		}
 		else
-		{
 			helper.Draw(pDC, mtxWorld, byOpacity);
-		}
 	}
 
 	// 全ての子ノードをレンダリング
@@ -1018,7 +986,11 @@ void CAssimpModel::ModelRelease(CAssimpModel* model)
 {
 }
 
+//=============================================================================
+// 
 // 全メッシュ取り込み
+// 
+//=============================================================================
 void CAssimpModel::processNode(ID3D11Device* pDevice, aiNode* node)
 {
 	for (UINT i = 0; i < node->mNumMeshes; ++i)
@@ -1033,7 +1005,11 @@ void CAssimpModel::processNode(ID3D11Device* pDevice, aiNode* node)
 	}
 }
 
+//=============================================================================
+// 
 // メッシュ展開
+// 
+//=============================================================================
 CAssimpMesh CAssimpModel::processMesh(ID3D11Device* pDevice, aiMesh* mesh)
 {
 	vector<TAssimpVertex> aVertex;
@@ -1116,7 +1092,11 @@ CAssimpMesh CAssimpModel::processMesh(ID3D11Device* pDevice, aiMesh* mesh)
 	return CAssimpMesh(pDevice, this, aVertex, aIndex, material);
 }
 
+//=============================================================================
+// 
 // マテリアル読込
+// 
+//=============================================================================
 TAssimpMaterial CAssimpModel::loadMaterial(ID3D11Device* pDevice, aiMaterial* mat, aiMesh* mesh)
 {
 	TAssimpMaterial material;
@@ -1230,7 +1210,11 @@ TAssimpMaterial CAssimpModel::loadMaterial(ID3D11Device* pDevice, aiMaterial* ma
 	return material;
 }
 
+//=============================================================================
+// 
 // テクスチャ タイプ決定
+// 
+//=============================================================================
 string CAssimpModel::determineTextureType(aiMaterial* mat)
 {
 	aiString textypeStr;
@@ -1253,7 +1237,11 @@ string CAssimpModel::determineTextureType(aiMaterial* mat)
 	return "";
 }
 
+//=============================================================================
+// 
 // テクスチャ インデックス取得
+// 
+//=============================================================================
 int CAssimpModel::getTextureIndex(aiString* str)
 {
 	string tistr;
@@ -1262,7 +1250,11 @@ int CAssimpModel::getTextureIndex(aiString* str)
 	return stoi(tistr);
 }
 
+//=============================================================================
+// 
 // モデル データ内包テクスチャ読込
+// 
+//=============================================================================
 ID3D11ShaderResourceView* CAssimpModel::getTextureFromModel(ID3D11Device* pDevice, int textureindex)
 {
 	HRESULT hr = S_OK;
@@ -1276,7 +1268,11 @@ ID3D11ShaderResourceView* CAssimpModel::getTextureFromModel(ID3D11Device* pDevic
 	return texture;
 }
 
+//=============================================================================
+// 
 // テクスチャ読込
+// 
+//=============================================================================
 void CAssimpModel::LoadTexture(ID3D11Device* pDevice, aiString& szPath, ID3D11ShaderResourceView** ppTexture)
 {
 	if (m_textype == "embedded compressed texture")
@@ -1316,7 +1312,11 @@ void CAssimpModel::LoadTexture(ID3D11Device* pDevice, aiString& szPath, ID3D11Sh
 	}
 }
 
+//=============================================================================
+// 
 // テクスチャのアルファ有無
+// 
+//=============================================================================
 bool CAssimpModel::HasAlphaPixels(ID3D11ShaderResourceView* pTexture)
 {
 	/*
@@ -1360,7 +1360,11 @@ bool CAssimpModel::HasAlphaPixels(ID3D11ShaderResourceView* pTexture)
 	return false;
 }
 
+//=============================================================================
+// 
 // ノード毎に頂点座標の最大最小値をチェック
+// 
+//=============================================================================
 void CAssimpModel::CalculateBounds(aiNode* piNode, aiVector3D* p_avOut, const aiMatrix4x4& piMatrix)
 {
 	aiMatrix4x4 mTemp = piNode->mTransformation;
@@ -1390,7 +1394,11 @@ void CAssimpModel::CalculateBounds(aiNode* piNode, aiVector3D* p_avOut, const ai
 	}
 }
 
+//=============================================================================
+// 
 // 境界ボックス計算
+// 
+//=============================================================================
 void CAssimpModel::ScaleAsset()
 {
 	aiVector3D aiVecs[2] = { aiVector3D(1e10f, 1e10f, 1e10f), aiVector3D(-1e10f, -1e10f, -1e10f) };
@@ -1412,7 +1420,11 @@ void CAssimpModel::ScaleAsset()
 	m_vCenter.z = vCenter.z;
 }
 
+//=============================================================================
+// 
 // アニメーション セット選択
+// 
+//=============================================================================
 void CAssimpModel::SetAnimIndex(int nAnimIndex)
 {
 	if (m_pAnimator)
@@ -1421,7 +1433,11 @@ void CAssimpModel::SetAnimIndex(int nAnimIndex)
 	}
 }
 
+//=============================================================================
+// 
 // 現在アニメーションインデックスを取得
+// 
+//=============================================================================
 int CAssimpModel::GetCurrentAnimIndex()
 {
 	if (m_pAnimator)
@@ -1432,7 +1448,11 @@ int CAssimpModel::GetCurrentAnimIndex()
 	return -1;
 }
 
+//=============================================================================
+// 
 // アニメーション セット数取得
+// 
+//=============================================================================
 UINT CAssimpModel::GetAnimCount()
 {
 	if (m_pScene)	return m_pScene->mNumAnimations;
@@ -1440,7 +1460,11 @@ UINT CAssimpModel::GetAnimCount()
 	return 0;
 }
 
+//=============================================================================
+// 
 // アニメーションの再生場所
+// 
+//=============================================================================
 void CAssimpModel::SetStartAnimTime(double dTime)
 {
 	if (m_pAnimator)
@@ -1453,6 +1477,11 @@ void CAssimpModel::SetStartAnimTime(double dTime)
 	}
 }
 
+//=============================================================================
+// 
+// アニメ速度
+// 
+//=============================================================================
 void CAssimpModel::SetAnimSpeed(double dSpeed)
 {
 	if (m_pAnimator)
@@ -1461,6 +1490,11 @@ void CAssimpModel::SetAnimSpeed(double dSpeed)
 	}
 }
 
+//=============================================================================
+// 
+// アニメ停止
+// 
+//=============================================================================
 void CAssimpModel::SetStopAnim(bool bStop)
 {
 	if (m_pAnimator)
@@ -1469,6 +1503,11 @@ void CAssimpModel::SetStopAnim(bool bStop)
 	}
 }
 
+//=============================================================================
+// 
+// アニメ再生時間取得
+// 
+//=============================================================================
 double CAssimpModel::GetAnimDuration(int nAnimIndex)
 {
 	if (m_pScene)

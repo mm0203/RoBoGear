@@ -23,7 +23,7 @@ cbuffer global2 : register(b1)
 	float4	g_Emissive;			// 発光色
 	float4	g_Flags;			// 拡散色テクスチャ有無, 発光色テクスチャ有無, 透過テクスチャ有無
 
-	bool g_bToon;
+	bool g_bToon;	// トゥーンテクスチャ判定用
 };
 
 SamplerState g_sampler			 : register(s0); // サンプラ

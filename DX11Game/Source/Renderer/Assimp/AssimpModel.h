@@ -66,6 +66,8 @@ struct TAssimpMaterial
 	ID3D11ShaderResourceView*	pTexTransparent;// 透過テクスチャ
 	ID3D11ShaderResourceView*	pTexNormal;		// 法線テクスチャ
 	ID3D11ShaderResourceView*	pTexAmbient;	// 環境テクスチャ
+
+	// マテリアル
 	TAssimpMaterial()
 	{
 		Ka = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f);
@@ -77,6 +79,8 @@ struct TAssimpMaterial
 		pTexSpecular = nullptr;
 		pTexTransparent = nullptr;
 	}
+
+	// 解放
 	void Release()
 	{
 		SAFE_RELEASE(pTexTransparent);
@@ -194,6 +198,7 @@ public:
 		return static_cast<unsigned int>(mCurrentAnimIndex) < mScene->mNumAnimations ? mScene->mAnimations[mCurrentAnimIndex] : nullptr;
 	}
 
+	// アニメの時間情報
 	double m_dCurrent;
 	double m_dLastPlaying;
 	double m_dAnimSpeed;
@@ -228,20 +233,19 @@ class CAssimpModel;
 class CAssimpMesh 
 {
 private:
-	CAssimpModel* m_pModel;
-	std::vector<TAssimpVertex> m_aVertex;
-	std::vector<UINT> m_aIndex;
+	CAssimpModel* m_pModel;	// モデル
+	std::vector<TAssimpVertex> m_aVertex;	// 頂点
+	std::vector<UINT> m_aIndex;	// インデックス
 
-	TAssimpMaterial m_material;
+	TAssimpMaterial m_material;	// マテリアル
 
-	ID3D11Buffer* m_pConstantBuffer0;
-	ID3D11Buffer* m_pConstantBuffer1;
 	ID3D11Buffer* m_pConstantBufferOutLine;
 	ID3D11Buffer* m_pConstantBufferBone;
 	DXBuffer* m_pAssimp;
-	ID3D11ShaderResourceView* m_pRampTex;
+	ID3D11ShaderResourceView* m_pRampTex;	// トゥーンテクスチャ用
 
-	ConstantBuffer* m_pConstantBuffer;
+	ConstantBuffer* m_pConstantBufferGlobal;	// グローバル用
+	ConstantBuffer* m_pConstantBufferMaterial;	// マテリアル用
 
 
 public:

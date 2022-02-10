@@ -70,7 +70,7 @@ float4 main(VS_OUTPUT input) : SV_Target0
     if (g_bLight && (g_vLightDir.x != 0.0f || g_vLightDir.y != 0.0f || g_vLightDir.z != 0.0f))
     {
 
-        //===== デフォルトシェーディング =====
+        // デフォルトシェーディング
         // 光源有効
         // 光源へのベクトル
         float3 L = normalize(-g_vLightDir.xyz);
@@ -185,7 +185,7 @@ float4 main(VS_OUTPUT input) : SV_Target0
         }
 
 
-        //===== ライティング =====
+        // ライティング
         // Half Lambert
         float PI = 3.14159265359f;
         float val = max(dot(N, L), 0.0f) * 0.5f + 0.5f;
@@ -205,7 +205,7 @@ float4 main(VS_OUTPUT input) : SV_Target0
 
         //　フォグ色とオブジェクト色と線形合成
         //float3 FogColor = float3(0.557f, 0.631f, 0.6f);
-        float3 FogColor = float3(0.1f, 0.1f, 0.1f);
+        float3 FogColor = float3(0.5f, 0.5f, 0.5f);
         Diff = lerp(FogColor, Diff, input.Fog);
         Alpha = lerp(1, Alpha, input.Fog);
     }

@@ -1,5 +1,3 @@
-//定数バッファの受け取り先
-
 #define MAX_BONE_MATRIX	64
 
 cbuffer Matrix : register(b0)
@@ -18,20 +16,20 @@ cbuffer global_bones : register(b2)
 
 struct VS_IN
 {
-	float3 pos : POSITION0;
-	float3 normal : NORMAL0;
-	float2 uv : TEXCOORD0;
+	float3 pos		: POSITION0;
+	float3 normal	: NORMAL0;
+	float2 uv		: TEXCOORD0;
 	uint4	Bone	: BONE_INDEX;	// ボーンのインデックス
 	float4	Weight	: BONE_WEIGHT;	// ボーンの重み
 };
 // ピクセルシェーダに渡すデータ
 struct VS_OUT
 {
-	float4 pos : SV_POSITION;
-	float4	LitPos		: WORLD_POSITION;
-	float2 uv : TEXCOORD0;
-	float3 normal : TEXCOORD1;
-	float3	PosForPS	: TEXCOORD2;
+	float4 pos		: SV_POSITION;
+	float4 LitPos	: WORLD_POSITION;
+	float2 uv		: TEXCOORD0;
+	float3 normal	: TEXCOORD1;
+	float3 PosForPS : TEXCOORD2;
 };
 struct SKIN
 {
