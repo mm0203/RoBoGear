@@ -39,6 +39,7 @@ public:
 	static GameState GetState() { return m_GameState; }
 	static int& GetStep() { return m_nStep; }
 	static int& GetStageMenu() { return m_nStageMenuIndex; }
+	static bool GetDebug() { return m_bDebugMode; }
 	
 	// setter
 	static void SetState(GameState state) { m_GameState = state; }
@@ -52,4 +53,5 @@ private:
 	static GameState m_GameState;	// ゲーム中の状態
 	static int m_nStep;	// 歩数
 	static int m_nStageMenuIndex; // ステージ番号
+	static bool m_bDebugMode; // デバックモード
 };

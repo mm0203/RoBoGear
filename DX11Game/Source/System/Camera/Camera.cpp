@@ -7,6 +7,7 @@
 #include <System/Input/input.h>
 #include <System/Debug/debugproc.h>
 #include <Manager/SceneManager.h>
+#include <Manager/GameManager.h>
 
 //=============================================================================
 // 
@@ -105,61 +106,65 @@ void CCamera::Update()
 	static float AngleMove = 0.0f;	// 回転量
 	bool isInput = false;	// 減衰処理判定
 
-	//// カメラ移動(4方向)
-	//if (GetKeyPress(VK_UP))		//前方
-	//{
-	//	Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y) * Acc;
-	//	Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y) * Acc;
-	//	isInput = true;
-	//}
-	//if (GetKeyPress(VK_DOWN))		//後方
-	//{
-	//	Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 180.0f) * Acc;
-	//	Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 180.0f) * Acc;
-	//	isInput = true;
-	//}
-	//if (GetKeyPress(VK_RIGHT))		//右
-	//{
-	//	Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 90.0f) * Acc;
-	//	Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 90.0f) * Acc;
-	//	isInput = true;
-	//}
-	//if (GetKeyPress(VK_LEFT))		//左
-	//{
-	//	Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 270.0f) * Acc;
-	//	Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 270.0f) * Acc;
-	//	isInput = true;
-	//}
+	// デバッグモードで操作
+	if (CGameManager::GetDebug())
+	{
+		// カメラ移動(4方向)
+		if (GetKeyPress(VK_W))		//前方
+		{
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y) * Acc;
+			isInput = true;
+		}
+		if (GetKeyPress(VK_S))		//後方
+		{
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 180.0f) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 180.0f) * Acc;
+			isInput = true;
+		}
+		if (GetKeyPress(VK_D))		//右
+		{
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 90.0f) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 90.0f) * Acc;
+			isInput = true;
+		}
+		if (GetKeyPress(VK_A))		//左
+		{
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 270.0f) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 270.0f) * Acc;
+			isInput = true;
+		}
 
-	//// カメラ移動(上下)
-	//if (GetKeyPress(VK_SPACE))		//上方
-	//{
-	//	Move.y += CameraMoveSpeed * Acc;
-	//	isInput = true;
-	//}
-	//if (GetKeyPress(VK_LCONTROL))	//下方
-	//{
-	//	Move.y -= CameraMoveSpeed * Acc;
-	//	isInput = true;
-	//}
+		// カメラ移動(上下)
+		if (GetKeyPress(VK_SPACE))		//上方
+		{
+			Move.y += CameraMoveSpeed * Acc;
+			isInput = true;
+		}
+		if (GetKeyPress(VK_LCONTROL))	//下方
+		{
+			Move.y -= CameraMoveSpeed * Acc;
+			isInput = true;
+		}
 
-	//// カメラ回転
-	//if (GetKeyPress(VK_L))		//右
-	//{
-	//	m_CameraAngle.y += CameraRotSpeed;
-	//}
-	//if (GetKeyPress(VK_J))		//左
-	//{
-	//	m_CameraAngle.y -= CameraRotSpeed;
-	//}
-	//if (GetKeyPress(VK_I))		//上方
-	//{
-	//	m_TargetRelativePos.y += CameraRotSpeed * CameraRotSpeed;
-	//}
-	//if (GetKeyPress(VK_K))		//下方
-	//{
-	//	m_TargetRelativePos.y -= CameraRotSpeed * CameraRotSpeed;
-	//}
+		// カメラ回転
+		if (GetKeyPress(VK_L))		//右
+		{
+			m_CameraAngle.y += CameraRotSpeed;
+		}
+		if (GetKeyPress(VK_J))		//左
+		{
+			m_CameraAngle.y -= CameraRotSpeed;
+		}
+		if (GetKeyPress(VK_I))		//上方
+		{
+			m_TargetRelativePos.y += CameraRotSpeed * CameraRotSpeed;
+		}
+		if (GetKeyPress(VK_K))		//下方
+		{
+			m_TargetRelativePos.y -= CameraRotSpeed * CameraRotSpeed;
+		}
+	}
 
 	// 移動速度制限
 	if (Move.x > CameraMoveSpeed || Move.x < -CameraMoveSpeed)

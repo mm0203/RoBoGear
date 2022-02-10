@@ -7,6 +7,7 @@
 #include <Renderer/Texture/Texture.h>
 #include <Renderer/Graphics/Graphics.h>
 #include <System/Input/input.h>
+#include <Manager/GameManager.h>
 #include <time.h>
 
 //=============================================================================
@@ -210,9 +211,15 @@ void CRenderer::Draw(XMFLOAT3 pos, XMFLOAT3 scale, XMFLOAT3 rot)
 
 	// モデル表示
 	m_pModel->Draw(pDC, g_mtxWorld, false, eNoAffect);
+
+	// デバッグモードでX押したらアウトライン非表示
+	bool outline = false;
+	if (CGameManager::GetDebug() && GetKeyPress(VK_X)) outline ^= 1;
+
 	// アウトライン表示
-	//if (!GetKeyPress(VK_Z))
+	if(!outline)
 	m_pModel->Draw(pDC, g_mtxWorld, true, eNoAffect);
+
 	// アニメーション
 	DrawAnime();
 }

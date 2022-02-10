@@ -12,6 +12,7 @@
 #include <System/Singleton/singleton.h>
 #include <System/Input/input.h>
 #include <System/Debug/debugproc.h>
+#include <System/Message/Message.h>
 
 // シーン
 #include <Scene/Title/TitleScene.h>
@@ -27,6 +28,7 @@
 GameState CGameManager::m_GameState;
 int CGameManager::m_nStep;
 int CGameManager::m_nStageMenuIndex;
+bool CGameManager::m_bDebugMode;
 
 //=============================================================================
 // 
@@ -37,6 +39,29 @@ void CGameManager::Init()
 {
 	m_GameState = GameState::eStop;
 	m_nStep = 99;
+	m_bDebugMode = false;
+
+	// デバックモード文字表示
+	MessageManager::Init();
+
+	// 文字黒色
+	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
+
+	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, 300.0f),8);
+
+	// カメラ操作表示
+	MessageManager::CreateMessage("CAMERA", XMFLOAT2(300, 300.0f), 6);
+	MessageManager::CreateMessage("MOVE  WASD", XMFLOAT2(360, 250.0f));
+	MessageManager::CreateMessage("ANGLE IJKL", XMFLOAT2(360, 200.0f));
+	MessageManager::CreateMessage("UP SPACE", XMFLOAT2(360, 150.0f));
+	MessageManager::CreateMessage("DOWN CTRL", XMFLOAT2(360, 100.0f));
+
+	// シェーダ切り替え表示
+	MessageManager::CreateMessage("SHADER", XMFLOAT2(300, 0.0f), 6);
+	MessageManager::CreateMessage("TOON    Z", XMFLOAT2(360, -50.0f));
+	MessageManager::CreateMessage("OUTLINE X", XMFLOAT2(360, -100.0f));
+	MessageManager::CreateMessage("BUMP    C", XMFLOAT2(360, -150.0f));
+	MessageManager::CreateMessage("ANBIENT V", XMFLOAT2(360, -200.0f));
 }
 
 //=============================================================================
@@ -46,6 +71,7 @@ void CGameManager::Init()
 //=============================================================================
 void CGameManager::Uninit()
 {
+	MessageManager::Uninit();
 }
 
 //=============================================================================
@@ -55,6 +81,9 @@ void CGameManager::Uninit()
 //=============================================================================
 void CGameManager::Update()
 {
+	if (GetKeyTrigger(VK_F1))
+		m_bDebugMode ^= 1;
+
 	static int nCount = 0;
 	static bool bPuase = false;
 	static bool bInstructions = false;
@@ -151,4 +180,6 @@ void CGameManager::Update()
 //=============================================================================
 void CGameManager::Draw()
 {
+	if(m_bDebugMode)
+	MessageManager::Draw();
 }

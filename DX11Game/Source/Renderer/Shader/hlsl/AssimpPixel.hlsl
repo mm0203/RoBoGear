@@ -22,6 +22,8 @@ cbuffer global2 : register(b1)
 	float4	g_Specular;			// 鏡面反射色+強度
 	float4	g_Emissive;			// 発光色
 	float4	g_Flags;			// 拡散色テクスチャ有無, 発光色テクスチャ有無, 透過テクスチャ有無
+
+	bool g_bToon;
 };
 
 SamplerState g_sampler			 : register(s0); // サンプラ
@@ -158,17 +160,20 @@ float4 main(VS_OUTPUT input) : SV_Target0
 	  Diff += Emis;
 
 	  //トゥーン
-	  float diffuse;
-	  diffuse = dot(N, L);
-	  diffuse = (diffuse + 1.0f) * 0.5f;
+	  if (!g_bToon)
+	  {
+		  float diffuse;
+		  diffuse = dot(N, L);
+		  diffuse = (diffuse + 1.0f) * 0.5f;
 
-	  float highLight = step(0.8f, diffuse) * 0.3f;
-	  float baseLight = step(0.3f, diffuse) * 0.4f;
-	  float shadowLight = step(0.0f, diffuse) * 0.3f;
+		  float highLight = step(0.8f, diffuse) * 0.3f;
+		  float baseLight = step(0.3f, diffuse) * 0.4f;
+		  float shadowLight = step(0.0f, diffuse) * 0.3f;
 
-	  //diffuse = highLight + baseLight + shadowLight;
-	  diffuse = rampTex.Sample(g_sampler, float2(diffuse, 0.5f)).r;
-	  Diff *= diffuse;
+		  //diffuse = highLight + baseLight + shadowLight;
+		  diffuse = rampTex.Sample(g_sampler, float2(diffuse, 0.5f)).r;
+		  Diff *= diffuse;
+	  }
 
 	  return float4(Diff, Alpha);
 }

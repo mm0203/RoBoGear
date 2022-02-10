@@ -57,7 +57,7 @@ void CPauseMenu::Update(GameState state)
 	m_PuaseMenuTexture.Update(m_nMenuIndex);
 
 	// 選択肢変更
-	if (GetKeyTrigger(VK_W))
+	if (GetKeyTrigger(VK_W) || GetKeyTrigger(VK_UP))
 	{
 		// 選択音
 		CSound::Play(SE_CURSORMOVE);
@@ -66,7 +66,7 @@ void CPauseMenu::Update(GameState state)
 		if (m_nMenuIndex < ePause_Continue)
 			m_nMenuIndex += ePauseMenuMax;
 	}
-	if (GetKeyTrigger(VK_S))
+	if (GetKeyTrigger(VK_S) || GetKeyTrigger(VK_DOWN))
 	{
 		// 選択音
 		CSound::Play(SE_CURSORMOVE);
