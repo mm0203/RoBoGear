@@ -71,34 +71,38 @@ void CPlayer::Update()
 	{
 	// 動ける
 	case GameState::eMove:
-		m_Dir = PlayerDir::eNone;
 
-		if (GetKeyTrigger(VK_W))// 上
+		// デバッグモード時は操作不可
+		if (!CGameManager::GetDebug())
 		{
-			m_Dir = PlayerDir::eUp;
-			m_Rot.y = 180.0f;
-		}
-		if (GetKeyTrigger(VK_S))// 下
-		{
-			m_Dir = PlayerDir::eDown;
-			m_Rot.y = 0.0f;
-		}
-		if (GetKeyTrigger(VK_A))// 左
-		{
-			m_Dir = PlayerDir::eLeft;
-			m_Rot.y = 90.0f;
-		}
-		if (GetKeyTrigger(VK_D))// 右
-		{
-			m_Dir = PlayerDir::eRight;
-			m_Rot.y = -90.0f;
-		}
-		// 方向が入力されたら移動
-		if (m_Dir != PlayerDir::eNone)
-		{
-			MoveObject(m_Dir, nStep);
-		}
+			m_Dir = PlayerDir::eNone;
 
+			if (GetKeyTrigger(VK_W))// 上
+			{
+				m_Dir = PlayerDir::eUp;
+				m_Rot.y = 180.0f;
+			}
+			if (GetKeyTrigger(VK_S))// 下
+			{
+				m_Dir = PlayerDir::eDown;
+				m_Rot.y = 0.0f;
+			}
+			if (GetKeyTrigger(VK_A))// 左
+			{
+				m_Dir = PlayerDir::eLeft;
+				m_Rot.y = 90.0f;
+			}
+			if (GetKeyTrigger(VK_D))// 右
+			{
+				m_Dir = PlayerDir::eRight;
+				m_Rot.y = -90.0f;
+			}
+			// 方向が入力されたら移動
+			if (m_Dir != PlayerDir::eNone)
+			{
+				MoveObject(m_Dir, nStep);
+			}
+		}
 		// 歩数0の時にゴールしたらゲームオーバーしない
 		if (nStep <= 0 && CGameManager::GetState() != GameState::eClear)
 		{

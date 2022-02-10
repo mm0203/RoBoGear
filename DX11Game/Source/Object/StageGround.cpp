@@ -14,8 +14,8 @@
 //=============================================================================
 #define SIZE_BROCK	(100.0f)
 #define	TEXTURE_FILENAME	L"data/texture/field001.jpg"
-#define	TEXTURE_NROMAL		L"data/texture/001.jpg"
-#define	TEXTURE_AMBIENT		L"data/texture/StageSelect/selectBG.png"
+#define	TEXTURE_NROMAL		L"data/texture/Bump.jpg"
+#define	TEXTURE_AMBIENT		L"data/texture/Anbient002.jpg"
 
 //=============================================================================
 // 
@@ -59,7 +59,7 @@ void CStageGround::Init()
 	// バンプマップ
 	hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL,&m_MeshField.m_pNormalTexture);
 	// 環境マップ
-	//hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT,&m_MeshField.m_pAmbientTexture);
+	hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT,&m_MeshField.m_pAmbientTexture);
 
 	// 頂点数の設定
 	m_MeshField.m_nNumVertex = (sizeX + 1) * (sizeY + 1);

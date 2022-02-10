@@ -11,6 +11,8 @@
 #include <main.h>
 #include <Renderer/Shader/Script/ShaderList.h>
 #include <Renderer/Graphics/Graphics.h>
+#include <System/Input/input.h>
+#include <Manager/GameManager.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "assimp-vc141-mtd")
@@ -50,6 +52,8 @@ struct SHADER_MATERIAL
 	XMVECTOR	vSpecular;	// スペキュラ色
 	XMVECTOR	vEmissive;	// エミッシブ色
 	XMVECTOR	vFlags;		// テクスチャ有無
+
+	int toon  = true;
 };
 
 // ボーン
@@ -683,6 +687,13 @@ void CAssimpMesh::Draw(ID3D11DeviceContext* pDC, XMFLOAT4X4& m44World, EByOpacit
 		sg.vSpecular = XMLoadFloat4(&pMaterial->Ks);
 		sg.vEmissive = XMLoadFloat4(&pMaterial->Ke);
 		sg.vFlags = XMLoadUInt4(&vFlags);
+
+		// トゥーンシェーダ表示切り替え
+		// デバッグモードでZ押したらトゥーンシェーダ非表示
+		bool toon = false;
+		if (CGameManager::GetDebug() && GetKeyPress(VK_Z)) toon ^= 1;
+		sg.toon = toon;
+
 		memcpy_s(pData.pData, pData.RowPitch, (void*)&sg, sizeof(sg));
 		pDC->Unmap(m_pConstantBuffer1, 0);
 	}

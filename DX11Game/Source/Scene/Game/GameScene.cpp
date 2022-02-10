@@ -80,6 +80,8 @@ void GameScene::Uninit()
 	SpriteManager::UninitAll();
 	// オブジェクト終了
 	ObjectManager::UninitAll();
+	// ゲーム制御終了
+	CGameManager::Uninit();
 	// BGM停止
 	CSound::Stop(GAME);
 }
@@ -123,6 +125,8 @@ void GameScene::Draw()
 	ObjectManager::DrawAll();
 	// スプライト描画
 	SpriteManager::DrawAll(m_State);
+	// ゲーム制御(デバッグ表記)描画
+	CGameManager::Draw();
 }
 
 //=============================================================================

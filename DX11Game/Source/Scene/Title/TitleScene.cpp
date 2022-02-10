@@ -101,7 +101,7 @@ void TitleScene::Update()
 	// タイトルBGM
 	CSound::Play(TITLE);
 
-	if (GetKeyTrigger(VK_W))
+	if (GetKeyTrigger(VK_W) || GetKeyTrigger(VK_UP))
 	{
 		// カーソルSE
 		CSound::Play(SE_CURSORMOVE);
@@ -110,7 +110,7 @@ void TitleScene::Update()
 		if (m_nMenuIndex < eTitle_Start)
 			m_nMenuIndex += eTitle_Max;
 	}
-	if (GetKeyTrigger(VK_S))
+	if (GetKeyTrigger(VK_S) || GetKeyTrigger(VK_DOWN))
 	{
 		// カーソルSE
 		CSound::Play(SE_CURSORMOVE);

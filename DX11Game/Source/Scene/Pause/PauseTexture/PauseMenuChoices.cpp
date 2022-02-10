@@ -6,11 +6,6 @@
 #include "PauseMenuChoices.h"
 #include <Scene/Pause/PauseMenu.h>
 
-#define PAUSE_CONTINUE  "data/Texture/Pause/Continue.png"
-#define PAUSE_RETRY		"data/texture/Pause/retry.png"
-#define PAUSE_SELECT	"data/TEXTURE/Pause/Select.png"
-#define PAUSE_TITLE		"data/TEXTURE/Pause/PauseTitle.png"
-
 //=============================================================================
 // 
 // –³–¼–¼‘O‹óŠÔ

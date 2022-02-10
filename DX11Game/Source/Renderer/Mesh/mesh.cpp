@@ -5,6 +5,8 @@
 //=============================================================================
 #include "mesh.h"
 
+#include <Manager/GameManager.h>
+
 // レンダー
 #include <Renderer/Graphics/Graphics.h>
 #include <Renderer/Shader/Script/Shader.h>
@@ -14,6 +16,7 @@
 #include <System/Singleton/singleton.h>
 #include <System/Camera/Camera.h>
 #include <System/Light/Light.h>
+#include <System/Input/input.h>
 
 //=============================================================================
 // 
@@ -219,14 +222,24 @@ void CMesh::Draw(ID3D11DeviceContext* pDeviceContext, CMesh* pMesh, int nTranslu
 	cb2.vSpecular = XMVectorSet(pMaterial->Specular.x, pMaterial->Specular.y, pMaterial->Specular.z, pMaterial->Power);
 	cb2.vEmissive = DirectX::XMLoadFloat4(&pMaterial->Emissive);
 
-	// バンプマップ表示判定
+	// バンプマップ表示
 	bool bump = false;
-	if (pMesh->m_pNormalTexture) bump = true;
+	// バンプマップ表示切り替え
+	if (pMesh->m_pNormalTexture)
+		bump = true;
+	if (CGameManager::GetDebug() && GetKeyPress(VK_C))
+		bump = false;
 	cb2.bBump = bump;
-	// 環境マップ表示判定
+	
+	// 環境マップ表示
 	bool anbient = false;
-	if (pMesh->m_pAmbientTexture) anbient = true;
+	// 環境マップ表示切り替え
+	if (pMesh->m_pAmbientTexture) 
+		anbient = true;
+	if (CGameManager::GetDebug() && GetKeyPress(VK_V))
+		anbient = false;
 	cb2.bAnbient = anbient;
+
 
 	cb2.bLight = pMesh->m_bLight;
 
