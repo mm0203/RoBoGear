@@ -205,7 +205,7 @@ void CMesh::Draw(ID3D11DeviceContext* pDeviceContext, CMesh* pMesh, int nTranslu
 	cb.mLightWVP = XMMatrixTranspose(m_MtxWorld * DirectX::XMLoadFloat4x4(&pLight->GetViewMatrix()) * DirectX::XMLoadFloat4x4(&pCamera.GetProjMatrix())/*SHADOW_BIAS*/);
 	cb.mW = XMMatrixTranspose(m_MtxWorld);
 	cb.mTex = XMMatrixTranspose(DirectX::XMLoadFloat4x4(&pMesh->m_MtxTexture));
-	XMFLOAT2 fog = { FOG_FAR_Z / (FOG_FAR_Z - FOG_NEAR_Z), -1 / (FOG_FAR_Z - FOG_NEAR_Z) };
+	XMFLOAT2 fog = { FogFarZ / (FogFarZ - FogNearZ), -1 / (FogFarZ - FogNearZ) };
 	cb.vFog = XMLoadFloat2(&fog);
 
 	m_pWorldBuffer->Write(&cb);

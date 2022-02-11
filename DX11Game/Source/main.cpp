@@ -55,6 +55,7 @@
 //=============================================================================
 
 #include <main.h>
+#include <Manager/GameManager.h>
 
 // システム
 #include <System/Singleton/singleton.h>
@@ -193,11 +194,11 @@ void Draw()
 	Singleton<SceneManager>::GetInstance().Draw();
 
 	// デバッグ文字列表示
-#ifdef _DEBUG
-	SetPolygonColor(1.0f, 1.0f, 1.0f);
-	//DrawDebugProc();
-#endif
-
+	if (CGameManager::GetDebug())
+	{
+		SetPolygonColor(1.0f, 1.0f, 1.0f);
+		DrawDebugProc();
+	}
 	// 深度バッファ
 	Singleton<Graphics>::GetInstance().SetDepthStencilState(DEPTHSTENCIL_ON);
 	// アルファブレンド有効

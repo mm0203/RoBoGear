@@ -71,6 +71,11 @@ void CCamera::Init()
 	m_UpVector = CameraDefUpVector;	// 上方ベクトル
 	m_CameraAngle = CameraAnglePos;	// カメラ角度
 
+	m_AspectRatio = AspectRatio; // アスペクト比
+	m_FovY = FovY;	// 視野角
+	m_NearClipZ = ViewNearZ;	// 前方クリップ距離
+	m_FarClipZ = ViewFarZ;	// 後方クリップ距離
+
 	// カメラと注視点の距離を設定
 	float dx, dz;
 	dx = CameraDefPos.x - m_TargetPos.x;

@@ -47,7 +47,7 @@ void CGameManager::Init()
 	// 文字黒色
 	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
-	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, 300.0f),8);
+	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, -300.0f),8);
 
 	// カメラ操作表示
 	MessageManager::CreateMessage("CAMERA", XMFLOAT2(300, 300.0f), 6);
@@ -180,6 +180,7 @@ void CGameManager::Update()
 //=============================================================================
 void CGameManager::Draw()
 {
+	// デバッグモード描画
 	if(m_bDebugMode)
 	MessageManager::Draw();
 }

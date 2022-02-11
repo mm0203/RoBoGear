@@ -6,7 +6,15 @@
 #include "fade.h"
 #include <System/Sound/Sound.h>
 
-#define FADE_RATE	0.02f
+//=============================================================================
+// 
+// 無名名前空間
+// 
+//=============================================================================
+namespace
+{
+	constexpr float FadeRate = 0.02f; // フェード時間
+}
 
 //=============================================================================
 // 
@@ -18,8 +26,6 @@ Fade::Fade()
 	m_fAlpha = 0.0f;
 	m_nFade = FADE_IN;
 	m_pNextScene = nullptr;
-	m_FadeCount = 0;
-	m_nTexNo = 0;
 }
 
 //=============================================================================
@@ -64,7 +70,7 @@ void Fade::Update()
 	if (m_nFade == FADE_OUT) 
 	{
 		// 徐々にフェード
-		m_fAlpha += FADE_RATE;
+		m_fAlpha += FadeRate;
 		if (m_fAlpha >= 1.0f) 
 		{
 			// フェードイン処理に切替
@@ -79,7 +85,7 @@ void Fade::Update()
 	}
 
 	// フェードアウト処理
-	m_fAlpha -= FADE_RATE;
+	m_fAlpha -= FadeRate;
 
 	if (m_fAlpha <= 0.0f) 
 	{

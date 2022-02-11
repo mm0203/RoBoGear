@@ -45,7 +45,6 @@ private:
 	// シングルトンのみでインスタンス生成を許可
 	friend class Singleton;
 
-
 	CLight() = default;
 	~CLight() = default;
 

@@ -50,9 +50,6 @@ private:
 	float m_fAlpha;		 // 不透明度
 	int m_nFade;		 // フェード状態
 	Scene* m_pNextScene; // 読み込むシーン
-	int m_FadeCount;
-	int m_nTexNo;
-
 	CPolygon m_FadePolygon;
-	CFadeTexture m_FadeTexture;
+	CFadeTexture m_FadeTexture; // フェード中のテクスチャ
 };
