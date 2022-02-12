@@ -63,8 +63,8 @@ UIでの操作説明表示やポーズ機能におけるやり直しなど細か
 
 # 画像
 
-![1w](https://user-images.githubusercontent.com/95344747/153701703-f87796a3-cb35-4644-840c-edc8d60607a5.png)
+![title](https://user-images.githubusercontent.com/95344747/153701751-5a5c95fd-6f39-4caf-bd76-ef91b39da794.png)
 
-![0w](https://user-images.githubusercontent.com/95344747/153701713-0a29e86e-bf60-4321-9001-3235bb5631db.png)
+![game1](https://user-images.githubusercontent.com/95344747/153701762-8410add6-6c85-44e8-bfae-01779de18960.png)
 
-![3w](https://user-images.githubusercontent.com/95344747/153701715-fb81821f-20fe-4e4e-8fb9-76bd2a261ef9.png)
+![Edit1](https://user-images.githubusercontent.com/95344747/153701765-679ad0ef-d50f-4316-b0a6-9e731d39da32.png)
