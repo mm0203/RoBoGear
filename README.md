@@ -62,3 +62,9 @@ UIでの操作説明表示やポーズ機能におけるやり直しなど細か
 ・効果音ラボ　https://soundeffect-lab.info/
 
 # 画像
+
+![1w](https://user-images.githubusercontent.com/95344747/153701703-f87796a3-cb35-4644-840c-edc8d60607a5.png)
+
+![0w](https://user-images.githubusercontent.com/95344747/153701713-0a29e86e-bf60-4321-9001-3235bb5631db.png)
+
+![3w](https://user-images.githubusercontent.com/95344747/153701715-fb81821f-20fe-4e4e-8fb9-76bd2a261ef9.png)
