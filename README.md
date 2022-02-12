@@ -1,6 +1,7 @@
 # RoBoGear
 
-作品名 : 「 RoBoGear 」
+作品名 : 「 RoBoGear 」 : 個人製作
+
 制作者 : HAL名古屋　松野将之
 
 【操作方法】
