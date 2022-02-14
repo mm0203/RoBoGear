@@ -51,6 +51,7 @@
 //             BGMとSEの実装
 // 2020/02/10  デバッグモード実装(フリーカメラ　シェーダー切り替え)
 // 2022/02/11  仮完成
+// 2022/02/14  一部テクスチャ差し替え
 //
 //=============================================================================
 
@@ -110,8 +111,8 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 	Singleton<Fade>::GetInstance().Init();
 
 	// タイトルシーン設定 -> タイトルシーン初期化
-	//Singleton<SceneManager>::GetInstance().EndFade(new TitleScene());
-	Singleton<SceneManager>::GetInstance().EndFade(new GameScene());
+	Singleton<SceneManager>::GetInstance().EndFade(new TitleScene());
+	//Singleton<SceneManager>::GetInstance().EndFade(new GameScene());
 	//Singleton<SceneManager>::GetInstance().EndFade(new StageSelectScene());
 	//Singleton<SceneManager>::GetInstance().EndFade(new EditScene());
 

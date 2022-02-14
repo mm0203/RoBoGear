@@ -5,7 +5,7 @@
 //=============================================================================
 
 #include "StageGround.h"
-//#include<Renderer/Texture/Texture.h>
+#include <Manager/SceneManager.h>
 
 //=============================================================================
 // 
@@ -15,7 +15,7 @@
 #define SIZE_BROCK	(100.0f)
 #define	TEXTURE_FILENAME	L"data/texture/field001.jpg"
 #define	TEXTURE_NROMAL		L"data/texture/Bump.jpg"
-#define	TEXTURE_AMBIENT		L"data/texture/Anbient002.jpg"
+#define	TEXTURE_AMBIENT		L"data/texture/Anbient001.jpg"
 
 //=============================================================================
 // 
@@ -53,13 +53,22 @@ void CStageGround::Init()
 	m_MeshField.m_Pos = XMFLOAT3(0.0f, -1.0f, 0.0f);
 	m_MeshField.m_Rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
+	int SceneNo = Singleton<SceneManager>::GetInstance().GetSceneNo();
+
 	// テクスチャの読み込み
 	// ステージテクスチャ
 	hr = CreateTextureFromFile(pDevice,TEXTURE_FILENAME,&m_MeshField.m_pTexture);
-	// バンプマップ
-	hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL,&m_MeshField.m_pNormalTexture);
-	// 環境マップ
-	hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT,&m_MeshField.m_pAmbientTexture);
+
+	// エディットモードはなし
+	if (SceneNo != Scene_Edit)
+	{
+		// バンプマップ
+		hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL, &m_MeshField.m_pNormalTexture);
+
+		// 環境マップ
+
+		hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT, &m_MeshField.m_pAmbientTexture);
+	}
 
 	// 頂点数の設定
 	m_MeshField.m_nNumVertex = (sizeX + 1) * (sizeY + 1);

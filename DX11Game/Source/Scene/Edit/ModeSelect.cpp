@@ -37,6 +37,8 @@ void CModeSelect::Init()
 	m_Polygon.SetSize(40, 40);
 	m_Polygon.SetColor(CURSOR_COLOR);
 
+	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
+
 	// テキスト描画
 	MessageManager::CreateMessage("CREATE", XMFLOAT2(440, 300.0f));
 	MessageManager::CreateMessage("DELETE", XMFLOAT2(440, 250.0f));

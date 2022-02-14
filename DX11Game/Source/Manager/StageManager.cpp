@@ -73,7 +73,7 @@ void StageManager::Init()
 	// ŠeƒXƒe[ƒW‚Ì•à”Ši”[
 	std::get<eStageStep>(m_StageInfo[eStage_1])  = 22;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_2])  = 25;	// Z
-	std::get<eStageStep>(m_StageInfo[eStage_3])  = 27;	// Z
+	std::get<eStageStep>(m_StageInfo[eStage_3])  = 24;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_4])  = 20;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_5])  = 20;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_6])  = 30;	// Z
