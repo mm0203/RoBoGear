@@ -72,4 +72,4 @@ UIでの操作説明表示やポーズ機能におけるやり直しなど細か
 
 ![github1](https://user-images.githubusercontent.com/95344747/153841710-e7a27db6-ba2b-41d4-aa62-70c2bc9ab140.png)
 
-![Edit1](https://user-images.githubusercontent.com/95344747/153701765-679ad0ef-d50f-4316-b0a6-9e731d39da32.png)
+![edit](https://user-images.githubusercontent.com/95344747/153849661-fdb1a847-c71f-4fbc-b276-cc598aea69d0.png)
