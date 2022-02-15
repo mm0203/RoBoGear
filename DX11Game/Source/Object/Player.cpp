@@ -145,10 +145,10 @@ void CPlayer::Update()
 	// アニメーション更新
 	PlayerAnimetion();
 
-	PrintDebugProc("\PosX%d:PosY%d:PosZ%d:\n", (int)m_Pos.x, (int)m_Pos.y, (int)m_Pos.z);
-	PrintDebugProc("\RotX%d:RotY%d:RotZ%d:\n", (int)m_Rot.x, (int)m_Rot.y, (int)m_Rot.z);
-	PrintDebugProc("\PlayerX:%d:PlayerY:%d:\n", (int)m_Coord.x, (int)m_Coord.y);
-	PrintDebugProc("\PlayerAnim:%d\n", (int)m_Model.GetAnimeNo());
+	PrintDebugProc("PosX%d:PosY%d:PosZ%d:\n", (int)m_Pos.x, (int)m_Pos.y, (int)m_Pos.z);
+	PrintDebugProc("RotX%d:RotY%d:RotZ%d:\n", (int)m_Rot.x, (int)m_Rot.y, (int)m_Rot.z);
+	PrintDebugProc("PlayerX:%d:PlayerY:%d:\n", (int)m_Coord.x, (int)m_Coord.y);
+	PrintDebugProc("PlayerAnim:%d\n", (int)m_Model.GetAnimeNo());
 }
 
 //=============================================================================

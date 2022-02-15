@@ -64,8 +64,6 @@ struct TAssimpMaterial
 	ID3D11ShaderResourceView*	pTexSpecular;	// 鏡面反射テクスチャ
 	ID3D11ShaderResourceView*	pTexEmmisive;	// 発光テクスチャ
 	ID3D11ShaderResourceView*	pTexTransparent;// 透過テクスチャ
-	ID3D11ShaderResourceView*	pTexNormal;		// 法線テクスチャ
-	ID3D11ShaderResourceView*	pTexAmbient;	// 環境テクスチャ
 
 	// マテリアル
 	TAssimpMaterial()

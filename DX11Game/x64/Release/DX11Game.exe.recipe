@@ -2,39 +2,39 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\DX11Game.exe</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\DX11Game.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\AssimpPixel.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\AssimpPixel.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\AssimpVertex.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\AssimpVertex.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\Pixel.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\Pixel.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\Pixel2D.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\Pixel2D.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\PostPixel2D.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\PostPixel2D.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\PostVertex2D.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\PostVertex2D.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\ToonOutlinePS.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\ToonOutlinePS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\ToonOutlineVS.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\ToonOutlineVS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\Vertex.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\Vertex.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\DX11Game\data\shader\Vertex2D.cso</FullPath>
+      <FullPath>C:\Users\skazz\Desktop\Sc\portfolio\RoBoGear\RoBoGear\DX11Game\data\shader\Vertex2D.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

@@ -243,10 +243,10 @@ void CCamera::Update()
 	// マトリックス更新
 	UpdateMatrix();
 
-	PrintDebugProc("\CameraPos_X:%d:PosY%d:PosZ:%d:\n", (int)m_CameraPos.x, (int)m_CameraPos.y, (int)m_CameraPos.z);
-	PrintDebugProc("\CameraTargetPos_X:%d:PosY%d:PosZ:%d:\n", (int)m_TargetPos.x, (int)m_TargetPos.y, (int)m_TargetPos.z);
-	PrintDebugProc("\CameraAngle:%d\n", (int)m_CameraAngle.y);
-	PrintDebugProc("\RelativePos:%d\n", (int)m_TargetRelativePos.y);
+	PrintDebugProc("CameraPos_X:%d:PosY%d:PosZ:%d:\n", (int)m_CameraPos.x, (int)m_CameraPos.y, (int)m_CameraPos.z);
+	PrintDebugProc("CameraTargetPos_X:%d:PosY%d:PosZ:%d:\n", (int)m_TargetPos.x, (int)m_TargetPos.y, (int)m_TargetPos.z);
+	PrintDebugProc("CameraAngle:%d\n", (int)m_CameraAngle.y);
+	PrintDebugProc("RelativePos:%d\n", (int)m_TargetRelativePos.y);
 }
 
 //=============================================================================

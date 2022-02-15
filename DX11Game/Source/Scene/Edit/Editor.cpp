@@ -185,10 +185,10 @@ void CEditor::Update()
 	if (nCount > 15) m_bDisp = false;
 	if (nCount > 30) nCount = 0;
 
-	PrintDebugProc("\PosX%d:PosY%d:PosZ%d:\n", (int)m_Trans.GetPos().x, (int)m_Trans.GetPos().y, (int)m_Trans.GetPos().z);
-	PrintDebugProc("\ObjectType:%d\n", m_type);
-	PrintDebugProc("\StageNo:%d\n", m_nCurrentStage);
-	PrintDebugProc("\Step:%d\n", m_nStepCount);
+	PrintDebugProc("PosX%d:PosY%d:PosZ%d:\n", (int)m_Trans.GetPos().x, (int)m_Trans.GetPos().y, (int)m_Trans.GetPos().z);
+	PrintDebugProc("ObjectType:%d\n", m_type);
+	PrintDebugProc("StageNo:%d\n", m_nCurrentStage);
+	PrintDebugProc("Step:%d\n", m_nStepCount);
 }
 
 //=============================================================================

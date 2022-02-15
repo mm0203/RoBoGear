@@ -170,7 +170,7 @@ void CGameManager::Update()
 		break;
 	}
 
-	PrintDebugProc("\Step:%d\n", m_nStep);
+	PrintDebugProc("Step:%d\n", m_nStep);
 }
 
 //=============================================================================

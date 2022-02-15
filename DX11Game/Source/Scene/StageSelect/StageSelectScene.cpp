@@ -155,7 +155,7 @@ void StageSelectScene::Update()
 			Singleton<SceneManager>::GetInstance().SetNextScene(new GameScene());
 	}
 
-	PrintDebugProc("\CurrentStage:%d\n", nMenuIndex + 1);
+	PrintDebugProc("CurrentStage:%d\n", nMenuIndex + 1);
 }
 
 //=============================================================================
