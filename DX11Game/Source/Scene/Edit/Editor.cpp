@@ -588,8 +588,6 @@ void CEditor::LoadStage()
 		// •à”‰Šú’l“Ç‚İ‚İ
 		auto& Info = StageManager::GetStageInfo(m_nCurrentStage);
 		m_nStepCount = std::get<eStageStep>(Info);
-
-		m_type = eObject_Wall;
 	}
 }
 //=============================================================================
