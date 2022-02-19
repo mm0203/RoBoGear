@@ -1,7 +1,8 @@
 // 2D用頂点シェーダ
 
 // グローバル
-cbuffer global : register(b0) {
+cbuffer global : register(b0)
+{
 	matrix g_mWorld;
 	matrix g_mView;
 	matrix g_mProjection;
@@ -9,16 +10,18 @@ cbuffer global : register(b0) {
 };
 
 // パラメータ
-struct VS_INPUT {
+struct VS_INPUT 
+{
 	float3	Position	: POSITION;
-	float2	TexCoord	: TEXCOORD0;
 	float4	Diffuse		: COLOR0;
+	float2	TexCoord	: TEXCOORD0;
 };
 
-struct VS_OUTPUT {
+struct VS_OUTPUT
+{
 	float4	Position	: SV_Position;
-	float2	TexCoord	: TEXCOORD0;
 	float4	Diffuse		: COLOR0;
+	float2	TexCoord	: TEXCOORD0;
 };
 
 VS_OUTPUT main(VS_INPUT input)

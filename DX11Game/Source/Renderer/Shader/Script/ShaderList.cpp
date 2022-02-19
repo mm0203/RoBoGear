@@ -10,7 +10,7 @@
 // 使用する頂点シェーダを登録
 const char* VertexShaderFile[MAX_VERTEX_SHADER] =
 {
-
+	"data/shader/Vertex2D.cso",
 	"data/shader/AssimpVertex.cso",
 	"data/shader/Vertex.cso",
 	"data/shader/ToonOutlineVS.cso",
@@ -19,6 +19,7 @@ const char* VertexShaderFile[MAX_VERTEX_SHADER] =
 // 使用するピクセルシェーダを登録
 const char* PixelShaderFile[MAX_PIXEL_SHADER] =
 {
+	"data/shader/Pixel2D.cso",
 	"data/shader/AssimpPixel.cso",
 	"data/shader/Pixel.cso",
 	"data/shader/ToonOutlinePS.cso",

@@ -48,9 +48,9 @@ public:
 	}
 	void Draw()
 	{
+		SetBlendState(BS_ALPHABLEND);
 		Singleton<Graphics>::GetInstance().SetDepthStencilState(DEPTHSTENCIL_OFF);
 		//SetZBuffer(false);
-		SetBlendState(BS_ALPHABLEND);
 		// ポリゴン情報セット
 		if (m_pTex != nullptr)	SetPolygonTexture(m_pTex);
 		else SetPolygonTexture(nullptr);

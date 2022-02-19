@@ -5,8 +5,10 @@
 //=============================================================================
 
 #include "polygon.h"
+#include <Renderer/Graphics/Graphics.h>
 #include <System/Singleton/singleton.h>
 #include <Renderer/Shader/Script/Shader.h>
+#include <Renderer/Shader/Script/ShaderList.h>
 
 //=============================================================================
 // 
@@ -27,91 +29,60 @@ struct SHADER_GLOBAL
 // プロトタイプ宣言
 // 
 //=============================================================================
-static HRESULT MakeVertexPolygon(ID3D11Device* pDevice);
-static void SetVertexPolygon(void);
+static HRESULT MakeVertexPolygon();
+static void SetVertexPolygon();
 
 //=============================================================================
 // 
 // グローバル変数
 // 
 //=============================================================================
-static ID3D11ShaderResourceView*	g_pTexture;				// テクスチャへのポインタ
+static ID3D11ShaderResourceView*	g_pTexture;		// テクスチャへのポインタ
 
-static VERTEX_2D					g_vertexWk[NUM_VERTEX];	// 頂点情報格納ワーク
+static VERTEX_2D	g_vertexWk[NUM_VERTEX];	// 頂点情報格納ワーク
 
-static XMFLOAT3						g_posPolygon;			// ポリゴンの移動量
-static XMFLOAT3						g_rotPolygon;			// ポリゴンの回転量
-static XMFLOAT3						g_sizPolygon;			// ポリゴンのサイズ
-static XMFLOAT4						g_colPolygon;			// ポリゴンの頂点カラー
-static bool							g_bInvalidate;			// 頂点データ更新フラグ
+static XMFLOAT3		g_posPolygon;	// ポリゴンの移動量
+static XMFLOAT3		g_rotPolygon;	// ポリゴンの回転量
+static XMFLOAT3		g_sizPolygon;	// ポリゴンのサイズ
+static XMFLOAT4		g_colPolygon;	// ポリゴンの頂点カラー
+static bool			g_bInvalidate;	// 頂点データ更新フラグ
 
-static XMFLOAT2						g_posTexFrame;			// UV座標
-static XMFLOAT2						g_sizTexFrame;			// テクスチャ抽出サイズ
+static XMFLOAT2		g_posTexFrame;	// UV座標
+static XMFLOAT2		g_sizTexFrame;	// テクスチャ抽出サイズ
 
-static ID3D11Buffer*				g_pConstantBuffer;		// 定数バッファ
-static ID3D11Buffer*				g_pVertexBuffer;		// 頂点バッファ
-static ID3D11SamplerState*			g_pSamplerState;		// テクスチャ サンプラ
-static ID3D11VertexShader*			g_pVertexShader;		// 頂点シェーダ
-static ID3D11InputLayout*			g_pInputLayout;			// 頂点フォーマット
-static ID3D11PixelShader*			g_pPixelShader;			// ピクセルシェーダ
+ConstantBuffer*		g_pMeshCBuffer; // 定数バッファ
+DXBuffer*			g_pMeshBuffer;  // メッシュバッファ
 
-static XMFLOAT4X4					g_mProj;				// 射影変換行列
-static XMFLOAT4X4					g_mView;				// ビュー変換行列
-static XMFLOAT4X4					g_mWorld;				// ワールド変換行列
-static XMFLOAT4X4					g_mTex;					// テクスチャ変換行列
+static XMFLOAT4X4	g_mProj;		// 射影変換行列
+static XMFLOAT4X4	g_mView;		// ビュー変換行列
+static XMFLOAT4X4	g_mWorld;		// ワールド変換行列
+static XMFLOAT4X4	g_mTex;			// テクスチャ変換行列
 
 //=============================================================================
 // 
 // 初期化処理
 // 
 //=============================================================================
-HRESULT InitPolygon(ID3D11Device* pDevice)
+HRESULT InitPolygon()
 {
 	HRESULT hr = S_OK;
 
-	// シェーダ初期化
-	static const D3D11_INPUT_ELEMENT_DESC layout[] = {
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, 0,                            D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	};
-	hr = LoadShader("Vertex2D", "Pixel2D",
-		&g_pVertexShader, &g_pInputLayout, &g_pPixelShader, layout, _countof(layout));
-	if (FAILED(hr)) {
-		return hr;
-	}
+	g_pMeshCBuffer = nullptr;
+	g_pMeshBuffer = nullptr;
 
 	// 定数バッファ生成
-	D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(SHADER_GLOBAL);
-	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	bd.CPUAccessFlags = 0;
-	hr = pDevice->CreateBuffer(&bd, nullptr, &g_pConstantBuffer);
-	if (FAILED(hr)) return hr;
-
-	// テクスチャ サンプラ生成
-	D3D11_SAMPLER_DESC sd;
-	ZeroMemory(&sd, sizeof(sd));
-	sd.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-	sd.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	sd.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	sd.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-	hr = pDevice->CreateSamplerState(&sd, &g_pSamplerState);
-	if (FAILED(hr)) {
-		return hr;
-	}
+	g_pMeshCBuffer = new ConstantBuffer;
+	g_pMeshCBuffer->Create(sizeof(SHADER_GLOBAL));
 
 	// 変換行列初期化
 	XMStoreFloat4x4(&g_mWorld, XMMatrixIdentity());
 	XMStoreFloat4x4(&g_mView, XMMatrixLookAtLH(XMVectorSet(0.0f, 0.0f, -10.0f, 1.0f),
 		XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f), XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f)));
-	XMStoreFloat4x4(&g_mProj,
-		XMMatrixOrthographicLH(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f, 100.0f));
+	XMStoreFloat4x4(&g_mProj, XMMatrixOrthographicLH(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f, 100.0f));
 	XMStoreFloat4x4(&g_mTex, XMMatrixIdentity());
 	g_mTex._44 = 0.0f;
 
+	// 各情報の初期化
 	g_posPolygon = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	g_rotPolygon = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	g_sizPolygon = XMFLOAT3(1.0f, 1.0f, 1.0f);
@@ -122,7 +93,7 @@ HRESULT InitPolygon(ID3D11Device* pDevice)
 	g_sizTexFrame = XMFLOAT2(1.0f, 1.0f);
 
 	// 頂点情報の作成
-	hr = MakeVertexPolygon(pDevice);
+	hr = MakeVertexPolygon();
 
 	return hr;
 }
@@ -132,20 +103,11 @@ HRESULT InitPolygon(ID3D11Device* pDevice)
 // 終了処理
 // 
 //=============================================================================
-void UninitPolygon(void)
+void UninitPolygon()
 {
-	// テクスチャ サンプラの開放
-	SAFE_RELEASE(g_pSamplerState);
-	// 頂点バッファの解放
-	SAFE_RELEASE(g_pVertexBuffer);
-	// 定数バッファの解放
-	SAFE_RELEASE(g_pConstantBuffer);
-	// ピクセルシェーダ解放
-	SAFE_RELEASE(g_pPixelShader);
-	// 頂点フォーマット解放
-	SAFE_RELEASE(g_pInputLayout);
-	// 頂点シェーダ解放
-	SAFE_RELEASE(g_pVertexShader);
+	SAFE_RELEASE(g_pTexture);
+	SAFE_DELETE(g_pMeshCBuffer);
+	SAFE_DELETE(g_pMeshCBuffer);
 }
 
 //=============================================================================
@@ -153,7 +115,7 @@ void UninitPolygon(void)
 // 更新処理
 // 
 //=============================================================================
-void UpdatePolygon(void)
+void UpdatePolygon()
 {
 
 }
@@ -168,10 +130,10 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 	// 拡縮
 	XMMATRIX mWorld = XMMatrixScaling(g_sizPolygon.x, g_sizPolygon.y, g_sizPolygon.z);
 	// 回転
-	mWorld *= XMMatrixRotationRollPitchYaw(XMConvertToRadians(g_rotPolygon.x),
-		XMConvertToRadians(g_rotPolygon.y), XMConvertToRadians(g_rotPolygon.z));
+	mWorld *= XMMatrixRotationRollPitchYaw(XMConvertToRadians(g_rotPolygon.x), XMConvertToRadians(g_rotPolygon.y), XMConvertToRadians(g_rotPolygon.z));
 	// 移動
 	mWorld *= XMMatrixTranslation(g_posPolygon.x, g_posPolygon.y, g_posPolygon.z);
+
 	// ワールド マトリックスに設定
 	XMStoreFloat4x4(&g_mWorld, mWorld);
 
@@ -183,7 +145,9 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 		mWorld *= XMMatrixTranslation(g_posTexFrame.x, g_posTexFrame.y, 0.0f);
 		// テクスチャ マトリックスに設定
 		XMStoreFloat4x4(&g_mTex, mWorld);
-	} else {
+	} 
+	else 
+	{
 		// テクスチャ無し
 		g_mTex._44 = 0.0f;
 	}
@@ -191,15 +155,14 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 	// 頂点バッファ更新
 	SetVertexPolygon();
 
-	pDeviceContext->VSSetShader(g_pVertexShader, nullptr, 0);
-	pDeviceContext->PSSetShader(g_pPixelShader, nullptr, 0);
-	pDeviceContext->IASetInputLayout(g_pInputLayout);
+	// シェーダセット
+	GetVertexShader(POLYGON_VS)->Bind();
+	GetPixelShader(POLYGON_PS)->Bind();
 
-	UINT stride = sizeof(VERTEX_2D);
-	UINT offset = 0;
-	pDeviceContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+	// サンプラセット
+	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
 
-	pDeviceContext->PSSetSamplers(0, 1, &g_pSamplerState);
+	// テクスチャセット
 	pDeviceContext->PSSetShaderResources(0, 1, &g_pTexture);
 
 	SHADER_GLOBAL cb;
@@ -207,15 +170,14 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 	cb.mView = XMMatrixTranspose(XMLoadFloat4x4(&g_mView));
 	cb.mWorld = XMMatrixTranspose(XMLoadFloat4x4(&g_mWorld));
 	cb.mTex = XMMatrixTranspose(XMLoadFloat4x4(&g_mTex));
-	pDeviceContext->UpdateSubresource(g_pConstantBuffer, 0, nullptr, &cb, 0, 0);
-	pDeviceContext->VSSetConstantBuffers(0, 1, &g_pConstantBuffer);
-	pDeviceContext->PSSetConstantBuffers(0, 1, &g_pConstantBuffer);
 
-	// プリミティブ形状をセット
-	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	// バッファ更新
+	g_pMeshCBuffer->Write(&cb);
+	g_pMeshCBuffer->BindVS(0);
+	g_pMeshCBuffer->BindPS(0);
 
-	// ポリゴンの描画
-	pDeviceContext->Draw(NUM_VERTEX, 0);
+	// ポリゴン描画
+	g_pMeshBuffer->Draw(NUM_VERTEX);
 }
 
 //=============================================================================
@@ -223,7 +185,7 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 // 頂点の作成
 // 
 //=============================================================================
-HRESULT MakeVertexPolygon(ID3D11Device* pDevice)
+HRESULT MakeVertexPolygon()
 {
 	// 頂点座標の設定
 	g_vertexWk[0].vtx = XMFLOAT3(-0.5f,  0.5f, 0.0f);
@@ -243,19 +205,19 @@ HRESULT MakeVertexPolygon(ID3D11Device* pDevice)
 	g_vertexWk[2].tex = XMFLOAT2(0.0f, 1.0f);
 	g_vertexWk[3].tex = XMFLOAT2(1.0f, 1.0f);
 
-	D3D11_BUFFER_DESC vbd;
-	ZeroMemory(&vbd, sizeof(vbd));
-	vbd.Usage = D3D11_USAGE_DYNAMIC;
-	vbd.ByteWidth = sizeof(g_vertexWk);
-	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	vbd.MiscFlags = 0;
+	// 頂点&インデックスバッファ 生成
+	DXBuffer::Desc desc;
+	desc.vtxSize = sizeof(VERTEX_2D);
+	desc.vtxCount = NUM_VERTEX;
+	desc.idxSize = sizeof(int);
+	desc.isWrite = true;
+	desc.pVtx = &g_vertexWk[0];
+	desc.pIdx = nullptr;
+	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
-	D3D11_SUBRESOURCE_DATA initData;
-	ZeroMemory(&initData, sizeof(initData));
-	initData.pSysMem = &g_vertexWk[0];
-
-	HRESULT hr = pDevice->CreateBuffer(&vbd, &initData, &g_pVertexBuffer);
+	g_pMeshBuffer = new DXBuffer();
+	HRESULT hr = g_pMeshBuffer->Create(desc);
+	if (FAILED(hr)) { return hr; }
 
 	return hr;
 }
@@ -265,29 +227,25 @@ HRESULT MakeVertexPolygon(ID3D11Device* pDevice)
 // 頂点座標の設定
 // 
 //=============================================================================
-void SetVertexPolygon(void)
+void SetVertexPolygon()
 {
-	if (g_bInvalidate) {
+	if (g_bInvalidate) 
+	{
 		//頂点バッファの中身を埋める
 		ID3D11DeviceContext* pDeviceContext = GetDeviceContext();
 		HRESULT hr = S_OK;
 
-		// 頂点データの範囲をロックし、頂点バッファへのポインタを取得
-		D3D11_MAPPED_SUBRESOURCE msr;
-		hr = pDeviceContext->Map(g_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-		if (SUCCEEDED(hr)) {
-			// 拡散反射光の設定
-			g_vertexWk[0].diffuse = g_colPolygon;
-			g_vertexWk[1].diffuse = g_colPolygon;
-			g_vertexWk[2].diffuse = g_colPolygon;
-			g_vertexWk[3].diffuse = g_colPolygon;
-			// 頂点データを上書き
-			memcpy_s(msr.pData, sizeof(g_vertexWk), g_vertexWk, sizeof(g_vertexWk));
-			// 頂点データをアンロックする
-			pDeviceContext->Unmap(g_pVertexBuffer, 0);
-			// フラグをクリア
-			g_bInvalidate = false;
-		}
+		// 拡散反射光の設定
+		g_vertexWk[0].diffuse = g_colPolygon;
+		g_vertexWk[1].diffuse = g_colPolygon;
+		g_vertexWk[2].diffuse = g_colPolygon;
+		g_vertexWk[3].diffuse = g_colPolygon;
+
+		// 頂点データ書き込み
+		g_pMeshBuffer->Write(g_vertexWk);
+
+		// フラグをクリア
+		g_bInvalidate = false;
 	}
 }
 
@@ -363,7 +321,8 @@ void SetPolygonFrameSize(float fWidth, float fHeight)
 //=============================================================================
 void SetPolygonColor(float fRed, float fGreen, float fBlue)
 {
-	if (fRed != g_colPolygon.x || fGreen != g_colPolygon.y || fBlue != g_colPolygon.z) {
+	if (fRed != g_colPolygon.x || fGreen != g_colPolygon.y || fBlue != g_colPolygon.z)
+	{
 		g_colPolygon.x = fRed;
 		g_colPolygon.y = fGreen;
 		g_colPolygon.z = fBlue;
@@ -378,7 +337,8 @@ void SetPolygonColor(float fRed, float fGreen, float fBlue)
 //=============================================================================
 void SetPolygonAlpha(float fAlpha)
 {
-	if (fAlpha != g_colPolygon.w) {
+	if (fAlpha != g_colPolygon.w)
+	{
 		g_colPolygon.w = fAlpha;
 		g_bInvalidate = true;
 	}

@@ -10,10 +10,11 @@ cbuffer global : register(b0)
 };
 
 // パラメータ
-struct VS_OUTPUT {
+struct VS_OUTPUT 
+{
 	float4	Position	: SV_Position;
-	float2	TexCoord	: TEXCOORD0;
 	float4	Diffuse		: COLOR0;
+	float2	TexCoord	: TEXCOORD0;
 };
 
 Texture2D    g_texture : register(t0);	// テクスチャ

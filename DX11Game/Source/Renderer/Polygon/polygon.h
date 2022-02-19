@@ -13,7 +13,7 @@
 // プロトタイプ宣言
 // 
 //=============================================================================
-HRESULT InitPolygon(ID3D11Device* pDevice);
+HRESULT InitPolygon();
 void UninitPolygon(void);
 void UpdatePolygon(void);
 void DrawPolygon(ID3D11DeviceContext* pDeviceContext);
