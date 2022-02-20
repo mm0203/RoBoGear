@@ -95,7 +95,7 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 	// 初期化
 	Singleton<Graphics>::GetInstance().Init();
 	// ポリゴン表示初期化
-	InitPolygon(GetDevice());
+	InitPolygon();
 	// 入力処理初期化
 	InitInput();
 	// デバッグ文字列表示初期化

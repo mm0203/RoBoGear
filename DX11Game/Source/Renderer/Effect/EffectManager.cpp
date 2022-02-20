@@ -95,7 +95,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 	switch (ID)
 	{
 	case Effect_GimicBreak:
-		obj.InitBill();
+		obj.Init();
 		obj.m_FrameNum = { 5,3 };
 		obj.m_MaxAnimNum = 15;
 		obj.m_Speed = 5;
@@ -106,7 +106,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	case Effect_KeyBreak:
-		obj.InitBill();
+		obj.Init();
 		obj.m_FrameNum = { 6,1 };
 		obj.m_MaxAnimNum = 6;
 		obj.m_Speed = 3;
@@ -117,7 +117,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	case Effect_PlayerMove:
-		obj.InitBill();
+		obj.Init();
 		obj.m_FrameNum = { 4,1 };
 		obj.m_MaxAnimNum = 4;
 		obj.m_Speed = 3;
@@ -128,7 +128,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	case Effect_CubeMove:
-		obj.InitBill();
+		obj.Init();
 		obj.m_FrameNum = { 8,1 };
 		obj.m_MaxAnimNum = 8;
 		obj.m_Speed = 2;
@@ -139,7 +139,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	case Effect_Trap:
-		obj.InitBill();
+		obj.Init();
 		obj.m_FrameNum = { 8,1 };
 		obj.m_MaxAnimNum = 8;
 		obj.m_Speed = 3;
@@ -197,7 +197,12 @@ void EffectManager::AddObject(Effect obj)
 
 	// オブジェクトの中身をコピー
 	*pObj = obj;
-	*pObj->m_BillMesh.m_pTexture = *obj.m_BillMesh.m_pTexture;
+	//*pObj->m_BillMesh.m_pTexture = *obj.m_BillMesh.m_pTexture;
+
+	// 生成したエフェクトを渡す
+	ID3D11ShaderResourceView* pTexture = &pObj->m_BillMesh.GetTexture();
+	ID3D11ShaderResourceView* pAddTexture = &obj.m_BillMesh.GetTexture();
+	pTexture = pAddTexture;
 
 	// アクティブリストに登録
 	m_ActiveList.push_back(pObj);

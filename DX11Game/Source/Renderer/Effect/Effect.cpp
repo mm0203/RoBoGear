@@ -18,7 +18,7 @@ void Effect::Init()
 	m_MaxAnimNum = 0;
 	m_CurrentAnimNum = 0;
 
-	BillBoard::InitBill();
+	BillBoard::Init();
 }
 
 //=============================================================================
@@ -28,7 +28,7 @@ void Effect::Init()
 //=============================================================================
 void Effect::Uninit()
 {
-	BillBoard::UninitBill();
+	BillBoard::Uninit();
 }
 
 //=============================================================================
@@ -47,7 +47,7 @@ void Effect::Update()
 		m_SpeedCount = 0;
 	}
 
-	BillBoard::UpdateBill();
+	BillBoard::Update();
 }
 
 //=============================================================================
@@ -57,7 +57,7 @@ void Effect::Update()
 //=============================================================================
 void Effect::Draw()
 {
-	BillBoard::DrawBill(m_CurrentAnimNum);
+	BillBoard::Draw(m_CurrentAnimNum);
 }
 
 

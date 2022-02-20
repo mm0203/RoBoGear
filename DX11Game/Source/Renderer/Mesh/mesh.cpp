@@ -240,7 +240,7 @@ void CMesh::Draw(ID3D11DeviceContext* pDeviceContext, CMesh* pMesh, int nTranslu
 		anbient = false;
 	cb2.bAnbient = anbient;
 
-
+	// ライティング
 	cb2.bLight = pMesh->m_bLight;
 
 	m_pLightBuffer->Write(&cb2);

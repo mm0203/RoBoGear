@@ -134,7 +134,6 @@ bool CRenderer::LoadModel(const char* FileName)
 //=============================================================================
 void CRenderer::ReleaseModel()
 {
-
 	const auto& itr = m_ModelPool.find(m_filename);
 
 	// ÉvÅ[ÉãÇ…Ç†Ç¡ÇΩÇÁ

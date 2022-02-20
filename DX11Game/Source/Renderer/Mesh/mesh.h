@@ -62,6 +62,22 @@ public:
 	CMesh();
 	~CMesh() = default;
 
+	// getter
+	XMFLOAT3& GetPos() { return m_Pos; }
+	XMFLOAT3& GetRot() { return m_Rot; }
+	int& GetNumVertex() { return m_nNumVertex; }
+	int& GetNumIndex() { return m_nNumIndex; }
+	XMFLOAT4X4& GetMtxTexture() { return m_MtxTexture; }
+	XMFLOAT4X4& GetWorldMtxTexture() { return m_MtxWorld; }
+	MATERIAL& GetMaterial() { return *m_pMaterial; }
+	ePrimitiveType& GetPrimitive() { return m_PrimitiveType; }
+	ID3D11ShaderResourceView& GetTexture() { return *m_pTexture; }
+
+	// setter 
+	void SetTexture(ID3D11ShaderResourceView* tex) { m_pTexture = tex; }
+	void SetNormalTexture(ID3D11ShaderResourceView* tex) { m_pNormalTexture = tex; }
+	void SetAmbientTexture(ID3D11ShaderResourceView* tex) { m_pAmbientTexture = tex; }
+
 	static void Init();
 	static void Uninit();
 	void Update(CMesh* pMesh);
@@ -69,27 +85,32 @@ public:
 	HRESULT MakeMeshVertex(ID3D11Device* pDevice, CMesh* pMesh, VERTEX_3D vertexWk[], int indexWk[]);
 	void Release(CMesh* pMesh);
 
-	XMFLOAT4X4 m_MtxWorld;
-	XMFLOAT3 m_Pos;		// ポリゴン表示位置の中心座標
-	XMFLOAT3 m_Rot;		// ポリゴンの回転角
-	int m_nNumVertex;	// 総頂点数	
-	int m_nNumIndex;	// 総インデックス数
-	float m_fAlpha;
-	bool m_bLight;
 
-	XMFLOAT4X4 m_MtxTexture;	// テクスチャマトリックス
+private:
+	XMFLOAT3 m_Pos;				// ポリゴン表示位置の中心座標
+	XMFLOAT3 m_Rot;				// ポリゴンの回転角
+	int m_nNumVertex;			// 総頂点数	
+	int m_nNumIndex;			// 総インデックス数
+	XMFLOAT4X4 m_MtxWorld;		// テクスチャ用ワールドマトリックス
+	XMFLOAT4X4 m_MtxTexture;	// テクスチャ用マトリックス
+
+	MATERIAL* m_pMaterial;			 // マテリアル
+	ePrimitiveType m_PrimitiveType;	 // プリミティブ型
+
 	ID3D11ShaderResourceView* m_pTexture;		 // テクスチャ
 	ID3D11ShaderResourceView* m_pNormalTexture;	 // 法線テクスチャ
 	ID3D11ShaderResourceView* m_pAmbientTexture; // 環境テクスチャ
 
-	ePrimitiveType m_PrimitiveType;	 // プリミティブ型
-	MATERIAL* m_pMaterial;	 // マテリアル
+private:
+	float m_fAlpha;	// 不透明度
+	bool m_bLight;	// ライティング
+
 	DXBuffer* m_pMeshBuffer; // 頂点&インデックスバッファ
 
-	static MATERIAL	m_Material;		// マテリアル
-	static ConstantBuffer* m_pWorldBuffer;
-	static ConstantBuffer* m_pLightBuffer;
+	static MATERIAL	m_Material;				// マテリアル
+	static ConstantBuffer* m_pWorldBuffer;	// シェーダ用バッファ
+	static ConstantBuffer* m_pLightBuffer;	// シェーダ用バッファ
+
 	//static SamplerState* m_pShadowSamplerState;
 	//static Texture* m_pShadowDepthStencil;
-private:
 };

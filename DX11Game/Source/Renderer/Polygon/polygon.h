@@ -14,8 +14,8 @@
 // 
 //=============================================================================
 HRESULT InitPolygon();
-void UninitPolygon(void);
-void UpdatePolygon(void);
+void UninitPolygon();
+void UpdatePolygon();
 void DrawPolygon(ID3D11DeviceContext* pDeviceContext);
 void SetPolygonTexture(ID3D11ShaderResourceView* pTexture);
 void SetPolygonPos(float fX, float fY);

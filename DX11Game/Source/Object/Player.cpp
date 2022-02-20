@@ -277,7 +277,6 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 
 		//CCamera::GetInstance().ZoomTarget(GimicPos);
 
-		if(keyPos == keyPos)
 		// エフェクト発生
 		EffectManager::CreateEffect(Effect_KeyBreak, keyPos);
 		EffectManager::CreateEffect(Effect_GimicBreak, GimicPos);

@@ -47,43 +47,52 @@ void CStageGround::Init()
 	HRESULT hr;
 
 	// テクスチャ マトリックス初期化
-	XMStoreFloat4x4(&m_MeshField.m_MtxTexture, XMMatrixIdentity());
+	XMFLOAT4X4& MtxTexture = m_MeshField.GetMtxTexture();
+	XMStoreFloat4x4(&MtxTexture, XMMatrixIdentity());
 
 	// 位置、向きの初期設定
-	m_MeshField.m_Pos = XMFLOAT3(0.0f, -1.0f, 0.0f);
-	m_MeshField.m_Rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	XMFLOAT3& pos = m_MeshField.GetPos();
+	XMFLOAT3& rot = m_MeshField.GetRot();
+	pos = XMFLOAT3(0.0f, -1.0f, 0.0f);
+	rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
 	int SceneNo = Singleton<SceneManager>::GetInstance().GetSceneNo();
 
-	// テクスチャの読み込み
-	// ステージテクスチャ
-	hr = CreateTextureFromFile(pDevice,TEXTURE_FILENAME,&m_MeshField.m_pTexture);
+	// テクスチャ読み込み
+	ID3D11ShaderResourceView* pTexture;
 
-	// エディットモードはなし
+	// フィールド用テクスチャ
+	hr = CreateTextureFromFile(pDevice,TEXTURE_FILENAME,&pTexture);
+	m_MeshField.SetTexture(pTexture);
+
+	// エディットモードは表示しない
 	if (SceneNo != Scene_Edit)
 	{
 		// バンプマップ
-		hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL, &m_MeshField.m_pNormalTexture);
+		hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL, &pTexture);
+		m_MeshField.SetNormalTexture(pTexture);
 
 		// 環境マップ
-
-		hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT, &m_MeshField.m_pAmbientTexture);
+		hr = CreateTextureFromFile(pDevice, TEXTURE_AMBIENT, &pTexture);
+		m_MeshField.SetAmbientTexture(pTexture);
 	}
 
 	// 頂点数の設定
-	m_MeshField.m_nNumVertex = (sizeX + 1) * (sizeY + 1);
+	int& NumVertex = m_MeshField.GetNumVertex();
+	NumVertex = (sizeX + 1) * (sizeY + 1);
 
 	// インデックス数の設定
-	m_MeshField.m_nNumIndex = (sizeX + 1) * 2 * sizeY + (sizeY - 1) * 2;
+	int& NumIndex = m_MeshField.GetNumIndex();
+	NumIndex = (sizeX + 1) * 2 * sizeY + (sizeY - 1) * 2;
 
 	// ポリゴン数の設定
 	int nNumPolygon = sizeX * sizeY * 2 + (sizeY - 1) * 4;
 
 	// オブジェクトの頂点バッファを生成
-	VERTEX_3D* pVertexWk = new VERTEX_3D[m_MeshField.m_nNumVertex];
+	VERTEX_3D* pVertexWk = new VERTEX_3D[NumVertex];
 
 	// オブジェクトのインデックスバッファを生成
-	int* pIndexWk = new int[m_MeshField.m_nNumIndex];
+	int* pIndexWk = new int[NumIndex];
 
 	// 頂点バッファの中身を埋める
 	VERTEX_3D* pVtx = pVertexWk;
