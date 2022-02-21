@@ -96,8 +96,8 @@ void MessageManager::CreateMessage(const char* message, XMFLOAT2 pos, int Mag, X
 	Message obj;
 	strcpy(obj.m_Message, message);
 	obj.m_MessagePos = pos;
-	obj.SetFrameSize(1.0f / FONTFRAME_X, 1.0f / FONTFRAME_Y);
-	obj.SetSize(FONTSIZE_X * Mag, FONTSIZE_Y * Mag);
+	obj.SetFrameSize(FontFrameSizeX, FontFrameSizeY);
+	obj.SetSize(FontSizeX * Mag, FontSizeY * Mag);
 	obj.SetColor(Color);
 	obj.m_Mag = Mag;
 	obj.SetTex(m_pFont);

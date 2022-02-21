@@ -181,9 +181,9 @@ void CEditor::Update()
 	// オブジェクト点滅
 	static int nCount = 0;
 	nCount++;
-	if (nCount < 15) m_bDisp = true;
-	if (nCount > 15) m_bDisp = false;
-	if (nCount > 30) nCount = 0;
+	if (nCount < Second / 4) m_bDisp = true;
+	if (nCount > Second / 4) m_bDisp = false;
+	if (nCount > Second / 2) nCount = 0;
 
 	PrintDebugProc("PosX%d:PosY%d:PosZ%d:\n", (int)m_Trans.GetPos().x, (int)m_Trans.GetPos().y, (int)m_Trans.GetPos().z);
 	PrintDebugProc("ObjectType:%d\n", m_type);

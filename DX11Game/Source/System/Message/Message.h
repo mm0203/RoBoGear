@@ -13,12 +13,21 @@
 //　マクロ定義
 // 
 //=============================================================================
-#define DEFAULT_MAG		(5)
-#define FONTSIZE_X		(4.0f)
-#define FONTSIZE_Y		(7.0f)
+namespace
+{
+	const int MessageMax = 20;		// 表示できる最大文字数
+	const int MessageNum = 15;		// 生成できる文字数
+	const int DefaultMag = 5;		// デフォルトの文字サイズ
+	const float FontSizeX = 4.0f;   // 横フレーム数
+	const float FontSizeY = 7.0f;   // 縦フレーム数
 
-#define FONTFRAME_X		(7)
-#define FONTFRAME_Y		(4)
+	const int FontFrameX = 7;		// フォントフレームX
+	const int FontFrameY = 4;		// フォントフレームX
+
+	// UVを分割
+	constexpr float FontFrameSizeX = 1.0f / FontFrameX;
+	constexpr float FontFrameSizeY = 1.0f / FontFrameY;
+}
 
 //=============================================================================
 // 
@@ -44,7 +53,7 @@ public:
 private:
 	// メンバ変数
 	XMFLOAT2 m_MessagePos;
-	char m_Message[20];
+	char m_Message[MessageMax];
 	int m_Mag;	//文字倍率
 };
 
@@ -58,13 +67,13 @@ public:
 	static void Draw();
 
 	static void CreateMessage
-	(const char* message, XMFLOAT2 pos, int Mag = DEFAULT_MAG, XMFLOAT3 Color = { 1.0f,1.0f,1.0f });
+	(const char* message, XMFLOAT2 pos, int Mag = DefaultMag, XMFLOAT3 Color = { 1.0f,1.0f,1.0f });
 	static void DeleteObject(Message*);
 	static std::vector<Message*> GetActiveList() { return m_ActiveList; }
 
 private:
 	static void AddObject(Message);
-	static void CreateObject(int num = 15);
+	static void CreateObject(int num = MessageNum);
 	static void UpdateObject();
 
 private:

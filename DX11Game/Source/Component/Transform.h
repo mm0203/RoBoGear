@@ -49,9 +49,9 @@ public:
 	void SetMove(XMFLOAT3 move) { m_Move = move; }
 
 protected:
-	XMFLOAT3 m_Pos;	// 位置
+	XMFLOAT3 m_Pos;		// 位置
 	XMINT2   m_Coord;	// 座標
 	XMFLOAT3 m_Scale;	// サイズ
-	XMFLOAT3 m_Rot;	// 回転
+	XMFLOAT3 m_Rot;		// 回転
 	XMFLOAT3 m_Move;	// 移動量
 };

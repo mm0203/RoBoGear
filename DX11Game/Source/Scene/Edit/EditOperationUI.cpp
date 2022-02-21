@@ -23,7 +23,7 @@ namespace
 void CEditOperationUI::Init()
 {
 	m_Polygon->SetSize(SCREEN_WIDTH,SCREEN_HEIGHT);
-	m_Polygon->LoadTexture(L"data/texture/Edit/EditOperationUI.png");
+	m_Polygon->LoadTexture(CEditOperationUITexture);
 }
 
 //=============================================================================

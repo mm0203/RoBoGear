@@ -17,9 +17,8 @@ constexpr float ViewNearZ =	10.0f;		// ビュー平面のNearZ値
 constexpr float ViewFarZ  = 10000.0f;	// ビュー平面のFarZ値
 constexpr float FogNearZ = ViewFarZ * 0.3f;	// フォグのNearZ値
 constexpr float FogFarZ  = ViewFarZ * 0.6f;	// フォグのFarZ値
-constexpr float FovY = 50.0f; //　視野角
 constexpr float AspectRatio = (float)SCREEN_WIDTH / SCREEN_HEIGHT; // アスペクト比
-
+const float FovY = 50.0f; //　視野角
 
 //=============================================================================
 // 
@@ -68,7 +67,7 @@ private:
 	DirectX::XMFLOAT4X4 m_ProjectionMatrix;	//プロジェクションマトリックス
 
 	float m_AspectRatio;	// アスペクト比
-	float m_FovY; // 視野角
-	float m_NearClipZ;	// 前方クリップ距離
-	float m_FarClipZ;	// 後方クリップ距離
+	float m_FovY;			// 視野角
+	float m_NearClipZ;		// 前方クリップ距離
+	float m_FarClipZ;		// 後方クリップ距離
 };

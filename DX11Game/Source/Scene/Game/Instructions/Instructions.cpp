@@ -77,18 +77,14 @@ void CInstructions::Update(GameState state)
 	// ƒy[ƒWØ‚è‘Ö‚¦
 	if (GetKeyTrigger(VK_A) && nCurrentPage > eInstructions_Page1)
 	{
-		CSound::SetVolume(1.0f);
 		CSound::Play(SE_SELECT_CURSOR);
-		CSound::SetVolume(0.3f);
 
 		nCurrentPage--;
 		fMove += movment;
 	}
 	if (GetKeyTrigger(VK_D) && nCurrentPage < eInstructions_Page3)
 	{
-		CSound::SetVolume(1.0f);
 		CSound::Play(SE_SELECT_CURSOR);
-		CSound::SetVolume(0.3f);
 
 		nCurrentPage++;
 		fMove -= movment;

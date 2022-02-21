@@ -27,16 +27,17 @@ namespace
 	// アングル初期座標
 	XMFLOAT3 CameraAnglePos = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	// 上方ベクトル定数
-	constexpr XMFLOAT3 CameraDefUpVector = XMFLOAT3(0.0f, 1.0f, 0.0f);
+	const XMFLOAT3 CameraDefUpVector = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
 	// 作業用変数
-	XMFLOAT3 Move{ 0.0f,0.0f,0.0f };		 // カメラ,注視点の移動量
-	constexpr float CameraMoveSpeed = 8.0f;	 // カメラの移動速度
-	constexpr float Acc = 0.05f;			 // 慣性
-	constexpr float XDistMax =  280.0f;		 // カメラX軸最大距離
-	constexpr float XDistMin = -280.0f;		 // カメラX軸最小距離
-	constexpr float YDistMax = 860.0f;		 // カメラY軸最大距離
-	constexpr float ZDistMax = -420.0f;		 // カメラZ軸最大距離
+	XMFLOAT3 Move{ 0.0f,0.0f,0.0f };	 // カメラ,注視点の移動量
+	const float CameraMoveSpeed = 5.0f;	 // カメラの移動速度
+	const float Acc = 0.05f;			 // 慣性
+	const float XDistMax =  280.0f;		 // カメラX軸最大距離
+	const float XDistMin = -280.0f;		 // カメラX軸最小距離
+	const float YDistMax = 860.0f;		 // カメラY軸最大距離
+	const float ZDistMax = -420.0f;		 // カメラZ軸最大距離
+	const float ClearRelative = -150.0f; // クリア時の角度
 }
 
 //=============================================================================
@@ -72,9 +73,9 @@ void CCamera::Init()
 	m_CameraAngle = CameraAnglePos;	// カメラ角度
 
 	m_AspectRatio = AspectRatio; // アスペクト比
-	m_FovY = FovY;	// 視野角
-	m_NearClipZ = ViewNearZ;	// 前方クリップ距離
-	m_FarClipZ = ViewFarZ;	// 後方クリップ距離
+	m_FovY = FovY;				 // 視野角
+	m_NearClipZ = ViewNearZ;	 // 前方クリップ距離
+	m_FarClipZ = ViewFarZ;		 // 後方クリップ距離
 
 	// カメラと注視点の距離を設定
 	float dx, dz;
@@ -267,10 +268,10 @@ void CCamera::ZoomOut()
 //=============================================================================
 void CCamera::ZoomTarget(XMFLOAT3 pos)
 {
-	// 角度を調整
-	m_TargetRelativePos.y += 5.0f;
-	if (m_TargetRelativePos.y >= -150.0f)
-		m_TargetRelativePos.y = -150.0f;
+	// ズーム時に対象の正面に来るように角度を調整
+	m_TargetRelativePos.y += CameraMoveSpeed;
+	if (m_TargetRelativePos.y >= ClearRelative)
+		m_TargetRelativePos.y = ClearRelative;
 
 	// 座標更新
 	m_CameraPos.x = m_CameraPos.x * 0.9f + (pos.x + m_RelCameraPos.x) * 0.1f;

@@ -79,7 +79,7 @@ void CGameTexture::Update(GameState state)
 		m_GameStep->FadeOut();
 
 		// クリア3秒後に
-		if (m_nCount >= 60 * 3)
+		if (m_nCount >= Second * 3)
 		{
 			// クリア表示
 			m_Clear->Update();

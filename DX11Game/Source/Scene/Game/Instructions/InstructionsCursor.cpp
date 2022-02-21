@@ -96,6 +96,7 @@ void CInstructionsCursor::MoveCursor(int index)
 		m_Polygons[eLeft].SetAlpha(0);
 	}
 
+	// ¶‰EˆÚ“®
 	m_TextureMoves[eRight].TextureRightLeft(m_Polygons[eRight], -560.0f);
 	m_TextureMoves[eLeft].TextureRightLeft(m_Polygons[eLeft], 540.0f);
 }

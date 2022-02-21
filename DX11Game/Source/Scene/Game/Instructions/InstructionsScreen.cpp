@@ -17,6 +17,8 @@ namespace
 	const auto InstructionsPage1 = L"data/texture/Instructions/Instructions1.png";
 	const auto InstructionsPage2 = L"data/texture/Instructions/Instructions2.png";
 	const auto InstructionsPage3 = L"data/texture/Instructions/Instructions3.png";
+
+	const float InstructionsWidth = 1100.0f; // 各画像の間隔
 }
 
 //=============================================================================
@@ -31,7 +33,7 @@ void CInstructionsScreen::Init()
 	// 操作説明
 	for (int i = 0; i < eInstructions_PageMax; i++)
 	{
-		m_Polygons[i].SetPosition(0.0f + (i * 1100), 0.0f);
+		m_Polygons[i].SetPosition(0.0f + (i * InstructionsWidth), 0.0f);
 		m_Polygons[i].SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
@@ -80,5 +82,5 @@ void CInstructionsScreen::PageMove(float& move)
 {
 	// 画像のポジションを変更
 	for (int i = 0; i < eInstructions_PageMax; i++)
-		m_Polygons[i].SetPosition(move + (i * 1100), 0.0f);
+		m_Polygons[i].SetPosition(move + (i * InstructionsWidth), 0.0f);
 }

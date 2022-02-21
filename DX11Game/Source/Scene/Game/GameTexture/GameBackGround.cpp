@@ -13,7 +13,6 @@
 //=============================================================================
 namespace
 {
-	// TODO cpp‚í‚¯‚é‚×‚«H
 	const auto GameOperation = L"data/texture/UI/OperationUI.png";
 	const auto BackGroundFrame = L"data/texture/UI/Frame.png";
 }

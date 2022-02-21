@@ -12,9 +12,10 @@
 //=============================================================================
 namespace
 {
+	// TODO ŠÔ
 	// 60/60‚Í1ƒtƒŒ[ƒ€ 1/60‚Í1•b
-	float FadeInSpeed = 1.2f / 60.0f;
-	float FadeOutSpeed = 1.8f / 60.0f;
+	constexpr float FadeInSpeed = 1.2f / 60.0f;
+	constexpr float FadeOutSpeed = 1.8f / 60.0f;
 	float FadeKeep = 2.0f;	// •b
 
 }

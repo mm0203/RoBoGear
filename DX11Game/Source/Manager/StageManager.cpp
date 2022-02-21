@@ -102,7 +102,7 @@ std::string StageManager::LoadStage()
 			int& step = CGameManager::GetStep();
 			step = std::get<eStageStep>(m_StageInfo[i]);
 
-			// 読み込むステージファイル名を返す
+			// ステージファイル名を取得
 			return std::get<eStageName>(m_StageInfo[i]);
 		}
 	}

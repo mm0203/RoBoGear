@@ -14,14 +14,14 @@
 //=============================================================================
 namespace
 {
-	constexpr XMFLOAT3 LightDirection = XMFLOAT3(0.0f, -1.0f, 1.0f);	 // 光の方向
-	constexpr XMFLOAT4 LightDiffuse = XMFLOAT4(0.9f, 0.9f, 0.9f, 1.0f);	 // 拡散色 + アルファ
-	constexpr XMFLOAT4 LightAmbient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);	 // 環境色
-	constexpr XMFLOAT4 LightSpecular = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f); // 鏡面反射色+強度
+	const XMFLOAT3 LightDirection = XMFLOAT3(0.0f, -1.0f, 1.0f);	 // 光の方向
+	const XMFLOAT4 LightDiffuse = XMFLOAT4(0.9f, 0.9f, 0.9f, 1.0f);	 // 拡散色 + アルファ
+	const XMFLOAT4 LightAmbient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);	 // 環境色
+	const XMFLOAT4 LightSpecular = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f); // 鏡面反射色+強度
 
-	constexpr XMFLOAT3 LightDefPos = XMFLOAT3(200.0f, 1200.0f, -600.0f);;	 // 初期視点
-	constexpr XMFLOAT3 LightDefTarget = XMFLOAT3(0.0f, 0.0f, 0.0f);		 // 注視点初期座標
-	constexpr XMFLOAT3 LightDefUpVector = XMFLOAT3(0.0f, 1.0f, 0.0f);	 // 上方ベクトル定数
+	const XMFLOAT3 LightDefPos = XMFLOAT3(200.0f, 1200.0f, -600.0f); // 初期視点
+	const XMFLOAT3 LightDefTarget = XMFLOAT3(0.0f, 0.0f, 0.0f);		 // 注視点初期座標
+	const XMFLOAT3 LightDefUpVector = XMFLOAT3(0.0f, 1.0f, 0.0f);	 // 上方ベクトル定数
 }
 
 //=============================================================================

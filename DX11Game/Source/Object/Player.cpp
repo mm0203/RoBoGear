@@ -10,11 +10,29 @@
 #include <Renderer/Effect/Effect.h>
 
 // システム
+#include <System/Camera/Camera.h>
 #include <System/Input/input.h>
 #include <System/Debug/debugproc.h>
 #include <System/Sound/Sound.h>
 #include <System/Helper/XMFLOAT_Helper.h>
 #include <time.h>
+
+//=============================================================================
+// 
+// 無名名前空間
+// 
+//=============================================================================
+namespace
+{
+	// モデルが向いている方向
+	const float DirRoationFront = 0.0f;		// 正面
+	const float DirRoationBack  = 180.0f;	// 背面
+	const float DirRoationLeft  = 90.0f;	// 左
+	const float DirRoationRight = -90.0f;	// 右
+
+	const float AnimeSpeed = 2.0f;	// アニメ再生速度
+	const float RotateSpeed = 2.0f; // クリア時のプレイヤー回転速度
+}
 
 //=============================================================================
 // 
@@ -80,22 +98,22 @@ void CPlayer::Update()
 			if (GetKeyTrigger(VK_W))// 上
 			{
 				m_Dir = PlayerDir::eUp;
-				m_Rot.y = 180.0f;
+				m_Rot.y = DirRoationBack;
 			}
 			if (GetKeyTrigger(VK_S))// 下
 			{
 				m_Dir = PlayerDir::eDown;
-				m_Rot.y = 0.0f;
+				m_Rot.y = DirRoationFront;
 			}
 			if (GetKeyTrigger(VK_A))// 左
 			{
 				m_Dir = PlayerDir::eLeft;
-				m_Rot.y = 90.0f;
+				m_Rot.y = DirRoationLeft;
 			}
 			if (GetKeyTrigger(VK_D))// 右
 			{
 				m_Dir = PlayerDir::eRight;
-				m_Rot.y = -90.0f;
+				m_Rot.y = DirRoationRight;
 			}
 			// 方向が入力されたら移動
 			if (m_Dir != PlayerDir::eNone)
@@ -125,14 +143,14 @@ void CPlayer::Update()
 
 		m_nCount++;
 		// クリア１秒後に
-		if (m_nCount >= 60)
+		if (m_nCount >= Second * 1)
 		{
 			// 正面じゃなければ正面に向かせる
-			if (m_Rot.y > 0.0f) m_Rot.y -= 2.0f;
-			if (m_Rot.y < 0.0f) m_Rot.y += 2.0f;
+			if (m_Rot.y > DirRoationFront) m_Rot.y -= RotateSpeed;
+			if (m_Rot.y < DirRoationFront) m_Rot.y += RotateSpeed;
 
 			// 正面に向いたらアニメーションを変更
-			if (m_Rot.y == 0.0f)
+			if (m_Rot.y == DirRoationFront)
 			{
 				m_Model.SetAnimeNo((int)PlayerAnime::eClear);
 			}
@@ -184,9 +202,9 @@ void CPlayer::PlayerAnimetion()
 	if(m_Model.GetAnimeNo() != (int)PlayerAnime::eClear)
 		m_Model.AnimeChange((int)PlayerAnime::eNone);
 
-	m_Caterpillar->GetModel().AnimeChange((int)CaterpillarAnime::eNone, 2.0f);
-	m_Gear->GetModel().AnimeChange((int)GearAnime::eNone, 2.0f);
-	m_Generare->GetModel().AnimeChange((int)GenerareAnime::eNone, 2.0f);
+	m_Caterpillar->GetModel().AnimeChange((int)CaterpillarAnime::eNone, AnimeSpeed);
+	m_Gear->GetModel().AnimeChange((int)GearAnime::eNone, AnimeSpeed);
+	m_Generare->GetModel().AnimeChange((int)GenerareAnime::eNone, AnimeSpeed);
 }
 
 //=============================================================================

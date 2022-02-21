@@ -16,10 +16,10 @@ public:
 	CTextureColorChangeComponent();
 	~CTextureColorChangeComponent() = default;
 
-	float ColorChange();
+	float ColorChange(int speed = 3);
 
 private:
-	int m_nTime; // カウント
+	int m_nTime;	// カウント
 	float m_fColor;	// 色
 
 };

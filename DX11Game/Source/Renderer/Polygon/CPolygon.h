@@ -11,8 +11,6 @@
 #include <Renderer/Graphics/Graphics.h>
 #include <System/Singleton/singleton.h>
 
-
-
 //=============================================================================
 // 
 // ƒNƒ‰ƒX’è‹`

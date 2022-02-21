@@ -5,8 +5,6 @@
 //=============================================================================
 #include "GameManager.h"
 
-
-
 // システム
 #include <System/Camera/Camera.h>
 #include <System/Singleton/singleton.h>
@@ -32,6 +30,15 @@ bool CGameManager::m_bDebugMode;
 
 //=============================================================================
 // 
+// 無名名前空間
+// 
+//=============================================================================
+namespace
+{
+	const int MesseageSize = 6; // メッセージ表示サイズ
+}
+//=============================================================================
+// 
 // 初期化処理
 // 
 //=============================================================================
@@ -47,17 +54,17 @@ void CGameManager::Init()
 	// 文字黒色
 	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
-	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, -300.0f),8);
+	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, -300.0f), MesseageSize);
 
 	// カメラ操作表示
-	MessageManager::CreateMessage("CAMERA", XMFLOAT2(300, 300.0f), 6);
+	MessageManager::CreateMessage("CAMERA",     XMFLOAT2(300, 300.0f), MesseageSize);
 	MessageManager::CreateMessage("MOVE  WASD", XMFLOAT2(360, 250.0f));
 	MessageManager::CreateMessage("ANGLE IJKL", XMFLOAT2(360, 200.0f));
-	MessageManager::CreateMessage("UP SPACE", XMFLOAT2(360, 150.0f));
-	MessageManager::CreateMessage("DOWN CTRL", XMFLOAT2(360, 100.0f));
+	MessageManager::CreateMessage("UP SPACE",   XMFLOAT2(360, 150.0f));
+	MessageManager::CreateMessage("DOWN CTRL",  XMFLOAT2(360, 100.0f));
 
 	// シェーダ切り替え表示
-	MessageManager::CreateMessage("SHADER", XMFLOAT2(300, 0.0f), 6);
+	MessageManager::CreateMessage("SHADER",    XMFLOAT2(300, 0.0f), MesseageSize);
 	MessageManager::CreateMessage("TOON    Z", XMFLOAT2(360, -50.0f));
 	MessageManager::CreateMessage("OUTLINE X", XMFLOAT2(360, -100.0f));
 	MessageManager::CreateMessage("BUMP    C", XMFLOAT2(360, -150.0f));
@@ -81,12 +88,11 @@ void CGameManager::Uninit()
 //=============================================================================
 void CGameManager::Update()
 {
+	// デバッグ切り替え
 	if (GetKeyTrigger(VK_F1))
 		m_bDebugMode ^= 1;
 
-	static int nCount = 0;
-	static bool bPuase = false;
-	static bool bInstructions = false;
+	static int nCount = 0;	// カウント用
 
 	switch (m_GameState)
 	{
@@ -97,7 +103,7 @@ void CGameManager::Update()
 		CCamera::GetInstance().ZoomOut();
 
 		// 4秒後に動けるように
-		if (nCount >= 60 * 4)
+		if (nCount >= Second * 4)
 		{
 			nCount = 0;
 			m_GameState = GameState::eMove;
@@ -129,7 +135,7 @@ void CGameManager::Update()
 	case GameState::eClear: // クリア
 		nCount++;
 		// クリア5秒後にシーン遷移
-		if (nCount >= 60 * 5)
+		if (nCount >= Second * 5)
 		{
 			nCount = 0;
 			Singleton<SceneManager>::GetInstance().SetNextScene(new StageSelectScene());
@@ -139,7 +145,7 @@ void CGameManager::Update()
 	case GameState::eGameOver: // ゲームオーバー
 		nCount++;
 		// クリア3秒後にシーン遷移
-		if (nCount >= 60 * 3)
+		if (nCount >= Second * 3)
 		{
 			nCount = 0;
 			SceneManager::GetInstance().SetNextScene(new GameScene());

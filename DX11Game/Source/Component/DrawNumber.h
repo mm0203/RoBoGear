@@ -17,7 +17,6 @@ namespace
 	const auto Number = L"data/texture/UI/StageNumber.png";
 }
 
-
 //=============================================================================
 // 
 // ƒNƒ‰ƒX’è‹`

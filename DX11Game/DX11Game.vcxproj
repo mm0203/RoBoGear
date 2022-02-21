@@ -115,6 +115,7 @@
       <AdditionalIncludeDirectories>..\..\Assimp\include;..\..\DirectXTex</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -152,6 +153,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)Source\;..\..\DirectXTex;..\..\Assimp\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -187,6 +189,7 @@
     <ClCompile Include="Source\Object\Trap.cpp" />
     <ClCompile Include="Source\Object\Wall.cpp" />
     <ClCompile Include="Source\Renderer\Assimp\AssimpModel.cpp" />
+    <ClCompile Include="Source\Renderer\Billboard\BillBorad.cpp" />
     <ClCompile Include="Source\Renderer\Effect\Effect.cpp" />
     <ClCompile Include="Source\Renderer\Effect\EffectManager.cpp" />
     <ClCompile Include="Source\Renderer\Graphics\DepthStencilState.cpp" />

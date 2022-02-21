@@ -13,8 +13,17 @@
 //=============================================================================
 namespace
 {
-	constexpr auto NumberFrameX = 10; // 横フレーム数
-	constexpr auto NumberFrameY = 1;  // 縦フレーム数
+	const auto NumberFrameX = 10; // 横フレーム数
+	const auto NumberFrameY = 1;  // 縦フレーム数
+
+	// UVを分割
+	constexpr float NumberFrameSizeX = 1.0f / NumberFrameX;
+	constexpr float NumberFrameSizeY = 1.0f / NumberFrameY;
+
+	const int DigitCheck = 10;	  // 桁数の判定
+	const float DigitPos = 80.0f; // 桁数の場所
+
+	const XMFLOAT2 size = XMFLOAT2(80.0f, 110.0f); // サイズ
 }
 
 //=============================================================================
@@ -35,8 +44,8 @@ CNumber::CNumber()
 //=============================================================================
 void CNumber::Init(const wchar_t* FileName)
 {
-	m_Polygon.SetSize(80.0f, 110.0f);
-	m_Polygon.SetFrameSize(1.0f / NumberFrameX, 1.0f / NumberFrameY);	// UVを10分割
+	m_Polygon.SetSize(size);
+	m_Polygon.SetFrameSize(NumberFrameSizeX, NumberFrameSizeY);	// UVを10分割
 	m_Polygon.LoadTexture(FileName);
 }
 
@@ -72,9 +81,9 @@ void CNumber::Draw(int Number, XMFLOAT2 pos)
 		m_Polygon.SetPosition(m_Pos.x, m_Pos.y);
 
 		// 一桁になったら中央に
-		if (m_nNumber < 10)
+		if (m_nNumber < DigitCheck)
 		{
-			m_Pos.x -= 40.0f;
+			m_Pos.x -= DigitPos / 2;
 			m_Polygon.SetPosition(m_Pos.x, m_Pos.y);
 		}
 		// UV座標をセット
@@ -85,7 +94,7 @@ void CNumber::Draw(int Number, XMFLOAT2 pos)
 		m_Polygon.SetUV(u / (float)NumberFrameX, v / (float)NumberFrameY);
 
 		// 桁数の位置をずらす
-		m_Pos.x -= 80.0f;
+		m_Pos.x -= DigitPos;
 		m_Polygon.Draw();
 	}
 }

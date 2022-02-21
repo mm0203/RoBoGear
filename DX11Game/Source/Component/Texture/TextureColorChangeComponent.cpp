@@ -5,6 +5,8 @@
 //=============================================================================
 #include "TextureColorChangeComponent.h"
 #include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 //=============================================================================
 // 
@@ -13,7 +15,7 @@
 //=============================================================================
 CTextureColorChangeComponent::CTextureColorChangeComponent()
 {
-	m_nTime = 10;
+	m_nTime = 0;
 	m_fColor = 0.0f;
 }
 
@@ -22,9 +24,10 @@ CTextureColorChangeComponent::CTextureColorChangeComponent()
 // テクスチャ色変更
 // 
 //=============================================================================
-float CTextureColorChangeComponent::ColorChange()
+float CTextureColorChangeComponent::ColorChange(int speed)
 {
-	m_nTime += 3;
-	m_fColor = abs(sinf(m_nTime * 3.1415f / 100.0f));
+	// 色の変更速度
+	m_nTime += speed;
+	m_fColor = abs(sinf(m_nTime * (float)M_PI / 100.0f));
 	return m_fColor;
 }

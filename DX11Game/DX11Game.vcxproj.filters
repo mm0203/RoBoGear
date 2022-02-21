@@ -443,6 +443,9 @@
     <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuBackGround.cpp">
       <Filter>Scene\Pause\PauseTexture</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Billboard\BillBorad.cpp">
+      <Filter>Renderer\Billboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Component\Texture\TextureColorChangeComponent.h">

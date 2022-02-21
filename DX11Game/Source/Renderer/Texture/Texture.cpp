@@ -152,7 +152,7 @@ BYTE Texture::GetPixelSize(DXGI_FORMAT format)
 
 //=============================================================================
 // 
-// 生成
+// テクスチャ生成
 // 
 //=============================================================================
 HRESULT Texture::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
@@ -174,7 +174,7 @@ HRESULT Texture::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
 
 //=============================================================================
 // 
-// メモリ生成
+// テクスチャ生成
 // 
 //=============================================================================
 HRESULT CreateTextureFromMemory(_In_ ID3D11Device* d3dDevice,
@@ -201,7 +201,7 @@ HRESULT CreateTextureFromMemory(_In_ ID3D11Device* d3dDevice,
 
 //=============================================================================
 // 
-// ファイル生成
+// テクスチャ生成
 // 
 //=============================================================================
 HRESULT CTexture::CreateTextureFromFile(_In_ ID3D11Device* d3dDevice,
@@ -228,7 +228,7 @@ HRESULT CTexture::CreateTextureFromFile(_In_ ID3D11Device* d3dDevice,
 
 //=============================================================================
 // 
-// ファイル生成
+// テクスチャ生成
 // 
 //=============================================================================
 HRESULT CTexture::CreateTextureFromFile(_In_ ID3D11Device* d3dDevice,

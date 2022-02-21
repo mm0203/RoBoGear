@@ -25,7 +25,7 @@ Message::Message()
 void Message::Init()
 {
 	m_MessagePos = { 0.0f,0.0f };
-	m_Mag = DEFAULT_MAG;
+	m_Mag = DefaultMag;
 }
 
 //=============================================================================
@@ -64,13 +64,13 @@ void Message::Draw()
 			pchar++;
 			continue;
 		}
-		int u = CharNum % FONTFRAME_X;
-		int v = CharNum / FONTFRAME_X;
+		int u = CharNum % FontFrameX;
+		int v = CharNum / FontFrameX;
 		float U = u * CPolygon::GetFrameSize().x;
 		float V = v * CPolygon::GetFrameSize().y + 0.0000001f;
 		CPolygon::SetUV({ U,V });
 		XMFLOAT2 pos = m_MessagePos;
-		pos.x += (pchar - m_Message) * ((FONTSIZE_X * m_Mag) + 5);
+		pos.x += (pchar - m_Message) * ((FontSizeX * m_Mag) + 5);
 		CPolygon::SetPosition(pos);
 		CPolygon::Draw();
 		pchar++;

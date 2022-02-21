@@ -11,11 +11,15 @@
 
 //=============================================================================
 // 
-// 静的メンバ
+// 無名名前空間
 // 
 //=============================================================================
+namespace
+{
+	const XMFLOAT3 CursorColor = XMFLOAT3(0.0f, 0.8f, 0.9f);	// カーソル色
+	constexpr float ModeHeight = -50.0f + 300.0f;	// 各モードの幅
+}
 
-#define CURSOR_COLOR	(XMFLOAT3(0.0f,0.8f,0.9f))
 //=============================================================================
 // 
 // コンストラクタ
@@ -35,19 +39,17 @@ void CModeSelect::Init()
 	m_Polygon.LoadTexture(L"data/texture/Edit/Cursor01.png");
 	m_Polygon.SetPosition(400, 300);
 	m_Polygon.SetSize(40, 40);
-	m_Polygon.SetColor(CURSOR_COLOR);
-
-	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	m_Polygon.SetColor(CursorColor);
 
 	// テキスト描画
-	MessageManager::CreateMessage("CREATE", XMFLOAT2(440, 300.0f));
-	MessageManager::CreateMessage("DELETE", XMFLOAT2(440, 250.0f));
-	MessageManager::CreateMessage("SET STEP", XMFLOAT2(440, 200.0f));
-	MessageManager::CreateMessage("SAVE", XMFLOAT2(440.0f, 150.0f));
-	MessageManager::CreateMessage("LOAD", XMFLOAT2(440.0f, 100.0f));
-	MessageManager::CreateMessage("TITLE", XMFLOAT2(440.0f, 50.0f));
-	MessageManager::CreateMessage("GAME", XMFLOAT2(440.0f, 0.0f));
-	MessageManager::CreateMessage("STEP", XMFLOAT2(485.0f, -75.0f));
+	MessageManager::CreateMessage("CREATE",   XMFLOAT2(440.0f, 300.0f));
+	MessageManager::CreateMessage("DELETE",   XMFLOAT2(440.0f, 250.0f));
+	MessageManager::CreateMessage("SET STEP", XMFLOAT2(440.0f, 200.0f));
+	MessageManager::CreateMessage("SAVE",     XMFLOAT2(440.0f, 150.0f));
+	MessageManager::CreateMessage("LOAD",     XMFLOAT2(440.0f, 100.0f));
+	MessageManager::CreateMessage("TITLE",    XMFLOAT2(440.0f, 50.0f));
+	MessageManager::CreateMessage("GAME",     XMFLOAT2(440.0f, 0.0f));
+	MessageManager::CreateMessage("STEP",     XMFLOAT2(485.0f, -75.0f));
 	MessageManager::CreateMessage("STAGE NO", XMFLOAT2(435.0f, -225.0f));
 }
 
@@ -77,7 +79,7 @@ void CModeSelect::Update(int& index,int ModeNum)
 		// 最小を超えたら最大に
 		if (index < 0) index += ModeNum;
 		XMFLOAT2 pos = m_Polygon.GetPos();
-		pos.y = index * -50.0f + 300.0f;
+		pos.y = index * ModeHeight;
 		m_Polygon.SetPosition(pos);
 		//CSound::Play(SE_Cursor);
 	}
@@ -91,7 +93,7 @@ void CModeSelect::Update(int& index,int ModeNum)
 		// 最大を超えたら最小に
 		if (index > ModeNum - 1) index -= ModeNum;
 		XMFLOAT2 pos = m_Polygon.GetPos();
-		pos.y = index * -50.0f + 300.0f;
+		pos.y = index * ModeHeight;
 		m_Polygon.SetPosition(pos);
 	}
 
@@ -103,7 +105,7 @@ void CModeSelect::Update(int& index,int ModeNum)
 	for (auto it : List)
 	{
 		if (num == index)
-			it->SetColor(CURSOR_COLOR);
+			it->SetColor(CursorColor);
 		else it->SetColor({ 1.0f,1.0f,1.0f });
 		num++;
 		if (num == ModeNum) break;
