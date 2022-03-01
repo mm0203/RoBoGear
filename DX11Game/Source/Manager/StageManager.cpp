@@ -161,9 +161,7 @@ void  StageManager::StageCreate(std::string& fileName)
 				break;
 				// 鍵
 			case(eObject_Key):	 // 3
-				// TODO キーのモデルサイズが合わないため...
-				XMFLOAT3 sizeKey = { 2.0f, 2.0f, 2.0f };
-				ObjectManager::CreateObject<CKey>(ObjectPos, Coord, sizeKey);
+				ObjectManager::CreateObject<CKey>(ObjectPos, Coord);
 				break;
 				// ギミック
 			case(eObject_Gimic): // 4

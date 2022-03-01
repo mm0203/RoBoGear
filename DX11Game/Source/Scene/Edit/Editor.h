@@ -84,18 +84,31 @@ private:
 	};
 private:
 
-	std::unique_ptr<CRenderer> m_pModel; // 表示用モデル
-	CTransform m_Trans;	// モデル情報
-	CModeSelect m_ModeSelect; // モード選択
-	CNumber m_Number;	// ステップやナンバー表示
-	CCursor m_ModelCursor; // カーソルモデル
-	CEditOperationUI m_pEditOperationUI; // UI表示
+	// 表示用モデル
+	std::unique_ptr<CRenderer> m_pModel;
+	// モデル情報
+	CTransform m_Trans;
+	// モード選択
+	CModeSelect m_ModeSelect;
+	// ステップやナンバー表示
+	CNumber m_Number;
+	// カーソルモデル
+	CCursor m_ModelCursor;
+	// UI表示
+	CEditOperationUI m_pEditOperationUI;
 
-	int m_nCurrentStage; // ステージ番号
-	int m_nStepCount;	 // 歩数
-	int m_nCurrentMode;	// 現在のモード
-	bool m_bDisp;		// 点滅用判定
-	int m_type;		//オブジェクトの種類
-	int m_nMap[HeightMax][WidthMax];	// ステージ編集用変数
-	int m_nChipsize;	// マップチップサイズ
+	// ステージ番号
+	int m_nCurrentStage;
+	// 歩数
+	int m_nStepCount;
+	// 現在のモード
+	int m_nCurrentMode;
+	// 点滅用判定
+	bool m_bDisp;
+	//オブジェクトの種類
+	int m_type;
+	// ステージ編集用変数
+	int m_nMap[HeightMax][WidthMax];
+	// マップチップサイズ
+	int m_nChipsize;
 };

@@ -107,7 +107,7 @@ void UninitPolygon()
 {
 	SAFE_RELEASE(g_pTexture);
 	SAFE_DELETE(g_pMeshCBuffer);
-	SAFE_DELETE(g_pMeshCBuffer);
+	SAFE_DELETE(g_pMeshBuffer);
 }
 
 //=============================================================================
@@ -160,7 +160,7 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 	GetPixelShader(POLYGON_PS)->Bind();
 
 	// サンプラセット
-	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
+	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_POINT);
 
 	// テクスチャセット
 	pDeviceContext->PSSetShaderResources(0, 1, &g_pTexture);

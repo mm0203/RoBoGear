@@ -17,7 +17,6 @@
 namespace
 {
 	const XMFLOAT3 CursorColor = XMFLOAT3(0.0f, 0.8f, 0.9f);	// カーソル色
-	constexpr float ModeHeight = -50.0f + 300.0f;	// 各モードの幅
 }
 
 //=============================================================================
@@ -78,8 +77,10 @@ void CModeSelect::Update(int& index,int ModeNum)
 		index--;
 		// 最小を超えたら最大に
 		if (index < 0) index += ModeNum;
+
+		// 矢印の位置を変更
 		XMFLOAT2 pos = m_Polygon.GetPos();
-		pos.y = index * ModeHeight;
+		pos.y = index * -50.0f + 300.0f;
 		m_Polygon.SetPosition(pos);
 		//CSound::Play(SE_Cursor);
 	}
@@ -92,8 +93,10 @@ void CModeSelect::Update(int& index,int ModeNum)
 		index++;
 		// 最大を超えたら最小に
 		if (index > ModeNum - 1) index -= ModeNum;
+
+		// 矢印の位置を変更
 		XMFLOAT2 pos = m_Polygon.GetPos();
-		pos.y = index * ModeHeight;
+		pos.y = index * -50.0f + 300.0f;
 		m_Polygon.SetPosition(pos);
 	}
 

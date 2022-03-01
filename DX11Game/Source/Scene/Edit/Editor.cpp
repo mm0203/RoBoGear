@@ -412,8 +412,6 @@ void CEditor::ChangeObject()
 		m_pModel->LoadModel(MODEL_CUBE);
 		break;
 	case eObject_Key:
-		XMFLOAT3 sizeKey = { 2.0f, 2.0f, 2.0f };
-		m_Trans.SetScale(sizeKey);
 		m_pModel->LoadModel(MODEL_KEY);
 		break;
 	case eObject_Gimic:
@@ -430,12 +428,6 @@ void CEditor::ChangeObject()
 		break;
 	default:
 		break;
-	}
-
-	if (m_type != eObject_Key)
-	{
-		XMFLOAT3 size = { 1.0f, 1.0f, 1.0f };
-		m_Trans.SetScale(size);
 	}
 }
 

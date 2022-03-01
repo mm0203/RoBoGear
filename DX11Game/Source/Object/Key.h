@@ -7,7 +7,7 @@
 
 #include <Manager/Object.h>
 
-#define MODEL_KEY "data/MODEL/Object/Key_01/Key_01.fbx"	
+#define MODEL_KEY "data/MODEL/Object/Lift_Line/Gear2.fbx"	
 
 //=============================================================================
 // 
