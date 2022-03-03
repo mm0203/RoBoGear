@@ -24,8 +24,8 @@
 //=============================================================================
 namespace
 {
-	constexpr int HeightMax = 8;
-	constexpr int WidthMax = 11;
+	const int HeightMax = 8;
+	const int WidthMax = 11;
 
 }
 

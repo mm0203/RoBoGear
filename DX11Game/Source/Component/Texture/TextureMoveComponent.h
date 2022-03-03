@@ -23,6 +23,8 @@ public:
 	void TextureRightLeft(CPolygon& polygon, float posX = 0.0f, int speed = 3);
 
 private:
-	int m_nTime;		// カウント
-	float m_TextMove;	// テクスチャ移動
+	// カウント
+	int m_nTime;
+	// テクスチャ移動量
+	float m_TextMove;
 };

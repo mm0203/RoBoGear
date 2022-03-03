@@ -33,11 +33,13 @@ void CKey::Init()
 //=============================================================================
 void CKey::Update()
 {
+	// ‰ñ“]‘¬“x
 	float RatateSpeed = 2.5f;
 
 	// ‰ñ“]
 	m_Rot.y += RatateSpeed;
 
+	// 180“x‰ñ“]‚µ‚½‚çYÀ•W‚ðƒŠƒZƒbƒg
 	if (m_Rot.y >= 180.0f)	
 		m_Rot.y -= 360.0f;
 }

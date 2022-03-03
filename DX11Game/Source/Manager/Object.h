@@ -41,14 +41,15 @@ public:
 	std::string GetTag() { return m_tag; }
 	CRenderer& GetModel() { return m_Model; }
 
-	void ObjectMove();
-
 	// setter
 	void SetPos(XMFLOAT3 pos) { m_Pos = pos; }
 	void SetCoord(XMINT2 coord) { m_Coord = coord; }
 	void SetScale(XMFLOAT3 scale) { m_Scale = scale; }
 	void SetRot(XMFLOAT3 rot) { m_Rot = rot; }
 	void SetMove(XMFLOAT3 move) { m_Move = move; }
+
+	// オブジェクトの慣性移動
+	void ObjectMove();
 
 protected:
 	// オブジェクトの情報
@@ -60,6 +61,5 @@ protected:
 	XMFLOAT3 m_Rot;		// 回転
 	XMFLOAT3 m_Move;	// 移動量
 	std::string m_tag;	// タグ名
-
-	CRenderer m_Model;
+	CRenderer m_Model;	// モデル情報
 };

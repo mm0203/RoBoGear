@@ -31,10 +31,10 @@ public:
 	// オブジェクト生成
 	template<class T>
 	static obj_shared CreateObject(
-		XMFLOAT3 pos = XMFLOAT3(), 
-		XMINT2 coord = XMINT2(), 
-		XMFLOAT3 scale = XMFLOAT3(1.0, 1.0, 1.0),
-		XMFLOAT3 rot = XMFLOAT3())
+		XMFLOAT3 pos = XMFLOAT3(0, 0, 0), 
+		XMINT2 coord = XMINT2(0, 0),
+		XMFLOAT3 scale = XMFLOAT3(1.0f, 1.0f, 1.0f),
+		XMFLOAT3 rot = XMFLOAT3(0, 0, 0))
 	{
 		obj_shared ptr;
 		ptr.reset(new T());

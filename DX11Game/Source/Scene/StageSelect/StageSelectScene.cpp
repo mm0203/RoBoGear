@@ -26,8 +26,8 @@
 //=============================================================================
 namespace 
 {
-	constexpr int UpperLower = 5;	// 上下移動
-	constexpr int TitleToLower = 10; // タイトルに
+	const int UpperLower = 5;	 // 上下移動
+	const int TitleToLower = 10; // タイトルに
 }
 
 //=============================================================================
@@ -140,7 +140,7 @@ void StageSelectScene::Update()
 			nMenuIndex++;
 	}
 
-	// ゲーム画面以降
+	// シーン遷移
 	if (GetKeyTrigger(VK_RETURN))
 	{
 		// 決定SE

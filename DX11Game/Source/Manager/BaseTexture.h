@@ -34,8 +34,12 @@ public:
 	virtual void Draw() = 0;
 
 protected:
+	// ポリゴン描画用変数
 	std::shared_ptr<CPolygon> m_Polygon;
+	// フェードオブジェクト
 	std::shared_ptr<CTextureFadeComponent> m_TextureFade;
+	// 移動オブジェクト
 	std::shared_ptr<CTextureMoveComponent> m_TextureMove;
+	// 色変更オブジェクト
 	std::shared_ptr<CTextureColorChangeComponent> m_TextureColor;
 };

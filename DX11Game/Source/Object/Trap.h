@@ -25,5 +25,5 @@ public:
 	void Update() override;
 
 private:
-	int m_nCount;
+	int m_nCount; // エフェクト発生用カウント
 };

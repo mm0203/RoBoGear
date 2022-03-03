@@ -16,11 +16,11 @@
 //=============================================================================
 enum EffectID
 {
-	Effect_GimicBreak,
-	Effect_KeyBreak,
-	Effect_PlayerMove,
-	Effect_CubeMove,
-	Effect_Trap,
+	Effect_GimicBreak,	// ギミック破壊時
+	Effect_KeyBreak,	// 鍵を取った
+	Effect_PlayerMove,	// プレイヤー移動
+	Effect_CubeMove,	// キューブ移動
+	Effect_Trap,		// ダメージ床
 	Effect_MAX
 };
 
@@ -48,10 +48,15 @@ public:
 	void Draw();
 
 private:
-	XMINT2 m_FrameNum;		//フレーム数
+	// フレーム数
+	XMINT2 m_FrameNum;
+	// エフェクトアニメの最大数
 	int m_MaxAnimNum;
+	// 現在のアニメ数
 	int m_CurrentAnimNum;
+	// アニメ再生スピード
 	int m_Speed;
+	// アニメの再生カウント
 	int m_SpeedCount;
 };
 

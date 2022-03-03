@@ -46,9 +46,9 @@
 namespace
 {
 	// マップ中央値
-	constexpr XMINT2 CenterCoord = XMINT2(5, 4);
+	const XMINT2 CenterCoord = XMINT2(5, 4);
 	// 選択できるモード数
-	constexpr int ModeNum = 7;
+	const int ModeNum = 7;
 	// ステージの数
 	int nStagemin = 1;
 	int nStagemax = 10;
@@ -412,6 +412,9 @@ void CEditor::ChangeObject()
 		m_pModel->LoadModel(MODEL_CUBE);
 		break;
 	case eObject_Key:
+		//TODO キーのサイズが合わないので！
+		XMFLOAT3 sizeKey = { 2.0f, 2.0f, 2.0f };
+		m_Trans.SetScale(sizeKey);
 		m_pModel->LoadModel(MODEL_KEY);
 		break;
 	case eObject_Gimic:
@@ -428,6 +431,13 @@ void CEditor::ChangeObject()
 		break;
 	default:
 		break;
+	}
+
+	// //TODO キーのサイズ
+	if (m_type != eObject_Key)
+	{
+		XMFLOAT3 size = { 1.0f, 1.0f, 1.0f };
+		m_Trans.SetScale(size);
 	}
 }
 

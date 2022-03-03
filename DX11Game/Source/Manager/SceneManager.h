@@ -10,6 +10,11 @@
 #include <System/Singleton/singleton.h>
 #include <memory>
 
+//=============================================================================
+// 
+// マクロ定義
+// 
+//=============================================================================
 enum Current_Scene
 {
 	Scene_None = 0,
@@ -70,8 +75,12 @@ private:
 	SceneManager();
 	~SceneManager() = default;
 
-	std::unique_ptr<Scene> m_pCurrentScene;	// 現在のシーン
-	std::unique_ptr<Scene> m_pNextScene;	// 次に読み込むシーン
-	bool m_bDoSceneChange;	// フェード中かどうか
-	Current_Scene m_SceneNo;	// 現在のシーン状態
+	// 現在のシーン
+	std::unique_ptr<Scene> m_pCurrentScene;
+	// 次に読み込むシーン
+	std::unique_ptr<Scene> m_pNextScene;
+	// フェード中かどうか
+	bool m_bDoSceneChange;
+	// 現在のシーン状態
+	Current_Scene m_SceneNo;
 };

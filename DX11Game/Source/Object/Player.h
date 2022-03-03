@@ -67,10 +67,14 @@ private:
 	void StepCalc(XMINT2 pos, int& step);
 
 private:
-	int m_nCount;	  // 秒数
-	PlayerDir m_Dir;  // 移動方向
-	bool m_bMoveCube; // キューブ押しアニメ判定
+	// 秒数
+	int m_nCount;
+	// 移動方向
+	PlayerDir m_Dir;
+	// キューブ押しアニメ判定
+	bool m_bMoveCube;
 
+	// 各モデルパーツのオブジェクト
 	obj_shared m_Caterpillar;
 	obj_shared m_Gear;
 	obj_shared m_Generare;

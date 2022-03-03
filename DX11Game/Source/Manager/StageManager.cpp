@@ -41,8 +41,8 @@ std::tuple<int, std::string, int> StageManager::m_StageInfo[] = {};
 namespace
 {
 	// 中央が(0,0)なのでマップの左端上からオブジェクトを配置する
-	constexpr float StartPosWidth = 500.0f;
-	constexpr float StartPosHeight = 400.0f;
+	const float StartPosWidth = 500.0f;
+	const float StartPosHeight = 400.0f;
 }
 
 //=============================================================================
@@ -161,7 +161,9 @@ void  StageManager::StageCreate(std::string& fileName)
 				break;
 				// 鍵
 			case(eObject_Key):	 // 3
-				ObjectManager::CreateObject<CKey>(ObjectPos, Coord);
+				//TODO キーのサイズが合わないので大きく！
+				XMFLOAT3 keysize = XMFLOAT3(2.0f, 2.0f, 2.0f);
+				ObjectManager::CreateObject<CKey>(ObjectPos, Coord, keysize);
 				break;
 				// ギミック
 			case(eObject_Gimic): // 4

@@ -5,6 +5,7 @@
 //=============================================================================
 #include "Trap.h"
 #include <Renderer/Effect/Effect.h>
+#include <Manager/GameManager.h>
 
 //=============================================================================
 // 
@@ -36,9 +37,8 @@ void CTrap::Init()
 void CTrap::Update()
 {
 	m_nCount++;
-	// TODO 時間
-	// 一定時間でエフェクト
-	if (m_nCount >= 60 * 3)
+	// 一定時間(３秒)でエフェクト発生
+	if (m_nCount >= Second * 3)
 	{
 		EffectManager::CreateEffect(Effect_Trap, m_Pos);
 		m_nCount = 0;

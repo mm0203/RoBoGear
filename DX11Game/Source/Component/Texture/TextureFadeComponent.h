@@ -43,9 +43,13 @@ private:
 	};
 
 private:
-	float m_fAlpha;				// 不透明度
-	int m_nFedeCount;			// フェード待機時間
-	FadeState m_CurrentFade;	// フェード
+	// 不透明度
+	float m_fAlpha;
+	// フェード待機時間
+	int m_nFedeCount;
+	// フェードの状態
+	FadeState m_CurrentFade;
+	// フェードしてるかどうか
 	bool m_bFadeStae;
 
 };

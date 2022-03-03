@@ -24,7 +24,8 @@ public:
 	void Update() override;
 
 private:
-	int m_nCount;
-	std::string m_energyOnTexture;		// 通電時のテクスチャ
-	std::string m_energyOffTexture;		// 非通電時のテクスチャ
+	//// 通電時のテクスチャ
+	//std::string m_energyOnTexture;
+	//// 非通電時のテクスチャ
+	//std::string m_energyOffTexture;
 };

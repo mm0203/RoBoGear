@@ -30,11 +30,11 @@
 //=============================================================================
 namespace
 {
-	constexpr XMFLOAT3 DefPos = XMFLOAT3(-200.0f, 720.0f, 50.0f); // 画面左下にセット
-	constexpr XMINT2 DefCoord = XMINT2(0, 0);					  // 使わない
-	constexpr XMFLOAT3 DefScale = XMFLOAT3(1.0f, 1.0f, 1.0f);	  // サイズ
-	constexpr XMFLOAT3 DefRot = XMFLOAT3(0, -90.0f, 0);			  // 右を向くように
-	constexpr int CubeNum = 10;	 // キューブの表示させる数
+	const XMFLOAT3 DefPos = XMFLOAT3(-200.0f, 720.0f, 50.0f); // 画面左下にセット
+	const XMINT2 DefCoord = XMINT2(0, 0);					  // 使わない
+	const XMFLOAT3 DefScale = XMFLOAT3(1.0f, 1.0f, 1.0f);	  // サイズ
+	const XMFLOAT3 DefRot = XMFLOAT3(0, -90.0f, 0);			  // 右を向くように
+	const int CubeNum = 10;	 // キューブの表示させる数
 }
 
 //=============================================================================

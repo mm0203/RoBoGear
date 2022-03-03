@@ -36,6 +36,7 @@ void CGear::Init()
 //=============================================================================
 void CGear::Update()
 {
+	// プレイヤーの座標と同じ場所に
 	const auto& player = ObjectManager::SearchObjectTag("Player");
 	m_Pos = player.lock()->GetPos();
 	m_Scale = player.lock()->GetScale();

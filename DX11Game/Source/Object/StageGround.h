@@ -26,6 +26,7 @@ public:
 	void Draw()   override;
 
 private:
+	// ステージ表示用メッシュ
 	CMesh m_MeshField;
 };
 

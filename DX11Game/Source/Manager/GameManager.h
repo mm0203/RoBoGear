@@ -14,7 +14,7 @@
 //=============================================================================
 
 // 秒数計算用
-constexpr float Second = 60.0f;
+const float Second = 60.0f;
 
 // 状態
 enum class GameState
@@ -54,8 +54,12 @@ public:
 	static void Draw();
 
 private:
-	static GameState m_GameState;	// ゲーム中の状態
-	static int m_nStep;	// 歩数
-	static int m_nStageMenuIndex; // ステージ番号
-	static bool m_bDebugMode; // デバックモード
+	// ゲーム中の状態
+	static GameState m_GameState;
+	// 歩数
+	static int m_nStep;
+	// ステージ番号
+	static int m_nStageMenuIndex;
+	// デバックモード
+	static bool m_bDebugMode;
 };

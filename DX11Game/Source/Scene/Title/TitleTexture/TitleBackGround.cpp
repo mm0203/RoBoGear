@@ -13,7 +13,7 @@
 //=============================================================================
 namespace
 {
-	constexpr int BgNum = 2; // ”wŒi‰æ‘œ‚Ì”
+	const int BgNum = 2; // ”wŒi‰æ‘œ‚Ì”
 	const auto TitleBackGround = L"data/texture/Title/TitleBackGround.png";
 }
 

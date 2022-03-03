@@ -40,8 +40,11 @@ public:
 	void Draw()   override;
 
 private:
+	// タイトルに使うテクスチャ
 	CTitleTexture m_TitleTexture;
+	// メニュー番号
 	int m_nMenuIndex;
+	// 押し判定
 	bool m_bButton;
 };
 
