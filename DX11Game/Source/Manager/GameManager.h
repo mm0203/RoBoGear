@@ -19,12 +19,12 @@ const float Second = 60.0f;
 // 状態
 enum class GameState
 {
-	eStop = 0,
-	eMove,
-	eClear,
-	eGameOver,
-	ePause,
-	eInstructions,
+	eStop = 0,		// 何もできない
+	eMove,			// 動ける
+	eClear,			// クリア
+	eGameOver,		// ゲームオーバー
+	ePause,			// ポーズ
+	eInstructions,	// 操作説明
 	eStateMax
 };
 

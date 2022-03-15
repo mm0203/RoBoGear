@@ -17,7 +17,7 @@
 // クラス定義
 // 
 //=============================================================================
-class CGameTexture : public Sprite
+class CGameTexture : public CSprite
 {
 public:
 	CGameTexture();
@@ -29,10 +29,15 @@ public:
 	void Draw(GameState state)   override;
 
 private:
+	// 秒数経過用
 	int m_nCount;
+	// 背景
 	std::shared_ptr<CGameBackGround> m_GameBackGround;
+	// 歩数
 	std::shared_ptr<CGameStep> m_GameStep;
+	// ステージ開始ロゴ
 	std::shared_ptr<CStartLogo> m_Start;
+	// クリアロゴ
 	std::shared_ptr<CClearLogo> m_Clear;
 
 private:

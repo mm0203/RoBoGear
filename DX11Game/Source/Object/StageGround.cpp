@@ -35,6 +35,7 @@ namespace
 //=============================================================================
 CStageGround::CStageGround()
 {
+	m_tag = TagStageGround;
 }
 
 //=============================================================================
@@ -57,7 +58,7 @@ void CStageGround::Init()
 	pos = XMFLOAT3(0.0f, -1.0f, 0.0f);
 	rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
-	int SceneNo = Singleton<SceneManager>::GetInstance().GetSceneNo();
+	int SceneNo = CSingleton<CSceneManager>::GetInstance().GetSceneNo();
 
 	// テクスチャ読み込み
 	ID3D11ShaderResourceView* pTexture;
@@ -67,7 +68,7 @@ void CStageGround::Init()
 	m_MeshField.SetTexture(pTexture);
 
 	// エディットモードは表示しない
-	if (SceneNo != Scene_Edit)
+	if (SceneNo != eSceneEdit)
 	{
 		// バンプマップ
 		hr = CreateTextureFromFile(pDevice, TEXTURE_NROMAL, &pTexture);

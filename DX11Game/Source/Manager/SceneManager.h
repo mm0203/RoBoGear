@@ -17,12 +17,12 @@
 //=============================================================================
 enum Current_Scene
 {
-	Scene_None = 0,
-	Scene_Title,
-	Scene_StageSelect,
-	Scene_Game,
-	Scene_Edit,
-	Scene_Max
+	eSceneNone = 0,
+	eSceneTitle,
+	eSceneStageSelect,
+	eSceneGame,
+	eSceneEdit,
+	eSceneMax
 };
 
 //=============================================================================
@@ -31,14 +31,14 @@ enum Current_Scene
 // 
 //=============================================================================
 // シーンクラス
-class Scene
+class CScene
 {
 protected:
-	//SceneManager& _controller;
+	//CSceneManager& _controller;
 
 public:
-	Scene(){}
-	virtual ~Scene(){}
+	CScene(){}
+	virtual ~CScene(){}
 
 	virtual void Init() = 0;
 	virtual void Uninit() = 0;
@@ -47,7 +47,7 @@ public:
 };
 
 // シーンマネージャー
-class SceneManager : public Singleton<SceneManager>
+class CSceneManager : public CSingleton<CSceneManager>
 {
 public:
 	// getter
@@ -63,22 +63,22 @@ public:
 	const void Draw();
 
 	// 次のシーンを設定
-	const void SetNextScene(Scene* Next);
+	const void SetNextScene(CScene* Next);
 	// フェードの終了をチェック
-	const void EndFade(Scene* Next);
+	const void EndFade(CScene* Next);
 	// シーン遷移
 	const bool ChangeNextScene();
 
 private:
 	// シングルトンのみでインスタンス生成を許可
-	friend class Singleton;
-	SceneManager();
-	~SceneManager() = default;
+	friend class CSingleton;
+	CSceneManager();
+	~CSceneManager() = default;
 
 	// 現在のシーン
-	std::unique_ptr<Scene> m_pCurrentScene;
+	std::unique_ptr<CScene> m_pCurrentScene;
 	// 次に読み込むシーン
-	std::unique_ptr<Scene> m_pNextScene;
+	std::unique_ptr<CScene> m_pNextScene;
 	// フェード中かどうか
 	bool m_bDoSceneChange;
 	// 現在のシーン状態

@@ -13,6 +13,7 @@
 namespace
 {
 	const auto GameOverBackGround = L"data/texture/GameOver/GameOverBg.png";
+	const float AlphaAdd = 0.01f; // ƒ¿‰ÁŽZ’l
 }
 
 //=============================================================================
@@ -54,11 +55,11 @@ void CGameOverBackGround::Uninit()
 //=============================================================================
 void CGameOverBackGround::Update()
 {
-	// ”wŒiFXV
+	// ”wŒiFXV(ÔF‚Ì“_–Åˆ—)
 	static bool bDisp = false;
-	if (!bDisp) m_fAlpha += 0.01f;
+	if (!bDisp) m_fAlpha += AlphaAdd;
 	if (m_fAlpha >= 0.7f) bDisp = true;
-	if (bDisp) m_fAlpha -= 0.01f;
+	if (bDisp) m_fAlpha -= AlphaAdd;
 	if (m_fAlpha <= 0.0f) bDisp = false;
 
 	// ”wŒiF•ÏX

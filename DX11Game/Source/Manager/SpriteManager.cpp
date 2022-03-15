@@ -12,14 +12,14 @@
 // 静的メンバ
 // 
 //=============================================================================
-std::vector<sprite_shared> SpriteManager::m_pSpriteList;
+std::vector<sprite_shared> CSpriteManager::m_pSpriteList;
 
 //=============================================================================
 // 
 // 初期化
 // 
 //=============================================================================
-void SpriteManager::InitAll()
+void CSpriteManager::InitAll()
 {
 	for (auto& sprite : m_pSpriteList)
 		sprite->Init();
@@ -30,7 +30,7 @@ void SpriteManager::InitAll()
 // 更新
 // 
 //=============================================================================
-void SpriteManager::UpdateAll(GameState state)
+void CSpriteManager::UpdateAll(GameState state)
 {
 	for (auto& sprite : m_pSpriteList)
 		sprite->Update(state);
@@ -41,7 +41,7 @@ void SpriteManager::UpdateAll(GameState state)
 // 終了
 // 
 //=============================================================================
-void SpriteManager::UninitAll()
+void CSpriteManager::UninitAll()
 {
 	// インスタンスの数を取得
 	int objCnt = (int)m_pSpriteList.size();
@@ -61,7 +61,7 @@ void SpriteManager::UninitAll()
 // 描画
 // 
 //=============================================================================
-void SpriteManager::DrawAll(GameState state)
+void CSpriteManager::DrawAll(GameState state)
 {
 	for (auto& sprite : m_pSpriteList)
 		sprite->Draw(state);

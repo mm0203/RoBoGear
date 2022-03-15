@@ -14,11 +14,11 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class StageSelectScene : public Scene
+class CStageSelectScene : public CScene
 {
 public:
-	StageSelectScene();
-	~StageSelectScene() = default;
+	CStageSelectScene();
+	~CStageSelectScene() = default;
 
 	void Init()   override;
 	void Uninit() override;

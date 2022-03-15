@@ -25,7 +25,7 @@
 class Texture
 {
 public:
-	friend class TextureFactory;
+	friend class CTextureFactory;
 
 public:
 	Texture();

@@ -25,7 +25,7 @@ void CInstructionsBackGround::Init()
 {
 	// ”wŒi
 	m_Polygon->SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	m_Polygon->SetAlpha(0.7f);
+	m_Polygon->SetAlpha(0.7f); // ƒQ[ƒ€‰æ–Ê‚ð‚â‚â•s“§–¾‚É
 	m_Polygon->LoadTexture(InstructionsBackGround);
 }
 

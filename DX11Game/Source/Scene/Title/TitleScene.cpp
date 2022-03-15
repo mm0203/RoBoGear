@@ -42,10 +42,10 @@ namespace
 // コンストラクタ
 // 
 //=============================================================================
-TitleScene::TitleScene()
+CTitleScene::CTitleScene()
 {
 	// シーンNo
-	Singleton<SceneManager>::GetInstance().SetSceneNo(Scene_Title);
+	CSingleton<CSceneManager>::GetInstance().SetSceneNo(eSceneTitle);
 
 	m_nMenuIndex = eTitle_Start;
 	m_bButton = false;
@@ -56,24 +56,24 @@ TitleScene::TitleScene()
 // 初期化処理
 // 
 //=============================================================================
-void TitleScene::Init()
+void CTitleScene::Init()
 {
 	// カメラ
-	Singleton<CCamera>::GetInstance().Init();
+	CSingleton<CCamera>::GetInstance().Init();
 
 	// プレイヤーモデル生成
-	ObjectManager::CreateObject<CTitlePlayerObj>(DefPos, DefCoord, DefScale, DefRot);
+	CObjectManager::CreateObject<CTitlePlayerObj>(DefPos, DefCoord, DefScale, DefRot);
 
 	// キューブモデル生成
 	for (int i = 0; i < CubeNum; i++)
 	{
 		XMFLOAT3 CubePos = XMFLOAT3(-500.0f + (i * 100.0f), 619.0f, 50.0f);
-		ObjectManager::CreateObject<CTitleCubeObj>(CubePos, DefCoord, DefScale, DefRot);
+		CObjectManager::CreateObject<CTitleCubeObj>(CubePos, DefCoord, DefScale, DefRot);
 	}
 	// タイトルテクスチャ初期化
 	m_TitleTexture.Init();
 	// オブジェクト初期化
-	ObjectManager::InitAll();	 
+	CObjectManager::InitAll();	 
 }
 
 //=============================================================================
@@ -81,10 +81,10 @@ void TitleScene::Init()
 // 終了処理
 // 
 //=============================================================================
-void TitleScene::Uninit()
+void CTitleScene::Uninit()
 {	
 	// オブジェクト終了
-	ObjectManager::UninitAll();
+	CObjectManager::UninitAll();
 	// タイトルテクスチャ終了
 	m_TitleTexture.Uninit();
 	// BGM終了
@@ -96,7 +96,7 @@ void TitleScene::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void TitleScene::Update()
+void CTitleScene::Update()
 {
 	// タイトルBGM
 	CSound::Play(TITLE);
@@ -107,6 +107,8 @@ void TitleScene::Update()
 		CSound::Play(SE_CURSORMOVE);
 
 		m_nMenuIndex--;
+
+		// １番上だったら１番下に
 		if (m_nMenuIndex < eTitle_Start)
 			m_nMenuIndex += eTitle_Max;
 	}
@@ -116,6 +118,8 @@ void TitleScene::Update()
 		CSound::Play(SE_CURSORMOVE);
 
 		m_nMenuIndex++;
+
+		// １番下だったら１番上に
 		if (m_nMenuIndex > eTitle_Exit)
 			m_nMenuIndex -= eTitle_Max;
 	}
@@ -124,7 +128,7 @@ void TitleScene::Update()
 	m_TitleTexture.Update(m_nMenuIndex);
 
 	// オブジェクト更新
-	ObjectManager::UpdateAll();
+	CObjectManager::UpdateAll();
 
 	// シーン遷移
 	if (GetKeyTrigger(VK_RETURN) && !m_bButton)
@@ -135,17 +139,16 @@ void TitleScene::Update()
 		// 選択肢でシーン遷移
 		switch (m_nMenuIndex)
 		{
-		case (eTitle_Start):
+		case (eTitle_Start): // ゲームへ
+			m_bButton = true;
+			CSceneManager::GetInstance().SetNextScene(new CStageSelectScene());
+			break;
+		case (eTitle_Edit):	// エディットへ
 			// ゲーム
 			m_bButton = true;
-			SceneManager::GetInstance().SetNextScene(new StageSelectScene());
+			CSceneManager::GetInstance().SetNextScene(new CEditScene());
 			break;
-		case (eTitle_Edit):
-			// ゲーム
-			m_bButton = true;
-			SceneManager::GetInstance().SetNextScene(new EditScene());
-			break;
-		case (eTitle_Exit):
+		case (eTitle_Exit):	// ウィンドウ終了
 			// 終了
 			m_bButton = true;
 			HWND hWnd = GetMainWnd();
@@ -162,11 +165,11 @@ void TitleScene::Update()
 // 描画処理
 // 
 //=============================================================================
-void TitleScene::Draw()
+void CTitleScene::Draw()
 {
 	// タイトルテクスチャ描画
 	m_TitleTexture.Draw();
 
 	// オブジェクト描画
-	ObjectManager::DrawAll();
+	CObjectManager::DrawAll();
 }

@@ -75,6 +75,8 @@ void CGameTexture::Update(GameState state)
 	case (GameState::eClear): // クリア
 
 		m_nCount++;
+
+		// UIとか全部非表示にする
 		m_GameBackGround->FadeOut();
 		m_GameStep->FadeOut();
 
@@ -87,8 +89,11 @@ void CGameTexture::Update(GameState state)
 		break;
 
 	case GameState::eGameOver: // ゲームオーバー
+
+		// UIとか全部非表示にする
 		m_GameBackGround->FadeOut();
 		m_GameStep->FadeOut();
+
 		break;
 	}
 }

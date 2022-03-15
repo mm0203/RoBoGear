@@ -12,7 +12,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-RenderTarget::RenderTarget()
+CRenderTarget::CRenderTarget()
 {
 	m_pRTV = nullptr;
 }
@@ -21,7 +21,7 @@ RenderTarget::RenderTarget()
 // デストラクタ
 // 
 //=============================================================================
-RenderTarget::~RenderTarget()
+CRenderTarget::~CRenderTarget()
 {
 }
 
@@ -30,7 +30,7 @@ RenderTarget::~RenderTarget()
 // 解放
 // 
 //=============================================================================
-void RenderTarget::Release()
+void CRenderTarget::Release()
 {
 	Texture::Release();
 	SAFE_RELEASE(m_pRTV);
@@ -41,7 +41,7 @@ void RenderTarget::Release()
 // レンダー取得
 // 
 //=============================================================================
-ID3D11RenderTargetView* RenderTarget::GetView() const
+ID3D11RenderTargetView* CRenderTarget::GetView() const
 {
 	return m_pRTV;
 }
@@ -51,7 +51,7 @@ ID3D11RenderTargetView* RenderTarget::GetView() const
 // 生成
 // 
 //=============================================================================
-HRESULT RenderTarget::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
+HRESULT CRenderTarget::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
 {
 	// テクスチャリソース作成
 	HRESULT hr = Texture::CreateResource(desc, nullptr);

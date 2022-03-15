@@ -32,11 +32,14 @@ public:
 	void Update() override;
 	void Draw()   override;
 
+	// getter
 	XMFLOAT2 GetLevelPos();
 	XMFLOAT2 GetLevelSize();
 
 private:
 	std::vector<CPolygon> m_Polygons;
+
+	// 各ステージ番号の位置とサイズ
 	std::map<int, XMFLOAT2> m_LevelPos;
 	std::map<int, XMFLOAT2> m_LevelSize;
 };

@@ -5,6 +5,7 @@
 //=============================================================================
 #include "Gear.h"
 #include <Manager/ObjectManager.h>
+#include "Player.h"
 
 #define MODEL_GEAR	"data/model/Object/MainAnim_Blender/Gear_Anim_Blender.fbx"
 
@@ -15,7 +16,7 @@
 //=============================================================================
 CGear::CGear()
 {
-	m_tag = "Gear";
+	m_tag = TagGear;
 	m_Model.LoadModel(MODEL_GEAR);
 }
 
@@ -37,7 +38,7 @@ void CGear::Init()
 void CGear::Update()
 {
 	// プレイヤーの座標と同じ場所に
-	const auto& player = ObjectManager::SearchObjectTag("Player");
+	const auto& player = CObjectManager::SearchObjectTag(TagPlayer);
 	m_Pos = player.lock()->GetPos();
 	m_Scale = player.lock()->GetScale();
 	m_Rot = player.lock()->GetRot();

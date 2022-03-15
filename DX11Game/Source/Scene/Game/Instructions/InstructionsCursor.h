@@ -25,6 +25,7 @@ public:
 	void Update() override;
 	void Draw()   override;
 
+	// ƒJ[ƒ\ƒ‹ˆÚ“®ŠÖ”
 	void MoveCursor(int index);
 private:
 	std::vector<CPolygon> m_Polygons;

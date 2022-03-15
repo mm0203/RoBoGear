@@ -1,5 +1,5 @@
 //=============================================================================
-// CGameManager.cpp
+// GameManager.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -35,7 +35,8 @@ bool CGameManager::m_bDebugMode;
 //=============================================================================
 namespace
 {
-	const int MesseageSize = 6; // メッセージ表示サイズ
+	// メッセージ表示サイズ
+	const int MesseageSize = 6;
 }
 //=============================================================================
 // 
@@ -49,26 +50,26 @@ void CGameManager::Init()
 	m_bDebugMode = false;
 
 	// デバックモード文字表示
-	MessageManager::Init();
+	CMessageManager::Init();
 
 	// 文字黒色
 	XMFLOAT3 color = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
-	MessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, -300.0f), MesseageSize);
+	CMessageManager::CreateMessage("DEBUG MODE", XMFLOAT2(-600.0f, -300.0f), MesseageSize);
 
 	// カメラ操作表示
-	MessageManager::CreateMessage("CAMERA",     XMFLOAT2(300, 300.0f), MesseageSize);
-	MessageManager::CreateMessage("MOVE  WASD", XMFLOAT2(360, 250.0f));
-	MessageManager::CreateMessage("ANGLE IJKL", XMFLOAT2(360, 200.0f));
-	MessageManager::CreateMessage("UP SPACE",   XMFLOAT2(360, 150.0f));
-	MessageManager::CreateMessage("DOWN CTRL",  XMFLOAT2(360, 100.0f));
+	CMessageManager::CreateMessage("CAMERA",     XMFLOAT2(300, 300.0f), MesseageSize);
+	CMessageManager::CreateMessage("MOVE  WASD", XMFLOAT2(360, 250.0f));
+	CMessageManager::CreateMessage("ANGLE IJKL", XMFLOAT2(360, 200.0f));
+	CMessageManager::CreateMessage("UP SPACE",   XMFLOAT2(360, 150.0f));
+	CMessageManager::CreateMessage("DOWN CTRL",  XMFLOAT2(360, 100.0f));
 
 	// シェーダ切り替え表示
-	MessageManager::CreateMessage("SHADER",    XMFLOAT2(300, 0.0f), MesseageSize);
-	MessageManager::CreateMessage("TOON    Z", XMFLOAT2(360, -50.0f));
-	MessageManager::CreateMessage("OUTLINE X", XMFLOAT2(360, -100.0f));
-	MessageManager::CreateMessage("BUMP    C", XMFLOAT2(360, -150.0f));
-	MessageManager::CreateMessage("ANBIENT V", XMFLOAT2(360, -200.0f));
+	CMessageManager::CreateMessage("SHADER",    XMFLOAT2(300, 0.0f), MesseageSize);
+	CMessageManager::CreateMessage("TOON    Z", XMFLOAT2(360, -50.0f));
+	CMessageManager::CreateMessage("OUTLINE X", XMFLOAT2(360, -100.0f));
+	CMessageManager::CreateMessage("BUMP    C", XMFLOAT2(360, -150.0f));
+	CMessageManager::CreateMessage("ANBIENT V", XMFLOAT2(360, -200.0f));
 }
 
 //=============================================================================
@@ -78,7 +79,7 @@ void CGameManager::Init()
 //=============================================================================
 void CGameManager::Uninit()
 {
-	MessageManager::Uninit();
+	CMessageManager::Uninit();
 }
 
 //=============================================================================
@@ -92,7 +93,8 @@ void CGameManager::Update()
 	if (GetKeyTrigger(VK_F1))
 		m_bDebugMode ^= 1;
 
-	static int nCount = 0;	// カウント用
+	// カウント用
+	static int nCount = 0;
 
 	switch (m_GameState)
 	{
@@ -100,7 +102,7 @@ void CGameManager::Update()
 
 		nCount++;
 		// ゲーム開始時カメラをズームアウト
-		CCamera::GetInstance().ZoomOut();
+		CSingleton<CCamera>::GetInstance().ZoomOut();
 
 		// 4秒後に動けるように
 		if (nCount >= Second * 4)
@@ -138,7 +140,7 @@ void CGameManager::Update()
 		if (nCount >= Second * 5)
 		{
 			nCount = 0;
-			Singleton<SceneManager>::GetInstance().SetNextScene(new StageSelectScene());
+			CSingleton<CSceneManager>::GetInstance().SetNextScene(new CStageSelectScene());
 		}	
 		break;
 
@@ -148,27 +150,33 @@ void CGameManager::Update()
 		if (nCount >= Second * 3)
 		{
 			nCount = 0;
-			SceneManager::GetInstance().SetNextScene(new GameScene());
+			CSceneManager::GetInstance().SetNextScene(new CGameScene());
 		}
 		break;
 
 	case GameState::ePause:	// ポーズ画面
+
+		// ポーズ閉じる
 		if (GetKeyTrigger(VK_TAB))
 		{
 			// BGMの音量を戻す
 			CSound::SetVolume(1.0f);
 			// 閉じる音
 			CSound::Play(SE_PAUSE_CLOSE);
+			// 動ける状態に
 			m_GameState = GameState::eMove;
 		}
 		break;
 	case GameState::eInstructions:	// 操作説明画面
+
+		// 操作説明閉じる
 		if (GetKeyTrigger(VK_R) || GetKeyTrigger(VK_RETURN) || GetKeyTrigger(VK_SPACE))
 		{
 			// BGMの音量を戻す
 			CSound::SetVolume(1.0f);
 			// 閉じる音
 			CSound::Play(SE_PAUSE_CLOSE);
+			// 動ける状態に
 			m_GameState = GameState::eMove;
 		}
 		break;
@@ -188,5 +196,5 @@ void CGameManager::Draw()
 {
 	// デバッグモード描画
 	if(m_bDebugMode)
-	MessageManager::Draw();
+	CMessageManager::Draw();
 }

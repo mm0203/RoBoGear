@@ -12,7 +12,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-SamplerState::SamplerState()
+CSamplerState::CSamplerState()
 {
 	m_pState = nullptr;
 }
@@ -22,7 +22,7 @@ SamplerState::SamplerState()
 // デストラクタ
 // 
 //=============================================================================
-SamplerState::~SamplerState()
+CSamplerState::~CSamplerState()
 {
 	SAFE_RELEASE(m_pState);
 }
@@ -32,7 +32,7 @@ SamplerState::~SamplerState()
 //	生成
 // 
 //=============================================================================
-HRESULT SamplerState::Create(D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address)
+HRESULT CSamplerState::Create(D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address)
 {
 	D3D11_SAMPLER_DESC desc = {};
 	desc.Filter = filter;
@@ -47,8 +47,8 @@ HRESULT SamplerState::Create(D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE add
 // シェーダセット
 // 
 //=============================================================================
-void SamplerState::Bind()
+void CSamplerState::Bind()
 {
 	GetDeviceContext()->PSSetSamplers(0, 1, &m_pState);
-	Singleton<Graphics>::GetInstance().SetSamplerState(this);
+	CSingleton<CGraphics>::GetInstance().SetSamplerState(this);
 }

@@ -17,7 +17,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-BillBoard::BillBoard() : m_BillMesh()
+CBillBoard::CBillBoard() : m_BillMesh()
 {
 
 }
@@ -27,7 +27,7 @@ BillBoard::BillBoard() : m_BillMesh()
 // 初期化処理
 // 
 //=============================================================================
-void BillBoard::Init()
+void CBillBoard::Init()
 {
 	m_BillPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_BillSize = XMFLOAT2(1.0f, 1.0f);
@@ -45,7 +45,7 @@ void BillBoard::Init()
 // 終了処理
 // 
 //=============================================================================
-void BillBoard::Uninit()
+void CBillBoard::Uninit()
 {
 	m_BillMesh.Release(&m_BillMesh);
 }
@@ -55,7 +55,7 @@ void BillBoard::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void BillBoard::Update()
+void CBillBoard::Update()
 {
 	m_BillMesh.Update(&m_BillMesh);
 	//Update(&m_BillMesh);
@@ -66,7 +66,7 @@ void BillBoard::Update()
 // 描画処理
 // 
 //=============================================================================
-void BillBoard::Draw(int AnimNum)
+void CBillBoard::Draw(int AnimNum)
 {
 	// テクスチャ用マトリックス取得
 	XMFLOAT4X4& MtxWolrdTexture = m_BillMesh.GetWorldMtxTexture();
@@ -134,7 +134,7 @@ void BillBoard::Draw(int AnimNum)
 	}
 
 	// ライトオフ
-	Singleton<CLight>::GetInstance().SetDisable();
+	CSingleton<CLight>::GetInstance().SetDisable();
 	//CLight::Get()->SetDisable();
 
 	// アルファブレンド
@@ -145,7 +145,7 @@ void BillBoard::Draw(int AnimNum)
 	pos = m_BillPos;
 
 	// カメラビューマトリクス取得
-	XMFLOAT4X4 mView = Singleton<CCamera>::GetInstance().GetViewMatrix();
+	XMFLOAT4X4 mView = CSingleton<CCamera>::GetInstance().GetViewMatrix();
 
 	MtxWolrdTexture._11 = mView._11;
 	MtxWolrdTexture._12 = mView._21;
@@ -164,6 +164,7 @@ void BillBoard::Draw(int AnimNum)
 
 	XMMATRIX mScale = XMMatrixScaling(m_BillSize.x * 2, m_BillSize.y * 2, 1.0f);
 	XMStoreFloat4x4(&MtxWolrdTexture, XMMatrixMultiply(mScale, XMLoadFloat4x4(&MtxWolrdTexture)));
+
 	// 位置を反映
 	MtxWolrdTexture._41 = m_BillPos.x;
 	MtxWolrdTexture._42 = m_BillPos.y;
@@ -201,7 +202,7 @@ void BillBoard::Draw(int AnimNum)
 	SetBlendState(BS_NONE);
 
 	// ライトオン
-	Singleton<CLight>::GetInstance().SetEnable();
+	CSingleton<CLight>::GetInstance().SetEnable();
 }
 
 //=============================================================================
@@ -209,7 +210,7 @@ void BillBoard::Draw(int AnimNum)
 // テクスチャロード
 // 
 //=============================================================================
-HRESULT BillBoard::LoadBillTexture(const wchar_t* FileName)
+HRESULT CBillBoard::LoadBillTexture(const wchar_t* FileName)
 {
 	HRESULT hr = S_OK;
 	ID3D11ShaderResourceView* pTexture;
@@ -224,7 +225,7 @@ HRESULT BillBoard::LoadBillTexture(const wchar_t* FileName)
 // テクスチャロード
 // 
 //=============================================================================
-HRESULT BillBoard::LoadBillTexture(const char* FileName)
+HRESULT CBillBoard::LoadBillTexture(const char* FileName)
 {
 	HRESULT hr = S_OK;
 	ID3D11ShaderResourceView* pTexture;

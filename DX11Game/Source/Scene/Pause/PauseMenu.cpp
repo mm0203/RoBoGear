@@ -63,6 +63,8 @@ void CPauseMenu::Update(GameState state)
 		CSound::Play(SE_CURSORMOVE);
 
 		m_nMenuIndex--;
+
+		// 選択肢が１番上だったら１番下に
 		if (m_nMenuIndex < ePause_Continue)
 			m_nMenuIndex += ePauseMenuMax;
 	}
@@ -72,6 +74,8 @@ void CPauseMenu::Update(GameState state)
 		CSound::Play(SE_CURSORMOVE);
 
 		m_nMenuIndex++;
+
+		// 選択肢が１番下だったら１番上に
 		if (m_nMenuIndex > ePause_Title) 
 			m_nMenuIndex -= ePauseMenuMax;
 	}
@@ -88,17 +92,17 @@ void CPauseMenu::Update(GameState state)
 		// 選択肢でシーン遷移
 		switch (m_nMenuIndex)
 		{
-		case (ePause_Continue):
+		case (ePause_Continue): // 続ける
 			CGameManager::SetState(GameState::eMove);
 			break;
-		case (ePause_Retry):
-			SceneManager::GetInstance().SetNextScene(new GameScene());
+		case (ePause_Retry):	// ステージの最初から
+			CSceneManager::GetInstance().SetNextScene(new CGameScene());
 			break;
-		case (ePause_StageSelect):
-			SceneManager::GetInstance().SetNextScene(new StageSelectScene());
+		case (ePause_StageSelect):	// ステージセレクトへ
+			CSceneManager::GetInstance().SetNextScene(new CStageSelectScene());
 			break;
-		case (ePause_Title):
-			SceneManager::GetInstance().SetNextScene(new TitleScene());
+		case (ePause_Title):	// タイトルへ
+			CSceneManager::GetInstance().SetNextScene(new CTitleScene());
 			break;
 		}
 	}

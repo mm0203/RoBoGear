@@ -20,7 +20,7 @@ namespace
     // インスタンス数カウント用変数
     int g_NumInstanceCnt = 0;
     // インスタンスを格納する配列
-    SingletonFinalizer::FinalizerFunc g_Instances[k_MaxInstanceSize]; 
+    CSingletonFinalizer::FinalizerFunc g_Instances[k_MaxInstanceSize]; 
 }
 
 //=============================================================================
@@ -28,7 +28,7 @@ namespace
 // インスタンス数設定
 // 
 //=============================================================================
-void SingletonFinalizer::addFinalizer(FinalizerFunc func)
+void CSingletonFinalizer::addFinalizer(FinalizerFunc func)
 {
     std::lock_guard<std::mutex> lock(g_Mutex);
 
@@ -46,7 +46,7 @@ void SingletonFinalizer::addFinalizer(FinalizerFunc func)
 // インスタンス破棄
 // 
 //=============================================================================
-void SingletonFinalizer::finalize() 
+void CSingletonFinalizer::finalize() 
 {
     std::lock_guard<std::mutex> lock(g_Mutex);
 

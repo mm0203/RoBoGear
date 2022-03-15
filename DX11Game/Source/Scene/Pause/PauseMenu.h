@@ -15,19 +15,18 @@
 //=============================================================================
 enum PauseMenu
 {
-	ePause_Continue,
-	ePause_Retry,
-	ePause_StageSelect,
-	ePause_Title,
+	ePause_Continue,	// 続ける
+	ePause_Retry,		// はじめから
+	ePause_StageSelect,	// ステージセレクト
+	ePause_Title,		// タイトル
 	ePauseMenuMax
 };
-
 //=============================================================================
 // 
 // クラス定義
 // 
 //=============================================================================
-class CPauseMenu : public Sprite
+class CPauseMenu : public CSprite
 {
 public:
 	CPauseMenu();
@@ -40,6 +39,7 @@ public:
 
 private:
 	CPauseMenuTexture m_PuaseMenuTexture;
+	// ポーズの選択肢
 	int m_nMenuIndex;
 };
 

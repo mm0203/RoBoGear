@@ -28,8 +28,8 @@ public:
 private:
 	enum StartLogo
 	{
-		eStartLogo,
-		eStartNumber,
+		eStartLogo,		// ステージロゴ
+		eStartNumber,	// ステージナンバー
 		eStartLogoMax
 	};
 

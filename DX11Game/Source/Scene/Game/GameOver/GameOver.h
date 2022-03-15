@@ -15,7 +15,7 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class CGameOver : public Sprite
+class CGameOver : public CSprite
 {
 public:
 	CGameOver();

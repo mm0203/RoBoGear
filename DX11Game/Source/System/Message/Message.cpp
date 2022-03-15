@@ -1,5 +1,5 @@
 //=============================================================================
-// MeSsage.cpp
+// Message.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -12,7 +12,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-Message::Message()
+CMessage::CMessage()
 { 
 	Init(); 
 }
@@ -22,7 +22,7 @@ Message::Message()
 // 初期化処理
 // 
 //=============================================================================
-void Message::Init()
+void CMessage::Init()
 {
 	m_MessagePos = { 0.0f,0.0f };
 	m_Mag = DefaultMag;
@@ -33,7 +33,7 @@ void Message::Init()
 // 終了処理
 // 
 //=============================================================================
-void Message::Uninit()
+void CMessage::Uninit()
 {
 	
 }
@@ -43,7 +43,7 @@ void Message::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void Message::Update()
+void CMessage::Update()
 {
 	
 }
@@ -53,22 +53,27 @@ void Message::Update()
 // 描画処理
 // 
 //=============================================================================
-void Message::Draw()
+void CMessage::Draw()
 {
 	char* pchar = m_Message;
+
 	while (*pchar != '\0')
 	{
+		// 入力された文字から検索
 		unsigned int CharNum = *pchar - 'A';
 		if (CharNum == ' ' - 'A')
 		{
 			pchar++;
 			continue;
 		}
+		// UVの場所を取得しセット
 		int u = CharNum % FontFrameX;
 		int v = CharNum / FontFrameX;
 		float U = u * CPolygon::GetFrameSize().x;
 		float V = v * CPolygon::GetFrameSize().y + 0.0000001f;
 		CPolygon::SetUV({ U,V });
+
+		// 位置とサイズを設定
 		XMFLOAT2 pos = m_MessagePos;
 		pos.x += (pchar - m_Message) * ((FontSizeX * m_Mag) + 5);
 		CPolygon::SetPosition(pos);

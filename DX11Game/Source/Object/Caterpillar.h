@@ -7,6 +7,14 @@
 
 #include <Manager/Object.h>
 
+//=============================================================================
+// 
+// マクロ定義
+// 
+//=============================================================================
+// タグ名
+const std::string TagCaterpillar = "Caterpillar";
+
 // キャタピラアニメ
 enum class CaterpillarAnime
 {
@@ -20,7 +28,7 @@ enum class CaterpillarAnime
 // クラス定義
 // 
 //=============================================================================
-class CCaterpillar : public Object
+class CCaterpillar : public CObject
 {
 public:
 	CCaterpillar();

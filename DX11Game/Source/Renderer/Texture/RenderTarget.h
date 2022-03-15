@@ -12,13 +12,13 @@
 // クラス定義
 // 
 //=============================================================================
-class RenderTarget : public Texture
+class CRenderTarget : public Texture
 {
 public:
-	friend class TextureFactory;
+	friend class CTextureFactory; // フレンドクラス
 public:
-	RenderTarget();
-	~RenderTarget();
+	CRenderTarget();
+	~CRenderTarget();
 	virtual void Release();
 
 	ID3D11RenderTargetView* GetView() const;

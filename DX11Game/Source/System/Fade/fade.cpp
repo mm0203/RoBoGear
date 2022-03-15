@@ -21,10 +21,10 @@ namespace
 // コンストラクタ
 // 
 //=============================================================================
-Fade::Fade()
+CFade::CFade()
 {
 	m_fAlpha = 0.0f;
-	m_nFade = FADE_IN;
+	m_nFade = eFadeIn;
 	m_pNextScene = nullptr;
 }
 
@@ -33,7 +33,7 @@ Fade::Fade()
 // 初期化処理
 // 
 //=============================================================================
-void Fade::Init()
+void CFade::Init()
 {
 	m_FadePolygon.SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_FadePolygon.SetTex(nullptr);
@@ -47,7 +47,7 @@ void Fade::Init()
 // 終了処理
 // 
 //=============================================================================
-void Fade::Uninit()
+void CFade::Uninit()
 {
 	m_FadeTexture.Uninit();
 }
@@ -57,17 +57,17 @@ void Fade::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void Fade::Update()
+void CFade::Update()
 {
 	// 次のシーンが設定されていなければスキップ
-	if (m_nFade == FADE_NONE)	return;
+	if (m_nFade == eFadeNone)	return;
 	//if (!m_pNextScene)	return;
 
 	m_FadePolygon.SetAlpha(m_fAlpha);
 	m_FadeTexture.Fade(m_fAlpha);
 
 	// フェードイン処理
-	if (m_nFade == FADE_OUT) 
+	if (m_nFade == eFadeOut) 
 	{
 		// 徐々にフェード
 		m_fAlpha += FadeRate;
@@ -75,10 +75,10 @@ void Fade::Update()
 		{
 			// フェードイン処理に切替
 			m_fAlpha = 1.0f;
-			m_nFade = FADE_IN;
+			m_nFade = eFadeIn;
 
 			// シーン切替
-			SceneManager::GetInstance().EndFade(m_pNextScene);
+			CSceneManager::GetInstance().EndFade(m_pNextScene);
 		}
 		CSound::SetVolume(1.0f - m_fAlpha);
 		return;
@@ -92,7 +92,7 @@ void Fade::Update()
 		// フェード処理終了
 		m_fAlpha = 0.0f;
 		EndFade();
-		m_nFade = FADE_NONE;
+		m_nFade = eFadeNone;
 	}
 	CSound::SetVolume(1.0f - m_fAlpha);
 }
@@ -102,7 +102,7 @@ void Fade::Update()
 // 描画処理
 // 
 //=============================================================================
-void Fade::Draw()
+void CFade::Draw()
 {
 	m_FadePolygon.Draw();
 	m_FadeTexture.Draw();
@@ -113,11 +113,11 @@ void Fade::Draw()
 // フェードアウト開始
 // 
 //=============================================================================
-void Fade::SetFadeOut(Scene* sceneNext)
+void CFade::SetFadeOut(CScene* sceneNext)
 {
-	if (m_nFade != FADE_OUT)
+	if (m_nFade != eFadeOut)
 	{
-		m_nFade = FADE_OUT;
+		m_nFade = eFadeOut;
 		m_pNextScene = sceneNext;
 	}
 }
@@ -127,7 +127,7 @@ void Fade::SetFadeOut(Scene* sceneNext)
 // フェードアウト開始
 // 
 //=============================================================================
-void Fade::EndFade()
+void CFade::EndFade()
 {
 	m_pNextScene = nullptr;
 

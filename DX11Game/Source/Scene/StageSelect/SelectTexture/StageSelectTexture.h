@@ -28,9 +28,13 @@ public:
 	void Draw();
 
 private:
+	// 背景
 	std::shared_ptr<CStageSelectBackGround> m_StageSelectBackGround;
+	// ステージセレクトロゴ
 	std::shared_ptr<CStageSelectLogo> m_StageSelectLogo;
+	// 各ステージ番号
 	std::shared_ptr<CStageSelectLevel> m_StageSelectLevel;
+	// カーソル(枠線)
 	std::shared_ptr<CStageSelectCursor> m_StageSelectCursor;
 private:
 	std::list<tex_shared> m_pStageSelectTextures;

@@ -12,7 +12,7 @@
 //=============================================================================
 CGimic::CGimic()
 {
-	m_tag = "Gimic";
+	m_tag = TagGimic;
 	m_Model.LoadModel(MODEL_GIMIC);
 }
 

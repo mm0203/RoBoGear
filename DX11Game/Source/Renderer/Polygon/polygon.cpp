@@ -51,7 +51,7 @@ static XMFLOAT2		g_posTexFrame;	// UV座標
 static XMFLOAT2		g_sizTexFrame;	// テクスチャ抽出サイズ
 
 ConstantBuffer*		g_pMeshCBuffer; // 定数バッファ
-DXBuffer*			g_pMeshBuffer;  // メッシュバッファ
+CDXBuffer*			g_pMeshBuffer;  // メッシュバッファ
 
 static XMFLOAT4X4	g_mProj;		// 射影変換行列
 static XMFLOAT4X4	g_mView;		// ビュー変換行列
@@ -160,7 +160,7 @@ void DrawPolygon(ID3D11DeviceContext* pDeviceContext)
 	GetPixelShader(POLYGON_PS)->Bind();
 
 	// サンプラセット
-	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_POINT);
+	CSingleton<CGraphics>::GetInstance().SetSamplerState(SAMPLER_POINT);
 
 	// テクスチャセット
 	pDeviceContext->PSSetShaderResources(0, 1, &g_pTexture);
@@ -206,7 +206,7 @@ HRESULT MakeVertexPolygon()
 	g_vertexWk[3].tex = XMFLOAT2(1.0f, 1.0f);
 
 	// 頂点&インデックスバッファ 生成
-	DXBuffer::Desc desc;
+	CDXBuffer::Desc desc;
 	desc.vtxSize = sizeof(VERTEX_2D);
 	desc.vtxCount = NUM_VERTEX;
 	desc.idxSize = sizeof(int);
@@ -215,7 +215,7 @@ HRESULT MakeVertexPolygon()
 	desc.pIdx = nullptr;
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
-	g_pMeshBuffer = new DXBuffer();
+	g_pMeshBuffer = new CDXBuffer();
 	HRESULT hr = g_pMeshBuffer->Create(desc);
 	if (FAILED(hr)) { return hr; }
 

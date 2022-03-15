@@ -14,11 +14,11 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class EditScene : public Scene
+class CEditScene : public CScene
 {
 public:
-	EditScene();
-	~EditScene() = default;
+	CEditScene();
+	~CEditScene() = default;
 
 	void Init()    override;
 	void Uninit()  override;

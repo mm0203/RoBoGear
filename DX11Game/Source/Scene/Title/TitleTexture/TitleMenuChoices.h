@@ -23,6 +23,7 @@ public:
 	void Update() override;
 	void Draw()   override;
 
+	// ‘I‘ğˆ•ÏX
 	void MenuChoices(int index);
 
 private:

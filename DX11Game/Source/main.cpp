@@ -93,7 +93,7 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 	// DirectX初期化
 	InitDX(hWnd, SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	// 初期化
-	Singleton<Graphics>::GetInstance().Init();
+	CSingleton<CGraphics>::GetInstance().Init();
 	// ポリゴン表示初期化
 	InitPolygon();
 	// 入力処理初期化
@@ -105,19 +105,19 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 	// メッシュ初期化
 	CMesh::Init();
 	// ステージ情報初期化
-	StageManager::Init();
+	CStageManager::Init();
 	// ライト
-	Singleton<CLight>::GetInstance().Init();
+	CSingleton<CLight>::GetInstance().Init();
 	// フェード初期化
-	Singleton<Fade>::GetInstance().Init();
+	CSingleton<CFade>::GetInstance().Init();
 
 	// タイトルシーン設定 -> タイトルシーン初期化
-	Singleton<SceneManager>::GetInstance().EndFade(new TitleScene());
-	//Singleton<SceneManager>::GetInstance().EndFade(new GameScene());
-	//Singleton<SceneManager>::GetInstance().EndFade(new StageSelectScene());
-	//Singleton<SceneManager>::GetInstance().EndFade(new EditScene());
+	CSingleton<CSceneManager>::GetInstance().EndFade(new CTitleScene());
+	//CSingleton<SceneManager>::GetInstance().EndFade(new GameScene());
+	//CSingleton<SceneManager>::GetInstance().EndFade(new StageSelectScene());
+	//CSingleton<SceneManager>::GetInstance().EndFade(new EditScene());
 
-	SceneManager::GetInstance().ChangeNextScene();
+	CSingleton<CSceneManager>::GetInstance().ChangeNextScene();
 	// サウンドの初期化
 	CSound::Init();
 
@@ -134,9 +134,9 @@ void Uninit()
 	// サウンドの終了処理
 	CSound::Fin();
 	// シーンの終了処理
-	Singleton<SceneManager>::GetInstance().Uninit();
+	CSingleton<CSceneManager>::GetInstance().Uninit();
 	// フェード終了処理
-	Singleton<Fade>::GetInstance().Uninit();
+	CSingleton<CFade>::GetInstance().Uninit();
 	// メッシュ終了処理
 	CMesh::Uninit();
 	// シェーダリスト解放
@@ -148,9 +148,9 @@ void Uninit()
 	// ポリゴン表示終了処理
 	UninitPolygon();
 	// DirectX解放
-	Singleton<Graphics>::GetInstance().Uninit();
+	CSingleton<CGraphics>::GetInstance().Uninit();
 	// シングルトンリスト解放
-	SingletonFinalizer::finalize();
+	CSingletonFinalizer::finalize();
 }
 
 //=============================================================================
@@ -170,13 +170,13 @@ void Update()
 	// ポリゴン表示更新
 	UpdatePolygon();
 	// カメラ更新
-	Singleton<CCamera>::GetInstance().Update();
+	CSingleton<CCamera>::GetInstance().Update();
 	// ライト更新
-	Singleton<CLight>::GetInstance().Update();
+	CSingleton<CLight>::GetInstance().Update();
 	// シーン更新
-	Singleton<SceneManager>::GetInstance().Update();
+	CSingleton<CSceneManager>::GetInstance().Update();
 	// フェード更新
-	Singleton<Fade>::GetInstance().Update();
+	CSingleton<CFade>::GetInstance().Update();
 	// サウンド更新
 	CSound::Update();
 }
@@ -189,11 +189,11 @@ void Update()
 void Draw()
 {
 	// レンダーターゲット&深度バッファ クリア
-	Singleton<Graphics>::GetInstance().BeginDraw();
+	CSingleton<CGraphics>::GetInstance().BeginDraw();
 	// アルファブレンド無効
 	SetBlendState(BS_NONE);
 	// シーン描画
-	Singleton<SceneManager>::GetInstance().Draw();
+	CSingleton<CSceneManager>::GetInstance().Draw();
 
 	// デバッグ文字列表示
 	if (CGameManager::GetDebug())
@@ -202,11 +202,11 @@ void Draw()
 		DrawDebugProc();
 	}
 	// 深度バッファ
-	Singleton<Graphics>::GetInstance().SetDepthStencilState(DEPTHSTENCIL_ON);
+	CSingleton<CGraphics>::GetInstance().SetDepthStencilState(DEPTHSTENCIL_ON);
 	// アルファブレンド有効
 	SetBlendState(BS_ALPHABLEND);
 	// フェード描画
-	Singleton<Fade>::GetInstance().Draw();
+	CSingleton<CFade>::GetInstance().Draw();
 	// バックバッファとフロントバッファの入れ替え
-	Singleton<Graphics>::GetInstance().EndDraw();
+	CSingleton<CGraphics>::GetInstance().EndDraw();
 }

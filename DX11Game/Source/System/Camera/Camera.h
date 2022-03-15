@@ -25,7 +25,7 @@ const float FovY = 50.0f; //　視野角
 // クラス定義
 // 
 //=============================================================================
-class CCamera : public Singleton<CCamera>
+class CCamera : public CSingleton<CCamera>
 {
 public:
 	void Init();
@@ -47,7 +47,7 @@ public:
 
 private:
 	// シングルトンのみでインスタンス生成を許可
-	friend class Singleton;
+	friend class CSingleton;
 
 	CCamera() = default;
 	~CCamera() = default;

@@ -520,7 +520,7 @@ bool CAssimpMesh::SetupMesh(ID3D11Device* pDevice)
 	HRESULT hr = S_OK;
 
 	// 頂点&インデックスバッファ 生成
-	DXBuffer::Desc desc;
+	CDXBuffer::Desc desc;
 	desc.vtxSize = sizeof(TAssimpVertex);
 	desc.vtxCount = UINT(m_aVertex.size());
 	desc.idxSize = UINT(sizeof(UINT));
@@ -529,7 +529,7 @@ bool CAssimpMesh::SetupMesh(ID3D11Device* pDevice)
 	desc.pVtx = &m_aVertex[0];
 	desc.pIdx = &m_aIndex[0];
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	m_pAssimp = new DXBuffer();
+	m_pAssimp = new CDXBuffer();
 	m_pAssimp->Create(desc);
 
 	// グローバル用
@@ -633,8 +633,8 @@ void CAssimpMesh::Draw(ID3D11DeviceContext* pDC, XMFLOAT4X4& m44World, EByOpacit
 
 	// グローバルシェーダ設定
 	SHADER_GLOBAL sg;
-	CCamera* pCamera = &Singleton<CCamera>::GetInstance();
-	CLight* pLight = &Singleton<CLight>::GetInstance();
+	CCamera* pCamera = &CSingleton<CCamera>::GetInstance();
+	CLight* pLight = &CSingleton<CLight>::GetInstance();
 	XMMATRIX mtxWorld = XMLoadFloat4x4(&m44World);
 	XMMATRIX mtxView = XMLoadFloat4x4(&pCamera->GetViewMatrix());
 	XMMATRIX mtxProj = XMLoadFloat4x4(&pCamera->GetProjMatrix());
@@ -730,8 +730,8 @@ void CAssimpMesh::DrawOutLine(ID3D11DeviceContext* pDC, XMFLOAT4X4& m44World, EB
 	if (SUCCEEDED(pDC->Map(m_pConstantBufferOutLine, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData)))
 	{
 		OutLine ot;
-		CCamera* pCamera = &Singleton<CCamera>::GetInstance();
-		CLight* pLight = &Singleton<CLight>::GetInstance();
+		CCamera* pCamera = &CSingleton<CCamera>::GetInstance();
+		CLight* pLight = &CSingleton<CLight>::GetInstance();
 		XMMATRIX mtxWorld = XMLoadFloat4x4(&m44World);
 		XMMATRIX mtxView = XMLoadFloat4x4(&pCamera->GetViewMatrix());
 		XMMATRIX mtxProj = XMLoadFloat4x4(&pCamera->GetProjMatrix());
@@ -896,7 +896,7 @@ void CAssimpModel::Draw(ID3D11DeviceContext* pDC, XMFLOAT4X4& mtxWorld, bool sha
 	m_mtxWorld = mtxWorld;
 
 	// テクスチャサンプラをセット
-	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
+	CSingleton<CGraphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
 	// ノード単位で描画
 	aiMatrix4x4* piMatrix = (aiMatrix4x4*)&m_mtxWorld;
 

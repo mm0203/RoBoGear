@@ -24,6 +24,7 @@ public:
 	void Update() override;
 	void Draw()   override;
 
+	// ƒy[ƒWØ‚è‘Ö‚¦‚ÌˆÚ“®—Ê
 	void PageMove(float& move);
 
 private:

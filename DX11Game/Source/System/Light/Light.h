@@ -14,7 +14,7 @@
 // クラス定義
 // 
 //=============================================================================
-class CLight : public Singleton<CLight>
+class CLight : public CSingleton<CLight>
 {
 public:
 	void Init();
@@ -43,7 +43,7 @@ public:
 private:
 
 	// シングルトンのみでインスタンス生成を許可
-	friend class Singleton;
+	friend class CSingleton;
 
 	CLight() = default;
 	~CLight() = default;

@@ -13,7 +13,7 @@
 //=============================================================================
 CTitlePlayerObj::CTitlePlayerObj()
 {
-	m_tag = "Player";
+	m_tag = TagPlayer;
 }
 //=============================================================================
 // 
@@ -24,9 +24,9 @@ void CTitlePlayerObj::Init()
 {
 	//// ƒ‚ƒfƒ‹“Ç‚İ‚İ
 	m_Model.LoadModel(MODEL_PLAYER);
-	m_Caterpillar = ObjectManager::CreateObject<CCaterpillar>();
-	m_Gear = ObjectManager::CreateObject<CGear>();
-	m_Generare = ObjectManager::CreateObject<CGenerare>();
+	m_Caterpillar = CObjectManager::CreateObject<CCaterpillar>();
+	m_Gear = CObjectManager::CreateObject<CGear>();
+	m_Generare = CObjectManager::CreateObject<CGenerare>();
 
 	//// ƒAƒjƒNo‰Šú‰»
 	m_Model.SetAnimeNo((int)PlayerAnime::eNone);

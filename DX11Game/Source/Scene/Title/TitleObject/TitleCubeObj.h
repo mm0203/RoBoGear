@@ -12,7 +12,7 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class CTitleCubeObj : public Object
+class CTitleCubeObj : public CObject
 {
 public:
 	CTitleCubeObj() = default;

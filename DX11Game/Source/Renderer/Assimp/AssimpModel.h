@@ -239,7 +239,7 @@ private:
 
 	ID3D11Buffer* m_pConstantBufferOutLine;
 	ID3D11Buffer* m_pConstantBufferBone;
-	DXBuffer* m_pAssimp;
+	CDXBuffer* m_pAssimp;
 	ID3D11ShaderResourceView* m_pRampTex;	// トゥーンテクスチャ用
 
 	ConstantBuffer* m_pConstantBufferGlobal;	// グローバル用

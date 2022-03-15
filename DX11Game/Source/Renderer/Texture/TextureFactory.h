@@ -12,7 +12,7 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class TextureFactory
+class CTextureFactory
 {
 public:
 	static Texture* CreateFromFile(const char* fileName);

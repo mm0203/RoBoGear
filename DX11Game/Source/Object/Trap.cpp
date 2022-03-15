@@ -14,7 +14,7 @@
 //=============================================================================
 CTrap::CTrap()
 {
-	m_tag = "Trap";
+	m_tag = TagTrap;
 	m_Model.LoadModel(MODEL_TRAP);
 	m_nCount = 0;
 }
@@ -40,7 +40,7 @@ void CTrap::Update()
 	// 一定時間(３秒)でエフェクト発生
 	if (m_nCount >= Second * 3)
 	{
-		EffectManager::CreateEffect(Effect_Trap, m_Pos);
+		CEffectManager::CreateEffect(Effect_Trap, m_Pos);
 		m_nCount = 0;
 	}
 }

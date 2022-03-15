@@ -34,14 +34,15 @@ namespace
 // クラス定義
 // 
 //=============================================================================
+// 前方宣言
 class MessageManager;
-class Message : public CPolygon
+
+class CMessage : public CPolygon
 {
-	// フレンドクラス　マネージャー
-	friend class MessageManager;
+	friend class CMessageManager; // フレンドクラス
 public:
-	Message();
-	~Message() = default;
+	CMessage();
+	~CMessage() = default;
 
 	// メンバ関数
 public:
@@ -58,7 +59,7 @@ private:
 };
 
 // メッセージマネージャー
-class MessageManager
+class CMessageManager
 {
 public:
 	static void Init();
@@ -66,20 +67,25 @@ public:
 	static void Update();
 	static void Draw();
 
-	static void CreateMessage
-	(const char* message, XMFLOAT2 pos, int Mag = DefaultMag, XMFLOAT3 Color = { 1.0f,1.0f,1.0f });
-	static void DeleteObject(Message*);
-	static std::vector<Message*> GetActiveList() { return m_ActiveList; }
+	// メッセージ生成
+	static void CreateMessage(const char* message, XMFLOAT2 pos, int Mag = DefaultMag, XMFLOAT3 Color = { 1.0f,1.0f,1.0f });
+	// オブジェクト削除
+	static void DeleteObject(CMessage*);
+	// メッセージリスト取得
+	static std::vector<CMessage*> GetActiveList() { return m_ActiveList; }
 
 private:
-	static void AddObject(Message);
+	// メッセージ追加
+	static void AddObject(CMessage);
+	// メッセージ生成
 	static void CreateObject(int num = MessageNum);
+	// メッセージ更新
 	static void UpdateObject();
 
 private:
-	static std::vector<Message*> m_UnusedList;
-	static std::vector<Message*> m_ActiveList;
-	static std::vector<Message*> m_DeleteList;
-	static ID3D11ShaderResourceView* m_pFont;
+	static std::vector<CMessage*> m_UnusedList;	// 未使用リスト
+	static std::vector<CMessage*> m_ActiveList;	// 使用リスト
+	static std::vector<CMessage*> m_DeleteList; // 削除リスト
+	static ID3D11ShaderResourceView* m_pFont;	// 使うフォント
 };
 

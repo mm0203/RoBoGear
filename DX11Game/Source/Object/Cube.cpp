@@ -12,7 +12,7 @@
 //=============================================================================
 CCube::CCube()
 {
-	m_tag = "Cube";
+	m_tag = TagCube;
 	m_Model.LoadModel(MODEL_CUBE);
 }
 

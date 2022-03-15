@@ -35,21 +35,22 @@ CModeSelect::CModeSelect()
 //=============================================================================
 void CModeSelect::Init()
 {
+	// ポリゴン初期設定
 	m_Polygon.LoadTexture(L"data/texture/Edit/Cursor01.png");
 	m_Polygon.SetPosition(400, 300);
 	m_Polygon.SetSize(40, 40);
 	m_Polygon.SetColor(CursorColor);
 
 	// テキスト描画
-	MessageManager::CreateMessage("CREATE",   XMFLOAT2(440.0f, 300.0f));
-	MessageManager::CreateMessage("DELETE",   XMFLOAT2(440.0f, 250.0f));
-	MessageManager::CreateMessage("SET STEP", XMFLOAT2(440.0f, 200.0f));
-	MessageManager::CreateMessage("SAVE",     XMFLOAT2(440.0f, 150.0f));
-	MessageManager::CreateMessage("LOAD",     XMFLOAT2(440.0f, 100.0f));
-	MessageManager::CreateMessage("TITLE",    XMFLOAT2(440.0f, 50.0f));
-	MessageManager::CreateMessage("GAME",     XMFLOAT2(440.0f, 0.0f));
-	MessageManager::CreateMessage("STEP",     XMFLOAT2(485.0f, -75.0f));
-	MessageManager::CreateMessage("STAGE NO", XMFLOAT2(435.0f, -225.0f));
+	CMessageManager::CreateMessage("CREATE",   XMFLOAT2(440.0f, 300.0f));
+	CMessageManager::CreateMessage("DELETE",   XMFLOAT2(440.0f, 250.0f));
+	CMessageManager::CreateMessage("SET STEP", XMFLOAT2(440.0f, 200.0f));
+	CMessageManager::CreateMessage("SAVE",     XMFLOAT2(440.0f, 150.0f));
+	CMessageManager::CreateMessage("LOAD",     XMFLOAT2(440.0f, 100.0f));
+	CMessageManager::CreateMessage("TITLE",    XMFLOAT2(440.0f, 50.0f));
+	CMessageManager::CreateMessage("GAME",     XMFLOAT2(440.0f, 0.0f));
+	CMessageManager::CreateMessage("STEP",     XMFLOAT2(485.0f, -75.0f));
+	CMessageManager::CreateMessage("STAGE NO", XMFLOAT2(435.0f, -225.0f));
 }
 
 //=============================================================================
@@ -104,12 +105,14 @@ void CModeSelect::Update(int& index,int ModeNum)
 
 	// 選択しているメッセージの色を変更	
 	int num = 0;
-	std::vector<Message*> List = MessageManager::GetActiveList();
+	std::vector<CMessage*> List = CMessageManager::GetActiveList();
 	for (auto it : List)
 	{
+		// 引数から現在の選択肢を取得
 		if (num == index)
 			it->SetColor(CursorColor);
-		else it->SetColor({ 1.0f,1.0f,1.0f });
+		else 
+			it->SetColor({ 1.0f,1.0f,1.0f });
 		num++;
 		if (num == ModeNum) break;
 	}

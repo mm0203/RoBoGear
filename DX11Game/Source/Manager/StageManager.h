@@ -53,9 +53,9 @@ enum  SelectStage
 // ステージタプルの情報
 enum StageInfo
 {
-	eStageNumber,
-	eStageName,
-	eStageStep,
+	eStageNumber,	// ステージ番号
+	eStageName,		// ステージファイル名
+	eStageStep,		// 各ステージの歩数
 	eStageInfo
 };
 
@@ -64,12 +64,12 @@ enum StageInfo
 // クラス定義
 // 
 //=============================================================================
-class StageManager
+class CStageManager
 {
 
 public:
-	StageManager() = default;
-	~StageManager() = default;
+	CStageManager() = default;
+	~CStageManager() = default;
 
 	static std::tuple<int, std::string, int>& GetStageInfo(int index) { return m_StageInfo[index]; }
 

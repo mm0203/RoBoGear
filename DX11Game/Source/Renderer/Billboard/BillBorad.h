@@ -21,11 +21,11 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class BillBoard
+class CBillBoard
 {
 public:
-	BillBoard();
-	~BillBoard() = default;
+	CBillBoard();
+	~CBillBoard() = default;
 
 public:
 	void Init();

@@ -38,6 +38,15 @@ namespace
 	const float YDistMax = 860.0f;		 // カメラY軸最大距離
 	const float ZDistMax = -420.0f;		 // カメラZ軸最大距離
 	const float ClearRelative = -150.0f; // クリア時の角度
+
+	// カメラの方向
+	const float DirCameraFront = 0.0f;	 // 前
+	const float DirCameraBack = 180.0f;	 // 後
+	const float DirCameraLeft = 90.0f;	 // 左
+	const float DirCameraRight = 270.0f; // 右
+
+	const float ObjectZoomRate = 0.9f; // オブジェクトへのズーム慣性
+	const float ObjectZoom = 0.1f;	   // オブジェクトへのズーム距離
 }
 
 //=============================================================================
@@ -48,21 +57,22 @@ namespace
 void CCamera::Init()
 {
 	// カメラ情報初期化
-	int SceneNo = Singleton<SceneManager>::GetInstance().GetSceneNo();
+	int SceneNo = CSingleton<CSceneManager>::GetInstance().GetSceneNo();
 
-	if (SceneNo == Scene_Title)
+	// 各シーンでカメラの初期位置を変更
+	if (SceneNo == eSceneTitle)	// タイトル
 	{
 		m_CameraPos = CameraDefPos;
 		m_TargetRelativePos = TargetRelativeTitlePos;
 	}
 
-	if (SceneNo == Scene_Game)
+	if (SceneNo == eSceneGame) // ゲーム
 	{
 		m_CameraPos = CameraGameStartPos;
 		m_TargetRelativePos = TargetRelativeGamePos;
 	}
 
-	if (SceneNo == Scene_Edit)
+	if (SceneNo == eSceneEdit)	// エディットモード
 	{
 		m_CameraPos = CameraDefPos;
 		m_TargetRelativePos = TargetRelativeGamePos;
@@ -118,26 +128,26 @@ void CCamera::Update()
 		// カメラ移動(4方向)
 		if (GetKeyPress(VK_W))		//前方
 		{
-			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y) * Acc;
-			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y) * Acc;
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + DirCameraFront) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + DirCameraFront) * Acc;
 			isInput = true;
 		}
 		if (GetKeyPress(VK_S))		//後方
 		{
-			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 180.0f) * Acc;
-			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 180.0f) * Acc;
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + DirCameraBack) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + DirCameraBack) * Acc;
 			isInput = true;
 		}
 		if (GetKeyPress(VK_D))		//右
 		{
-			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 90.0f) * Acc;
-			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 90.0f) * Acc;
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + DirCameraLeft) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + DirCameraLeft) * Acc;
 			isInput = true;
 		}
 		if (GetKeyPress(VK_A))		//左
 		{
-			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + 270.0f) * Acc;
-			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + 270.0f) * Acc;
+			Move.x += CameraMoveSpeed * CosDeg(m_CameraAngle.y + DirCameraRight) * Acc;
+			Move.z += CameraMoveSpeed * SinDeg(m_CameraAngle.y + DirCameraRight) * Acc;
 			isInput = true;
 		}
 
@@ -274,9 +284,9 @@ void CCamera::ZoomTarget(XMFLOAT3 pos)
 		m_TargetRelativePos.y = ClearRelative;
 
 	// 座標更新
-	m_CameraPos.x = m_CameraPos.x * 0.9f + (pos.x + m_RelCameraPos.x) * 0.1f;
-	m_CameraPos.y = m_CameraPos.y * 0.9f + (pos.y + m_RelCameraPos.y) * 0.05f; // 高さをアイレベルに
-	m_CameraPos.z = m_CameraPos.z * 0.9f + (pos.z + m_RelCameraPos.z) * 0.1f;
+	m_CameraPos.x = m_CameraPos.x * ObjectZoomRate + (pos.x + m_RelCameraPos.x) * ObjectZoom;
+	m_CameraPos.y = m_CameraPos.y * ObjectZoomRate + (pos.y + m_RelCameraPos.y) * ObjectZoom / 2; // 高さをアイレベルに
+	m_CameraPos.z = m_CameraPos.z * ObjectZoomRate + (pos.z + m_RelCameraPos.z) * ObjectZoom;
 }
 
 //=============================================================================

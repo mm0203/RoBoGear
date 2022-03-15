@@ -13,9 +13,9 @@
 // コンストラクタ
 // 
 //=============================================================================
-EditScene::EditScene()
+CEditScene::CEditScene()
 {
-	Singleton<SceneManager>::GetInstance().SetSceneNo(Scene_Edit);
+	CSingleton<CSceneManager>::GetInstance().SetSceneNo(eSceneEdit);
 }
 
 //=============================================================================
@@ -23,11 +23,13 @@ EditScene::EditScene()
 // 初期化処理
 // 
 //=============================================================================
-void EditScene::Init()
+void CEditScene::Init()
 {
 	// カメラ
-	Singleton<CCamera>::GetInstance().Init();
+	CSingleton<CCamera>::GetInstance().Init();
+	// 地面初期化
 	m_Field.Init();
+	// エディット初期化
 	m_Editor.Init();
 }
 
@@ -36,11 +38,15 @@ void EditScene::Init()
 // 終了処理
 // 
 //=============================================================================
-void EditScene::Uninit()
+void CEditScene::Uninit()
 {
-	ObjectManager::UninitAll();
+	// オブジェクト終了
+	CObjectManager::UninitAll();
+	// 地面終了
 	m_Field.Uninit();
+	// エディット終了
 	m_Editor.Uninit();
+	// サウンド終了
 	CSound::Stop(EDIT);
 }
 
@@ -49,11 +55,13 @@ void EditScene::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void EditScene::Update()
+void CEditScene::Update()
 {
 	// EditBGM
 	CSound::Play(EDIT);
+	// 地面更新
 	m_Field.Update();
+	// エディット更新
 	m_Editor.Update();
 }
 
@@ -62,9 +70,12 @@ void EditScene::Update()
 // 描画処理
 // 
 //=============================================================================
-void EditScene::Draw()
+void CEditScene::Draw()
 {
+	// 地面描画
 	m_Field.Draw();
-	ObjectManager::DrawAll();
+	// オブジェクト描画
+	CObjectManager::DrawAll();
+	// エディット描画
 	m_Editor.Draw();
 }

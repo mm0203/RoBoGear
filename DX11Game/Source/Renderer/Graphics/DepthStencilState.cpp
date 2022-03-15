@@ -14,7 +14,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-DepthStencilState::DepthStencilState()
+CDepthStencilState::CDepthStencilState()
 {
 	m_pState = nullptr;
 }
@@ -24,7 +24,7 @@ DepthStencilState::DepthStencilState()
 // デストラクタ
 // 
 //=============================================================================
-DepthStencilState::~DepthStencilState()
+CDepthStencilState::~CDepthStencilState()
 {
 	SAFE_RELEASE(m_pState);
 }
@@ -34,7 +34,7 @@ DepthStencilState::~DepthStencilState()
 // 生成
 // 
 //=============================================================================
-HRESULT DepthStencilState::Create(bool depthEnable, bool stencilEnable)
+HRESULT CDepthStencilState::Create(bool depthEnable, bool stencilEnable)
 {
 	D3D11_DEPTH_STENCIL_DESC desc;
 	// 深度値
@@ -63,8 +63,8 @@ HRESULT DepthStencilState::Create(bool depthEnable, bool stencilEnable)
 // 書き込み
 // 
 //=============================================================================
-void DepthStencilState::Bind()
+void CDepthStencilState::Bind()
 {
 	GetDeviceContext()->OMSetDepthStencilState(m_pState, 0);
-	Singleton<Graphics>::GetInstance().SetDepthStencilState(this);
+	CSingleton<CGraphics>::GetInstance().SetDepthStencilState(this);
 }

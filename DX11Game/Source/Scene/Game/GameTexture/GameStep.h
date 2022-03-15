@@ -30,12 +30,12 @@ public:
 private:
 	enum GameStep
 	{
-		eGameStep,
-		eGameStepFrame,
+		eGameStep,		// •à”
+		eGameStepFrame,	// •à”‚Ìü‚è‚Ì•Ô
 		eGameStepMax
 	};
 private:
 	CNumber m_Number;
-	float m_fAngle;
+	float m_fAngle;	// ‰ñ“]
 	std::vector<CTextureFadeComponent> m_TextureFades;
 };

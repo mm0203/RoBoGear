@@ -12,14 +12,14 @@
 // 静的メンバ
 // 
 //=============================================================================
-std::list<obj_shared> ObjectManager::m_pObjList;
+std::list<obj_shared> CObjectManager::m_pObjList;
 
 //=============================================================================
 // 
 // 初期化
 // 
 //=============================================================================
-void ObjectManager::InitAll()
+void CObjectManager::InitAll()
 {
 	for (auto& obj : m_pObjList)
 		obj->Init();
@@ -30,7 +30,7 @@ void ObjectManager::InitAll()
 // 更新
 // 
 //=============================================================================
-void ObjectManager::UpdateAll()
+void CObjectManager::UpdateAll()
 {
 	// 更新中に要素を削除する場合があるので範囲for文は使用できない
 	for (auto it = m_pObjList.begin(); it != m_pObjList.end(); ++it)
@@ -42,7 +42,7 @@ void ObjectManager::UpdateAll()
 // 終了
 // 
 //=============================================================================
-void ObjectManager::UninitAll()
+void CObjectManager::UninitAll()
 {
 	// インスタンスの数を取得
 	int objCnt = (int)m_pObjList.size();
@@ -62,7 +62,7 @@ void ObjectManager::UninitAll()
 // 描画
 // 
 //=============================================================================
-void ObjectManager::DrawAll()
+void CObjectManager::DrawAll()
 {
 	for (auto& obj : m_pObjList)
 		obj->Draw();
@@ -73,7 +73,7 @@ void ObjectManager::DrawAll()
 // オブジェクト削除
 // 
 //=============================================================================
-void ObjectManager::DestroyObject(std::string tag)
+void CObjectManager::DestroyObject(std::string tag)
 {
 	for (auto it = m_pObjList.begin(); it != m_pObjList.end();) 
 	{
@@ -93,7 +93,7 @@ void ObjectManager::DestroyObject(std::string tag)
 // タグサーチ
 // 
 //=============================================================================
-std::weak_ptr<Object> ObjectManager::SearchObjectTag(std::string tag)
+std::weak_ptr<CObject> CObjectManager::SearchObjectTag(std::string tag)
 {
 	for (const auto& obj : m_pObjList)
 	{
@@ -101,7 +101,7 @@ std::weak_ptr<Object> ObjectManager::SearchObjectTag(std::string tag)
 		if (obj->GetTag() == tag)
 			return obj;
 	}
-	return std::weak_ptr<Object>();
+	return std::weak_ptr<CObject>();
 }
 
 //=============================================================================
@@ -109,7 +109,7 @@ std::weak_ptr<Object> ObjectManager::SearchObjectTag(std::string tag)
 // 移動オブジェクト取得
 // 
 //=============================================================================
-std::weak_ptr<Object> ObjectManager::GetObjectAtPosition(std::string tag, XMINT2 pos)
+std::weak_ptr<CObject> CObjectManager::GetObjectAtPosition(std::string tag, XMINT2 pos)
 {
 	for (const auto& obj : m_pObjList)
 	{
@@ -121,7 +121,7 @@ std::weak_ptr<Object> ObjectManager::GetObjectAtPosition(std::string tag, XMINT2
 				return obj;
 		}
 	}
-	return std::weak_ptr<Object>();
+	return std::weak_ptr<CObject>();
 }
 
 //=============================================================================
@@ -129,7 +129,7 @@ std::weak_ptr<Object> ObjectManager::GetObjectAtPosition(std::string tag, XMINT2
 // オブジェクトチェック
 // 
 //=============================================================================
-bool ObjectManager::IsObject(std::string tag, XMINT2 pos)
+bool CObjectManager::IsObject(std::string tag, XMINT2 pos)
 {
 	for (const auto& obj : m_pObjList)
 	{
@@ -149,7 +149,7 @@ bool ObjectManager::IsObject(std::string tag, XMINT2 pos)
 // エディット削除
 // 
 //=============================================================================
-bool ObjectManager::DestroyEditObject(std::string tag, XMINT2 pos)
+bool CObjectManager::DestroyEditObject(std::string tag, XMINT2 pos)
 {
 	for (auto it = m_pObjList.begin(); it != m_pObjList.end();)
 	{

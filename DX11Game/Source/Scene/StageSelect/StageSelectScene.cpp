@@ -35,9 +35,9 @@ namespace
 // コンストラクタ
 // 
 //=============================================================================
-StageSelectScene::StageSelectScene()
+CStageSelectScene::CStageSelectScene()
 {
-	Singleton<SceneManager>::GetInstance().SetSceneNo(Scene_StageSelect);
+	CSingleton<CSceneManager>::GetInstance().SetSceneNo(eSceneStageSelect);
 }
 
 //=============================================================================
@@ -45,7 +45,7 @@ StageSelectScene::StageSelectScene()
 // 初期化処理
 // 
 //=============================================================================
-void StageSelectScene::Init()
+void CStageSelectScene::Init()
 {
 	// 初期化
 	m_StageSelectTexture.Init();
@@ -56,7 +56,7 @@ void StageSelectScene::Init()
 // 終了処理
 // 
 //=============================================================================
-void StageSelectScene::Uninit()
+void CStageSelectScene::Uninit()
 {
 	// 終了
 	m_StageSelectTexture.Uninit();
@@ -69,7 +69,7 @@ void StageSelectScene::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void StageSelectScene::Update()
+void CStageSelectScene::Update()
 {
 	CSound::Play(STAGESELECT);
 
@@ -94,7 +94,7 @@ void StageSelectScene::Update()
 			nMenuIndex -= UpperLower;
 
 		// タイトルバックなら下段に
-		if (nMenuIndex == eTitleBack)	
+		else if (nMenuIndex == eTitleBack)	
 			// 選択肢をさっきの下段の場所に
 			nMenuIndex = nOldMenuIndex;
 	}
@@ -149,10 +149,10 @@ void StageSelectScene::Update()
 
 		// 選択肢がタイトルバックだったらタイトルへ
 		if(nMenuIndex == eTitleBack)
-			Singleton<SceneManager>::GetInstance().SetNextScene(new TitleScene());
+			CSingleton<CSceneManager>::GetInstance().SetNextScene(new CTitleScene());
 		// タイトルバック以外ならゲームへ
 		else
-			Singleton<SceneManager>::GetInstance().SetNextScene(new GameScene());
+			CSingleton<CSceneManager>::GetInstance().SetNextScene(new CGameScene());
 	}
 
 	PrintDebugProc("CurrentStage:%d\n", nMenuIndex + 1);
@@ -163,7 +163,7 @@ void StageSelectScene::Update()
 // 描画処理
 // 
 //=============================================================================
-void StageSelectScene::Draw()
+void CStageSelectScene::Draw()
 {
 	// ステージテクスチャ描画
 	m_StageSelectTexture.Draw();

@@ -2,16 +2,13 @@
 //#pragma once
 //
 //
-////====== インクルード部 ======
 //#include "main.h"
 //#include "singleton.h"
 //
-//
-////===== クラス定義 =====
 //class PostProcessing : public Singleton<PostProcessing>
 //{
 //public:
-//	friend class Singleton;
+//	friend class CSingleton;
 //
 //	PostProcessing();
 //	~PostProcessing();

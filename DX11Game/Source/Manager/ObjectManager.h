@@ -19,14 +19,14 @@
 // 
 //=============================================================================
 // 型定義
-typedef std::shared_ptr<Object> obj_shared;
-typedef std::weak_ptr<Object> obj_weak;
+typedef std::shared_ptr<CObject> obj_shared;
+typedef std::weak_ptr<CObject> obj_weak;
 
-class ObjectManager
+class CObjectManager
 {
 public:
-	ObjectManager() = default;
-	~ObjectManager() = default;
+	CObjectManager() = default;
+	~CObjectManager() = default;
 
 	// オブジェクト生成
 	template<class T>
@@ -66,9 +66,9 @@ public:
 	// オブジェクト削除(エディット用)
 	static bool DestroyEditObject(std::string tag, XMINT2 pos);
 	// タグサーチ
-	static std::weak_ptr<Object> SearchObjectTag(std::string tag);
+	static std::weak_ptr<CObject> SearchObjectTag(std::string tag);
 	// 移動オブジェクト取得
-	static std::weak_ptr<Object> GetObjectAtPosition(std::string tag ,XMINT2 pos);
+	static std::weak_ptr<CObject> GetObjectAtPosition(std::string tag ,XMINT2 pos);
 	// オブジェクトチェック
 	static bool IsObject(std::string tag, XMINT2 pos);
 

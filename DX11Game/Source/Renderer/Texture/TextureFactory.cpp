@@ -34,7 +34,7 @@ D3D11_TEXTURE2D_DESC MakeTexDesc(DXGI_FORMAT format, UINT width, UINT height)
 // ファイルから生成
 // 
 //=============================================================================
-Texture* TextureFactory::CreateFromFile(const char* fileName)
+Texture* CTextureFactory::CreateFromFile(const char* fileName)
 {
 #if USE_DIRECTXTEX
 	HRESULT hr;
@@ -77,7 +77,7 @@ Texture* TextureFactory::CreateFromFile(const char* fileName)
 // 生成
 // 
 //=============================================================================
-Texture* TextureFactory::CreateFromData(DXGI_FORMAT format, UINT width, UINT height, const void* pData)
+Texture* CTextureFactory::CreateFromData(DXGI_FORMAT format, UINT width, UINT height, const void* pData)
 {
 	// テクスチャ設定
 	D3D11_TEXTURE2D_DESC desc = MakeTexDesc(format, width, height);
@@ -101,7 +101,7 @@ Texture* TextureFactory::CreateFromData(DXGI_FORMAT format, UINT width, UINT hei
 // 生成
 // 
 //=============================================================================
-Texture* TextureFactory::CreateRenderTarget(DXGI_FORMAT format, UINT width, UINT height)
+Texture* CTextureFactory::CreateRenderTarget(DXGI_FORMAT format, UINT width, UINT height)
 {
 	// テクスチャ設定
 	// レンダーテクスチャからshaderリソースビューを作成
@@ -109,7 +109,7 @@ Texture* TextureFactory::CreateRenderTarget(DXGI_FORMAT format, UINT width, UINT
 	desc.BindFlags |= D3D11_BIND_RENDER_TARGET;
 
 	// インスタンス生成
-	RenderTarget* pTexture = new RenderTarget;
+	CRenderTarget* pTexture = new CRenderTarget;
 
 	// レンダーターゲットビュー作成
 	if (SUCCEEDED(pTexture->CreateResource(desc)))
@@ -129,10 +129,10 @@ Texture* TextureFactory::CreateRenderTarget(DXGI_FORMAT format, UINT width, UINT
 // レンダーターゲットビュー生成
 // 
 //=============================================================================
-Texture* TextureFactory::CreateRenderTargetFromScreen()
+Texture* CTextureFactory::CreateRenderTargetFromScreen()
 {
 	HRESULT hr;
-	RenderTarget* pTexture = new RenderTarget;
+	CRenderTarget* pTexture = new CRenderTarget;
 
 	// バックバッファのポインタを取得
 	ID3D11Texture2D* pBackBuffer = NULL;
@@ -165,7 +165,7 @@ Texture* TextureFactory::CreateRenderTargetFromScreen()
 // 深度ビュー生成
 // 
 //=============================================================================
-Texture* TextureFactory::CreateDepthStencil(UINT width, UINT height, bool useStencil)
+Texture* CTextureFactory::CreateDepthStencil(UINT width, UINT height, bool useStencil)
 {
 	// テクスチャ設定
 	D3D11_TEXTURE2D_DESC desc = MakeTexDesc(
@@ -173,7 +173,7 @@ Texture* TextureFactory::CreateDepthStencil(UINT width, UINT height, bool useSte
 	desc.BindFlags |= D3D11_BIND_DEPTH_STENCIL;
 
 	// インスタンス生成
-	DepthStencil* pTexture = new DepthStencil;
+	CDepthStencil* pTexture = new CDepthStencil;
 	if (SUCCEEDED(pTexture->CreateResource(desc)))
 	{
 		pTexture->m_width = width;

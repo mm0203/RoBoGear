@@ -13,7 +13,7 @@
 //=============================================================================
 CClear::CClear()
 {
-	m_tag = "Clear";
+	m_tag = TagClear;
 	m_Model.LoadModel(MODEL_CLEAR);
 }
 

@@ -36,6 +36,7 @@ void CTitleCubeObj::Init()
 void CTitleCubeObj::Update()
 {
 	m_Pos.x -= Move;
+
 	// ¶’[‚Ü‚Ås‚Á‚½‚ç‰E‚©‚çÄ•`‰æ
 	if (m_Pos.x < -EndCubePos)
 		m_Pos.x = EndCubePos;

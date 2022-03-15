@@ -1,5 +1,5 @@
 //=============================================================================
-// EffectManager.cpp
+// CEffectManager.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -12,19 +12,19 @@
 // 静的メンバ
 // 
 //=============================================================================
-std::vector<Effect*> EffectManager::m_ActiveList;
-std::vector<Effect*> EffectManager::m_UnusedList;
-std::vector<Effect*> EffectManager::m_DeleteList;
+std::vector<CEffect*> CEffectManager::m_ActiveList;
+std::vector<CEffect*> CEffectManager::m_UnusedList;
+std::vector<CEffect*> CEffectManager::m_DeleteList;
 
 //=============================================================================
 // 
 // 初期化処理
 // 
 //=============================================================================
-void EffectManager::Init()
+void CEffectManager::Init()
 {
 	// オブジェクト作成
-	EffectManager::CreateObject(99);
+	CEffectManager::CreateObject(99);
 
 }
 //=============================================================================
@@ -32,13 +32,13 @@ void EffectManager::Init()
 // 終了処理
 // 
 //=============================================================================
-void EffectManager::Uninit()
+void CEffectManager::Uninit()
 {
 	// 各リストのオブジェクト破棄
 	int num = (int)m_ActiveList.size();
 	for (int i = 0; i < num; i++)
 	{
-		Effect* p;						//削除用ポインタ
+		CEffect* p;						//削除用ポインタ
 		p = *(m_ActiveList.begin());	//要素のポインタ
 		p->Uninit();					//終了処理を呼ぶ
 		m_ActiveList.erase(m_ActiveList.begin());	//リストから削除
@@ -47,7 +47,7 @@ void EffectManager::Uninit()
 	num = (int)m_UnusedList.size();
 	for (int i = 0; i < num; i++)
 	{
-		Effect* p;						//削除用ポインタ
+		CEffect* p;						//削除用ポインタ
 		p = *(m_UnusedList.begin());	//要素のポインタ
 
 		p->Uninit();					//終了処理を呼ぶ
@@ -61,14 +61,14 @@ void EffectManager::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void EffectManager::Update(GameState state)
+void CEffectManager::Update(GameState state)
 {
 	// オブジェクト更新
 	for (auto it : m_ActiveList)
 		it->Update();
 
 	// リスト更新
-	EffectManager::UpdateObject();
+	CEffectManager::UpdateObject();
 }
 
 //=============================================================================
@@ -76,7 +76,7 @@ void EffectManager::Update(GameState state)
 // 描画処理
 // 
 //=============================================================================
-void EffectManager::Draw(GameState state)
+void CEffectManager::Draw(GameState state)
 {
 	// オブジェクト描画
 	for (auto it : m_ActiveList)
@@ -88,10 +88,14 @@ void EffectManager::Draw(GameState state)
 // エフェクト生成
 // 
 //=============================================================================
-void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
+void CEffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 {
-	Effect obj;
+	CEffect obj;
+
+	// 座標をちょっと上げて見えやすいように
 	pos.y += 50.0f;
+
+	// 各IDでエフェクトを登録
 	switch (ID)
 	{
 	case Effect_GimicBreak:
@@ -159,7 +163,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 	obj.m_CurrentAnimNum = 0;
 	obj.m_SpeedCount = 0;
 
-	EffectManager::AddObject(obj);
+	CEffectManager::AddObject(obj);
 }
 
 //=============================================================================
@@ -167,7 +171,7 @@ void EffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 // エフェクト削除
 // 
 //=============================================================================
-void EffectManager::DeleteObject(Effect* pObj)
+void CEffectManager::DeleteObject(CEffect* pObj)
 {
 	// DeleteListに登録
 	m_DeleteList.push_back(pObj);
@@ -178,10 +182,10 @@ void EffectManager::DeleteObject(Effect* pObj)
 // エフェクトのオブジェクト追加
 // 
 //=============================================================================
-void EffectManager::AddObject(Effect obj)
+void CEffectManager::AddObject(CEffect obj)
 {
 	// 登録用オブジェクト
-	Effect* pObj;
+	CEffect* pObj;
 	// 未使用オブジェクトが無ければエラー
 	if (m_UnusedList.empty())
 	{
@@ -213,7 +217,7 @@ void EffectManager::AddObject(Effect obj)
 // エフェクトのオブジェクト更新
 // 
 //=============================================================================
-void EffectManager::UpdateObject()
+void CEffectManager::UpdateObject()
 {
 	// 空の場合スキップ
 	if (m_DeleteList.empty()) return;
@@ -227,7 +231,7 @@ void EffectManager::UpdateObject()
 			if (it == ite)
 			{
 				// ポインタをゲット
-				Effect* pObj = ite;
+				CEffect* pObj = ite;
 				pObj->Uninit();
 				// アクティブリストから削除
 				m_ActiveList.erase(m_ActiveList.begin() + num);
@@ -248,12 +252,12 @@ void EffectManager::UpdateObject()
 // エフェクトのオブジェクト作成
 // 
 //=============================================================================
-void EffectManager::CreateObject(int num)
+void CEffectManager::CreateObject(int num)
 {
 	// オブジェクト作成
 	for (int i = 0; i < num; i++)
 	{
-		Effect* pObj = new Effect;
+		CEffect* pObj = new CEffect;
 		// 未使用リストに登録
 		m_UnusedList.push_back(pObj);
 	}

@@ -11,13 +11,15 @@
 #include "Gear.h"
 #include "Generare.h"
 
-#define MODEL_PLAYER "data/model/Object/MainAnim_Blender/Main_Re_Blender.fbx"
-
 //=============================================================================
 // 
 // マクロ定義
 // 
 //=============================================================================
+// モデル
+#define MODEL_PLAYER "data/model/Object/MainAnim_Blender/Main_Re_Blender.fbx"
+// タグ名
+const std::string TagPlayer = "Player";
 
 // プレイヤー方向
 enum class PlayerDir
@@ -33,10 +35,10 @@ enum class PlayerDir
 // プレイヤーアニメ
 enum class PlayerAnime
 {
-	ePush = 0,
-	eSmallPush,
-	eClear,
-	eNone,
+	ePush = 0,		// キューブ押した
+	eSmallPush,		// 使ってない
+	eClear,			// クリア時のアニメ
+	eNone,			// 待機
 	ePlayerAnimeMax
 };
 
@@ -45,7 +47,7 @@ enum class PlayerAnime
 // クラス定義
 // 
 //=============================================================================
-class CPlayer : public Object
+class CPlayer : public CObject
 {
 public:
 	CPlayer();

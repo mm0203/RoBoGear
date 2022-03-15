@@ -40,6 +40,7 @@ void CTitleMenuChoices::Init()
 
 	XMFLOAT2 size = XMFLOAT2(640, 80.0f);
 
+	// Še‘I‘ğˆ‚ÌˆÊ’u‚ğİ’è
 	for (int i = 0; i < eTitle_Max; i++)
 	{
 		m_Polygons[i].SetPosition(0.0f, 20.0f - (i * 90.0f));

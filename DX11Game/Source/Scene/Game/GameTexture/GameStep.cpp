@@ -14,6 +14,7 @@
 namespace
 {
 	const auto NumberFrame = L"data/texture/UI/gear.png";
+	const float RoationSpeed = 0.5f; // ‰ñ“]‘¬“x
 }
 
 //=============================================================================
@@ -63,7 +64,8 @@ void CGameStep::Update()
 {
 	m_Number.Update();
 
-	m_fAngle -= 0.5f;
+	// Ž•ŽÔ‚Ì‰ñ“]
+	m_fAngle -= RoationSpeed;
 	m_Polygon->SetAngle(m_fAngle);
 }
 

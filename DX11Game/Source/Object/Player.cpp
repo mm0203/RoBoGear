@@ -17,6 +17,14 @@
 #include <System/Helper/XMFLOAT_Helper.h>
 #include <time.h>
 
+// オブジェクト
+#include <Object/Cube.h>
+#include <Object/Gimic.h>
+#include <Object/Key.h>
+#include <Object/Wall.h>
+#include <Object/Trap.h>
+#include <Object/Clear.h>
+
 //=============================================================================
 // 
 // 無名名前空間
@@ -41,9 +49,8 @@ namespace
 //=============================================================================
 CPlayer::CPlayer()
 {
-	m_tag = "Player";
-
 	// プレイヤーの情報
+	m_tag = TagPlayer;
 	m_nCount = 0;
 	m_Dir = PlayerDir::eNone;
 	m_Model.LoadModel(MODEL_PLAYER);
@@ -58,9 +65,9 @@ CPlayer::CPlayer()
 void CPlayer::Init()
 {
 	// 各プレイヤーモデル生成
-	m_Caterpillar = ObjectManager::CreateObject<CCaterpillar>();
-	m_Gear = ObjectManager::CreateObject<CGear>();
-	m_Generare = ObjectManager::CreateObject<CGenerare>();
+	m_Caterpillar = CObjectManager::CreateObject<CCaterpillar>();
+	m_Gear = CObjectManager::CreateObject<CGear>();
+	m_Generare = CObjectManager::CreateObject<CGenerare>();
 
 	// アニメNo初期化
 	m_Model.SetAnimeNo((int)PlayerAnime::eNone);
@@ -79,10 +86,10 @@ void CPlayer::Update()
 	// 移動
 	ObjectMove();
 
-	// 歩数
+	// 歩数取得
 	int& nStep = CGameManager::GetStep();
 
-	// 状態
+	// 状態取得
 	GameState state = CGameManager::GetState();
 
 	switch (state)
@@ -138,22 +145,23 @@ void CPlayer::Update()
 	case GameState::eClear:
 
 		m_Dir = PlayerDir::eNone;
-		// プレイヤーズーム
+
+		// プレイヤーにズーム
 		CCamera::GetInstance().ZoomTarget(m_Pos);
 
 		m_nCount++;
-		// クリア１秒後に
-		if (m_nCount >= Second * 1)
-		{
-			// 正面じゃなければ正面に向かせる
-			if (m_Rot.y > DirRoationFront) m_Rot.y -= RotateSpeed;
-			if (m_Rot.y < DirRoationFront) m_Rot.y += RotateSpeed;
 
-			// 正面に向いたらアニメーションを変更
-			if (m_Rot.y == DirRoationFront)
-			{
-				m_Model.SetAnimeNo((int)PlayerAnime::eClear);
-			}
+		// 正面を向いてないかつ1秒経過したら
+		if (m_Rot.y >= DirRoationFront && m_nCount >= Second * 1)
+		{
+			// 正面向くまで回転させる
+			m_Rot.y -= RotateSpeed;
+		}
+		// 正面に向いたら
+		else if (m_Rot.y <= DirRoationFront)
+		{
+			// クリア時のアニメに変更
+			m_Model.SetAnimeNo((int)PlayerAnime::eClear);
 		}
 		break;
 	default:
@@ -194,14 +202,17 @@ void CPlayer::PlayerAnimetion()
 			// 押してないときはアニメなし
 			m_Model.SetAnimeNo((int)PlayerAnime::eNone);
 		}
+		// アニメ時間を初期化
 		CRenderer::SetAnimeTime(0.0f);
 	}
+	// アニメ再生時間取得
 	CRenderer::AnimePlayTime();
 
 	// アニメ切り替え 再生が終わったらアイドル状態に クリア時のアニメはループにしたいので切り替えなし
 	if(m_Model.GetAnimeNo() != (int)PlayerAnime::eClear)
 		m_Model.AnimeChange((int)PlayerAnime::eNone);
 
+	// 再生が終わったらアイドル状態に
 	m_Caterpillar->GetModel().AnimeChange((int)CaterpillarAnime::eNone, AnimeSpeed);
 	m_Gear->GetModel().AnimeChange((int)GearAnime::eNone, AnimeSpeed);
 	m_Generare->GetModel().AnimeChange((int)GenerareAnime::eNone, AnimeSpeed);
@@ -221,18 +232,18 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 	XMINT2 nextPlayerPos = GetNextPosition(dir, m_Coord);
 	
 	// 移動先が壁なら移動できない
-	if (ObjectManager::IsObject("Wall",nextPlayerPos) || ObjectManager::IsObject("Gimic", nextPlayerPos))
+	if (CObjectManager::IsObject(TagWall,nextPlayerPos) || CObjectManager::IsObject(TagGimic, nextPlayerPos))
 		// プレイヤーの座標を現在地に戻す
 		m_Coord = currentPlayerPos;
 
 	// プレイヤーの移動先にキューブが存在する場合
-	else if (ObjectManager::IsObject("Cube", nextPlayerPos))
+	else if (CObjectManager::IsObject(TagCube, nextPlayerPos))
 	{
 		// キューブ移動のアニメーション判定
 		m_bMoveCube = true;
 
 		// 移動するキューブを取得
-		const auto& Cube = ObjectManager::GetObjectAtPosition("Cube", nextPlayerPos);
+		const auto& Cube = CObjectManager::GetObjectAtPosition(TagCube, nextPlayerPos);
 
 		// 移動するキューブの位置を取得
 		XMINT2 currentCubePos = Cube.lock()->GetCoord();
@@ -241,9 +252,9 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 		XMINT2 nextCubepos = GetNextPosition(dir, Cube.lock()->GetCoord());
 
 		// キューブの移動先にオブジェクトが存在するなら
-		if (ObjectManager::IsObject("Wall", nextCubepos)  || ObjectManager::IsObject("Cube", nextCubepos) ||
-			ObjectManager::IsObject("Clear", nextCubepos) || ObjectManager::IsObject("Key", nextCubepos) ||
-			ObjectManager::IsObject("Gimic", nextCubepos))
+		if (CObjectManager::IsObject(TagWall, nextCubepos)  || CObjectManager::IsObject(TagCube, nextCubepos) ||
+			CObjectManager::IsObject(TagClear, nextCubepos) || CObjectManager::IsObject(TagKey, nextCubepos) ||
+			CObjectManager::IsObject(TagGimic, nextCubepos))
 		{
 			// キューブが移動できない音
 			CSound::Play(SE_CUBE_MOVE_NONE);
@@ -266,16 +277,17 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 			GetNextMove(dir, m_Move);
 			GetNextMove(dir, Cube.lock()->GetMove());
 
+			// キューブ押したときのエフェクト発生
 			XMFLOAT3 CubePos = Cube.lock()->GetPos();
 			GetNextMove(dir, CubePos);
-			EffectManager::CreateEffect(Effect_CubeMove, CubePos);
+			CEffectManager::CreateEffect(Effect_CubeMove, CubePos);
 
 			// プレイヤーの歩数をカウントする
 			StepCalc(nextPlayerPos, step);
 		}
 	}
 	// プレイヤーの移動先が鍵だったら
-	else if (ObjectManager::IsObject("Key", nextPlayerPos))
+	else if (CObjectManager::IsObject(TagKey, nextPlayerPos))
 	{
 		// 鍵取得
 		CSound::Play(SE_KEY_GIMIC);
@@ -287,21 +299,21 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 		// プレイヤーの歩数をカウントする
 		StepCalc(nextPlayerPos, step);
 
-		// 位置を取得
-		const auto& key = ObjectManager::SearchObjectTag("Key");
-		const auto& Gimic = ObjectManager::SearchObjectTag("Gimic");
+		// 鍵とギミックのエフェクト発生
+		const auto& key = CObjectManager::SearchObjectTag(TagKey);
+		const auto& Gimic = CObjectManager::SearchObjectTag(TagGimic);
 		XMFLOAT3 keyPos = key.lock()->GetPos();
 		XMFLOAT3 GimicPos = Gimic.lock()->GetPos();
 
+		// ギミック破壊時にズームする
 		//CCamera::GetInstance().ZoomTarget(GimicPos);
 
-		// エフェクト発生
-		EffectManager::CreateEffect(Effect_KeyBreak, keyPos);
-		EffectManager::CreateEffect(Effect_GimicBreak, GimicPos);
+		CEffectManager::CreateEffect(Effect_KeyBreak, keyPos);
+		CEffectManager::CreateEffect(Effect_GimicBreak, GimicPos);
 
 		// オブジェクトを消去
-		ObjectManager::DestroyObject("Key");
-		ObjectManager::DestroyObject("Gimic");
+		CObjectManager::DestroyObject(TagKey);
+		CObjectManager::DestroyObject(TagGimic);
 	}
 	// プレイヤーの移動先にキューブが存在しない場合
 	else
@@ -314,7 +326,7 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 		StepCalc(nextPlayerPos, step);
 
 		// プレイヤーとクリアの座標が一致したら
-		if (ObjectManager::IsObject("Clear", nextPlayerPos))
+		if (CObjectManager::IsObject(TagClear, nextPlayerPos))
 		{
 			CSound::Play(SE_CLEAR);
 			CGameManager::SetState(GameState::eClear);
@@ -328,7 +340,7 @@ void CPlayer::MoveObject(PlayerDir& dir, int& step)
 	// 移動時のエフェクト
 	if (m_Coord == nextPlayerPos)
 	{
-		EffectManager::CreateEffect(Effect_PlayerMove, m_Pos);
+		CEffectManager::CreateEffect(Effect_PlayerMove, m_Pos);
 	}
 }
 
@@ -403,7 +415,7 @@ void CPlayer::GetNextMove(PlayerDir dir, XMFLOAT3& move)
 void CPlayer::StepCalc(XMINT2 pos, int& step)
 {
 	// 移動先にトゲがあるなら
-	if (ObjectManager::IsObject("Trap", pos))
+	if (CObjectManager::IsObject(TagTrap, pos))
 	{
 		// トラップ効果音
 		CSound::Play(SE_TRAP);

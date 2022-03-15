@@ -446,6 +446,9 @@
     <ClCompile Include="Source\Renderer\Billboard\BillBorad.cpp">
       <Filter>Renderer\Billboard</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Polygon\CPolygon.cpp">
+      <Filter>Renderer\Polygon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Component\Texture\TextureColorChangeComponent.h">

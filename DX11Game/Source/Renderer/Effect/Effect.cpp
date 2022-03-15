@@ -1,5 +1,5 @@
 //=============================================================================
-// Ceffect.cpp
+// Effect.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -11,14 +11,13 @@
 // 初期化処理
 // 
 //=============================================================================
-void Effect::Init()
+void CEffect::Init()
 {
-	// メンバ変数初期化
 	m_FrameNum = XMINT2(1, 1);
 	m_MaxAnimNum = 0;
 	m_CurrentAnimNum = 0;
 
-	BillBoard::Init();
+	CBillBoard::Init();
 }
 
 //=============================================================================
@@ -26,9 +25,9 @@ void Effect::Init()
 // 終了処理
 // 
 //=============================================================================
-void Effect::Uninit()
+void CEffect::Uninit()
 {
-	BillBoard::Uninit();
+	CBillBoard::Uninit();
 }
 
 //=============================================================================
@@ -36,18 +35,19 @@ void Effect::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void Effect::Update()
+void CEffect::Update()
 {
 	if (++m_SpeedCount >= m_Speed)
 	{
+		// エフェクトが最大アニメ数を超えたら削除
 		if (m_CurrentAnimNum++ > m_MaxAnimNum)
 		{
-			EffectManager::DeleteObject(this);
+			CEffectManager::DeleteObject(this);
 		}
 		m_SpeedCount = 0;
 	}
 
-	BillBoard::Update();
+	CBillBoard::Update();
 }
 
 //=============================================================================
@@ -55,9 +55,9 @@ void Effect::Update()
 // 描画処理
 // 
 //=============================================================================
-void Effect::Draw()
+void CEffect::Draw()
 {
-	BillBoard::Draw(m_CurrentAnimNum);
+	CBillBoard::Draw(m_CurrentAnimNum);
 }
 
 

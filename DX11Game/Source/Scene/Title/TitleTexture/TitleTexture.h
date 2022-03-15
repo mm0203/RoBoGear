@@ -29,9 +29,13 @@ public:
 	void Draw();
 
 private:
+	// 背景
 	std::shared_ptr<CTitleBackGround> m_TitleBackGround;
+	// タイトルシーンの歯車画像
 	std::shared_ptr<CTitleFrame> m_TitleFrame;
+	// カーソル
 	std::shared_ptr<CTitleMenuChoices> m_TitleMenuChoices;
+	// タイトルロゴ
 	std::shared_ptr<CTitleLogo> m_TitleLogo;
 
 private:

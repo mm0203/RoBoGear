@@ -7,6 +7,7 @@
 #include <Manager/GameManager.h>
 #include <Scene/StageSelect/StageSelectScene.h>
 #include <Manager/StageManager.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 //=============================================================================
@@ -18,6 +19,7 @@ namespace
 {
 	const auto StageLogo = L"data/texture/UI/StartLogo.png";
 	const auto StageNumber = L"data/texture/UI/StartNumber.png";
+	const int TextMove = 3; // テキスト上下移動の振り幅
 }
 
 //=============================================================================
@@ -73,8 +75,8 @@ void CStartLogo::Update()
 	if (FadeState)
 	{
 		// テキスト上下
-		m_nTime += 3;
-		m_TextMove += ((sinf(m_nTime * 3.1415f / 100)));
+		m_nTime += TextMove;
+		m_TextMove += ((sinf(m_nTime * (float)M_PI / 100)));
 		m_TextureMove->TextureUpDown(m_Polygon);
 		// テキストフェードインアウト
 		m_TextureFades[eStartLogo].FadeInOut(m_Polygon);
@@ -90,7 +92,6 @@ void CStartLogo::Update()
 void CStartLogo::Draw()
 {
 	m_Polygon->Draw();
-	//int StageNumber = StageManager::GetStageNumber();
 	int StageNumber = CGameManager::GetStageMenu();
 	XMFLOAT2 pos = { 300, m_TextMove };
 	// ナンバー描画

@@ -13,8 +13,9 @@
 //=============================================================================
 namespace
 {
-	const int BgNum = 2; // ”wŒi‰æ‘œ‚Ì”
 	const auto TitleBackGround = L"data/texture/Title/TitleBackGround.png";
+	const int BgNum = 2; // ”wŒi‰æ‘œ‚Ì”
+	const float TitleBgMove = 1.0f;
 }
 
 //=============================================================================
@@ -55,10 +56,12 @@ void CTitleBackGround::Update()
 {
 	// ”wŒi‰æ‘œ‚ğƒXƒNƒ[ƒ‹
 	static float fPosX = 0.0f;
-	fPosX -= 1.0f;
+	fPosX -= TitleBgMove;
+
 	for (int i = 0; i < BgNum; i++)
 	{
 		m_Polygons[i].SetPosition(fPosX + (i * SCREEN_WIDTH), 0.0f);
+
 		// ¶’[‚Ü‚Ås‚Á‚½‚ç‰E’[‚©‚çÄ•`‰æ
 		if (fPosX <= -SCREEN_WIDTH)
 		{

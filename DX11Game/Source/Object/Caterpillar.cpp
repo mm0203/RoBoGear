@@ -5,6 +5,7 @@
 //=============================================================================
 #include "Caterpillar.h"
 #include <Manager/ObjectManager.h>
+#include "Player.h"
 
 #define MODEL_CATERPILLAR "data/model/Object/MainAnim_Blender/Caterpillar_Anim.fbx"
 
@@ -15,7 +16,7 @@
 //=============================================================================
 CCaterpillar::CCaterpillar()
 {
-	m_tag = "Caterpillar";
+	m_tag = TagCaterpillar;
 	m_Model.LoadModel(MODEL_CATERPILLAR);
 }
 
@@ -37,7 +38,7 @@ void CCaterpillar::Init()
 void CCaterpillar::Update()
 {
 	// プレイヤーの座標と同じ場所に
-	const auto& player = ObjectManager::SearchObjectTag("Player");
+	const auto& player = CObjectManager::SearchObjectTag(TagPlayer);
 	m_Pos = player.lock()->GetPos();
 	m_Scale = player.lock()->GetScale();
 	m_Rot = player.lock()->GetRot();

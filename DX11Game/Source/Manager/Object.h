@@ -18,13 +18,13 @@
 // 
 //=============================================================================
 // オブジェクトクラス
-class Object
+class CObject
 {
 public:
-	Object();
-	virtual ~Object() = default;
+	CObject();
+	virtual ~CObject() = default;
 
-	friend class ObjectManager; // フレンドクラス
+	friend class CObjectManager; // フレンドクラス
 
 	virtual void Init() = 0;
 	virtual void Uninit();

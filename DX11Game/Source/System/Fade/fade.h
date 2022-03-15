@@ -15,12 +15,11 @@
 // 定義
 // 
 //=============================================================================
-enum EFade	// フェード状態
+enum FadeMode
 {
-	FADE_NONE = 0,	// 何もしていない
-	FADE_IN,		// フェードイン処理
-	FADE_OUT,		// フェードアウト処理
-
+	eFadeNone = 0, // 何もしていない
+	eFadeIn,	   // フェードイン処理
+	eFadeOut,	   // フェードアウト処理
 	MAX_FADE
 };
 
@@ -29,27 +28,32 @@ enum EFade	// フェード状態
 // クラス定義
 // 
 //=============================================================================
-class Scene;	// 前方宣言
+class CScene;	// 前方宣言
 
-class Fade : public Singleton<Fade>
+class CFade : public CSingleton<CFade>
 {
 public:
 	void Init();
 	void Uninit();
 	void Update();
 	void Draw();
-	void SetFadeOut(Scene* sceneNext);
+	void SetFadeOut(CScene* sceneNext);
 	void EndFade();
 
 private:
 	// シングルトンのみでインスタンス生成を許可
-	friend class Singleton;
-	Fade();
-	~Fade() = default;
+	friend class CSingleton;
+	CFade();
+	~CFade() = default;
 
-	float m_fAlpha;		 // 不透明度
-	int m_nFade;		 // フェード状態
-	Scene* m_pNextScene; // 読み込むシーン
+	// 不透明度
+	float m_fAlpha;
+	// フェード状態
+	int m_nFade;
+	// 読み込むシーン
+	CScene* m_pNextScene; 
+	// フェードポリゴン
 	CPolygon m_FadePolygon;
-	CFadeTexture m_FadeTexture; // フェード中のテクスチャ
+	// フェード中のテクスチャ
+	CFadeTexture m_FadeTexture;
 };

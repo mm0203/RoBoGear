@@ -15,7 +15,7 @@
 // クラス定義
 // 
 //=============================================================================
-class CTitlePlayerObj : public Object
+class CTitlePlayerObj : public CObject
 {
 public:
 	CTitlePlayerObj();
@@ -25,6 +25,7 @@ public:
 	void Update();
 
 private:
+	// プレイヤーパーツのインスタンス
 	obj_shared m_Caterpillar;
 	obj_shared m_Gear;
 	obj_shared m_Generare;

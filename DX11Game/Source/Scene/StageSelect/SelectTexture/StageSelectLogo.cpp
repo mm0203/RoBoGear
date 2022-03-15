@@ -52,6 +52,7 @@ void CStageSelectLogo::Uninit()
 //=============================================================================
 void CStageSelectLogo::Update()
 {
+	// テクスチャ上下移動
 	m_TextureMove->TextureUpDown(m_Polygon, 250.0f);
 }
 

@@ -17,9 +17,9 @@
 //=============================================================================
 enum TitleMenu
 {
-	eTitle_Start,
-	eTitle_Edit,
-	eTitle_Exit,
+	eTitle_Start,	// ゲーム開始
+	eTitle_Edit,	// エディットモードへ
+	eTitle_Exit,	// ゲーム終了
 	eTitle_Max
 };
 
@@ -28,11 +28,11 @@ enum TitleMenu
 // クラス定義
 // 
 //=============================================================================
-class TitleScene : public Scene
+class CTitleScene : public CScene
 {
 public:
-	TitleScene();
-	~TitleScene() = default;
+	CTitleScene();
+	~CTitleScene() = default;
 
 	void Init()   override;
 	void Uninit() override;

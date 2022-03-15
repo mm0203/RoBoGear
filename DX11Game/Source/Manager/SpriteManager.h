@@ -19,17 +19,17 @@
 //=============================================================================
 
 // 前方宣言
-class Sprite;
+class CSprite;
 
 // 型定義
-typedef std::shared_ptr<Sprite> sprite_shared;
-typedef std::weak_ptr<Sprite> sprite_weak;
+typedef std::shared_ptr<CSprite> sprite_shared;
+typedef std::weak_ptr<CSprite> sprite_weak;
 
-class SpriteManager
+class CSpriteManager
 {
 public:
-	SpriteManager() = default;
-	~SpriteManager() = default;
+	CSpriteManager() = default;
+	~CSpriteManager() = default;
 
 	// スプライト生成
 	template<class T>

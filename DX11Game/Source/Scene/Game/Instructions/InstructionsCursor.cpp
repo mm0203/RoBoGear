@@ -76,22 +76,19 @@ void CInstructionsCursor::Draw()
 void CInstructionsCursor::MoveCursor(int index)
 {
 
-	// →表示非表示　いいやり方求
+	// カーソル表示非表示　いいやり方じゃない
 	if (index == eInstructions_Page1)
 	{
-		// 非表示
 		m_Polygons[eRight].SetAlpha(0);
 		m_Polygons[eLeft].SetAlpha(1);
 	}
 	if (index == eInstructions_Page2)
 	{
-		// 非表示
 		m_Polygons[eRight].SetAlpha(1);
 		m_Polygons[eLeft].SetAlpha(1);
 	}
 	if (index == eInstructions_Page3)
 	{
-		// 非表示
 		m_Polygons[eRight].SetAlpha(1);
 		m_Polygons[eLeft].SetAlpha(0);
 	}

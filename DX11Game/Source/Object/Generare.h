@@ -7,6 +7,14 @@
 
 #include <Manager/Object.h>
 
+//=============================================================================
+// 
+// マクロ定義
+// 
+//=============================================================================
+// タグ名
+const std::string TagGenerare = "Generare";
+
 // 歯車アニメ
 enum class GenerareAnime
 {
@@ -20,7 +28,7 @@ enum class GenerareAnime
 // クラス定義
 // 
 //=============================================================================
-class CGenerare : public Object
+class CGenerare : public CObject
 {
 public:
 	CGenerare();

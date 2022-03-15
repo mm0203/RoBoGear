@@ -1,5 +1,5 @@
 //=============================================================================
-// Collision.h
+// CCollision.h
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -47,11 +47,11 @@ typedef struct
 // クラス定義
 // 
 //=============================================================================
-class Collision abstract
+class CCollision abstract
 {
 public:
 	//-- メンバ変数 --
-	bool CollisionAABB(Collision& Target)	//当たり判定処理
+	bool CollisionAABB(CCollision& Target)	//当たり判定処理
 	{
 		XMFLOAT3 tPos = Target.GetColPos();
 		XMFLOAT2 tDisX = Target.GetColDisX();
@@ -68,7 +68,7 @@ public:
 	}
 
 	//面の詳しい判定
-	CollisionSurface CollisiomSurface(Collision& Target)
+	CollisionSurface CollisiomSurface(CCollision& Target)
 	{
 		// 判定用変数
 		CollisionSurface ColState;

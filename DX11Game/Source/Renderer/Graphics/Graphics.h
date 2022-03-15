@@ -65,7 +65,7 @@ enum SamplerStateKind
 // クラス定義
 // 
 //=============================================================================
-class Graphics : public Singleton<Graphics>
+class CGraphics : public CSingleton<CGraphics>
 {
 public:
 	void Init();
@@ -81,20 +81,20 @@ public:
 
 	// サンプラー
 	void SetSamplerState(SamplerStateKind kind) { m_pDefSamplerState[kind]->Bind(); }
-	void SetSamplerState(SamplerState* pState) { m_pSamplerState = pState; }
-	SamplerState* GetSamplerState() { return m_pSamplerState; }
+	void SetSamplerState(CSamplerState* pState) { m_pSamplerState = pState; }
+	CSamplerState* GetSamplerState() { return m_pSamplerState; }
 	// 深度ステンシル
 	void SetDepthStencilState(DepthStencilKind kind) { m_pDefDepthStencilState[kind]->Bind(); }
-	void SetDepthStencilState(DepthStencilState* pState) { m_pDepthStencilState = pState; }
-	DepthStencilState* GetDepthStencilState() { return m_pDepthStencilState; }
+	void SetDepthStencilState(CDepthStencilState* pState) { m_pDepthStencilState = pState; }
+	CDepthStencilState* GetDepthStencilState() { return m_pDepthStencilState; }
 	void UpdateTargetView();
 	void DrawPostEffect();
 private:
 	// シングルトンのみで生成を許可
-	friend class Singleton;
+	friend class CSingleton;
 
-	Graphics() = default;
-	~Graphics() = default;
+	CGraphics() = default;
+	~CGraphics() = default;
 
 private:
 	Texture* m_pDefRenderTarget;
@@ -102,10 +102,10 @@ private:
 	Texture* m_pRenderTarget[4];
 	UINT m_renderTargetNum;
 	Texture* m_pDepthStencilView;
-	SamplerState* m_pDefSamplerState[MAX_SAMPLER];
-	SamplerState* m_pSamplerState;
-	DepthStencilState* m_pDefDepthStencilState[MAX_DEPTHSTENCIL];
-	DepthStencilState* m_pDepthStencilState;
+	CSamplerState* m_pDefSamplerState[MAX_SAMPLER];
+	CSamplerState* m_pSamplerState;
+	CDepthStencilState* m_pDefDepthStencilState[MAX_DEPTHSTENCIL];
+	CDepthStencilState* m_pDepthStencilState;
 };
 
 // カリング設定

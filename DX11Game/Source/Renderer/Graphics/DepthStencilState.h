@@ -12,11 +12,11 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class DepthStencilState
+class CDepthStencilState
 {
 public:
-	DepthStencilState();
-	~DepthStencilState();
+	CDepthStencilState();
+	~CDepthStencilState();
 
 	HRESULT Create(bool depthEnable, bool stencilEnable);
 	void Bind();

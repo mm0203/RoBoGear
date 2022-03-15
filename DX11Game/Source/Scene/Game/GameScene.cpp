@@ -1,5 +1,5 @@
 //=============================================================================
-// GameScene.cpp
+// CGameScene.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -38,9 +38,9 @@
 // コンストラクタ
 // 
 //=============================================================================
-GameScene::GameScene() 
+CGameScene::CGameScene() 
 {
-	Singleton<SceneManager>::GetInstance().SetSceneNo(Scene_Game);
+	CSingleton<CSceneManager>::GetInstance().SetSceneNo(eSceneGame);
 	// ゲームモード
 	m_State = GameState::eStop;
 }
@@ -50,23 +50,23 @@ GameScene::GameScene()
 // 初期化処理
 // 
 //=============================================================================
-void GameScene::Init()
+void CGameScene::Init()
 {
 	// ゲーム制御
 	CGameManager::Init();
 	// カメラ
-	Singleton<CCamera>::GetInstance().Init();
+	CSingleton<CCamera>::GetInstance().Init();
 	// ステージ生成
-	std::string StageFile = StageManager::LoadStage();
-	StageManager::StageCreate(StageFile);
+	std::string StageFile = CStageManager::LoadStage();
+	CStageManager::StageCreate(StageFile);
 	// 地面生成
-	ObjectManager::CreateObject<CStageGround>();
+	CObjectManager::CreateObject<CStageGround>();
 	// スプライトインスタンス生成
 	CreateSpriteInstance();
 	// 全スプライト初期化
-	SpriteManager::InitAll();
+	CSpriteManager::InitAll();
 	// 全オブジェクト初期化
-	ObjectManager::InitAll();
+	CObjectManager::InitAll();
 }
 
 //=============================================================================
@@ -74,12 +74,12 @@ void GameScene::Init()
 // 終了処理
 // 
 //=============================================================================
-void GameScene::Uninit()
+void CGameScene::Uninit()
 {
 	// スプライト終了
-	SpriteManager::UninitAll();
+	CSpriteManager::UninitAll();
 	// オブジェクト終了
-	ObjectManager::UninitAll();
+	CObjectManager::UninitAll();
 	// ゲーム制御終了
 	CGameManager::Uninit();
 	// BGM停止
@@ -91,7 +91,7 @@ void GameScene::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void GameScene::Update()
+void CGameScene::Update()
 {
 	// ゲーム制御更新
 	CGameManager::Update();
@@ -108,10 +108,10 @@ void GameScene::Update()
 	if (m_State != GameState::ePause && m_State != GameState::eInstructions)
 	{
 		// オブジェクト更新
-		ObjectManager::UpdateAll();
+		CObjectManager::UpdateAll();
 	}
 	// スプライト更新
-	SpriteManager::UpdateAll(m_State);
+	CSpriteManager::UpdateAll(m_State);
 }
 
 //=============================================================================
@@ -119,12 +119,12 @@ void GameScene::Update()
 // 描画処理
 // 
 //=============================================================================
-void GameScene::Draw()
+void CGameScene::Draw()
 {
 	// オブジェクト描画
-	ObjectManager::DrawAll();
+	CObjectManager::DrawAll();
 	// スプライト描画
-	SpriteManager::DrawAll(m_State);
+	CSpriteManager::DrawAll(m_State);
 	// ゲーム制御(デバッグ表記)描画
 	CGameManager::Draw();
 }
@@ -134,16 +134,16 @@ void GameScene::Draw()
 // スプライトインスタンス生成
 // 
 //=============================================================================
-void GameScene::CreateSpriteInstance()
+void CGameScene::CreateSpriteInstance()
 {
 	// エフェクト
-	SpriteManager::CreateSprite<EffectManager>();
+	CSpriteManager::CreateSprite<CEffectManager>();
 	// ゲームUI
-	SpriteManager::CreateSprite<CGameTexture>();
+	CSpriteManager::CreateSprite<CGameTexture>();
 	// ゲームオーバー
-	SpriteManager::CreateSprite<CGameOver>();
+	CSpriteManager::CreateSprite<CGameOver>();
 	// ポーズ
-	SpriteManager::CreateSprite<CPauseMenu>();
+	CSpriteManager::CreateSprite<CPauseMenu>();
 	// 操作説明
-	SpriteManager::CreateSprite<CInstructions>();
+	CSpriteManager::CreateSprite<CInstructions>();
 }

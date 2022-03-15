@@ -132,7 +132,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 				preExecTime = nowTime;
 			}
 			// 変更先のシーンが設定されていなければスキップ
-			SceneManager::GetInstance().ChangeNextScene();
+			CSceneManager::GetInstance().ChangeNextScene();
 		}
 	}
 

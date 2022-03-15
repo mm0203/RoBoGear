@@ -12,7 +12,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-DepthStencil::DepthStencil()
+CDepthStencil::CDepthStencil()
 {
 	m_pDSV = nullptr;
 }
@@ -22,7 +22,7 @@ DepthStencil::DepthStencil()
 // デストラクタ
 // 
 //=============================================================================
-DepthStencil::~DepthStencil()
+CDepthStencil::~CDepthStencil()
 {
 }
 
@@ -31,7 +31,7 @@ DepthStencil::~DepthStencil()
 // 解放
 // 
 //=============================================================================
-void DepthStencil::Release()
+void CDepthStencil::Release()
 {
 	Texture::Release();
 	SAFE_RELEASE(m_pDSV);
@@ -42,7 +42,7 @@ void DepthStencil::Release()
 // 深度値取得
 // 
 //=============================================================================
-ID3D11DepthStencilView* DepthStencil::GetView() const
+ID3D11DepthStencilView* CDepthStencil::GetView() const
 {
 	return m_pDSV;
 }
@@ -51,7 +51,7 @@ ID3D11DepthStencilView* DepthStencil::GetView() const
 // 生成
 // 
 //=============================================================================
-HRESULT DepthStencil::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
+HRESULT CDepthStencil::CreateResource(D3D11_TEXTURE2D_DESC& desc, const void* pData)
 {
 	// ステンシル使用判定
 	bool useStencil = (desc.Format == DXGI_FORMAT_D24_UNORM_S8_UINT);

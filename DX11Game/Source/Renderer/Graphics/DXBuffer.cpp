@@ -1,5 +1,5 @@
 //=============================================================================
-// Cube.cpp
+// DXBuffer.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -13,7 +13,7 @@
 // コンストラクタ
 // 
 //=============================================================================
-DXBuffer::DXBuffer()
+CDXBuffer::CDXBuffer()
 	: m_pVtxBuffer(NULL), m_vtxSize(0), m_vtxCount(0)
 	, m_pIdxBuffer(NULL), m_idxSize(0), m_idxCount(0)
 {
@@ -23,7 +23,7 @@ DXBuffer::DXBuffer()
 // デストラクタ
 // 
 //=============================================================================
-DXBuffer::~DXBuffer()
+CDXBuffer::~CDXBuffer()
 {
 	SAFE_RELEASE(m_pIdxBuffer);
 	SAFE_RELEASE(m_pVtxBuffer);
@@ -34,7 +34,7 @@ DXBuffer::~DXBuffer()
 // バッファ生成
 // 
 //=============================================================================
-HRESULT DXBuffer::Create(const Desc& desc)
+HRESULT CDXBuffer::Create(const Desc& desc)
 {
 	HRESULT hr = E_FAIL;
 
@@ -57,7 +57,7 @@ HRESULT DXBuffer::Create(const Desc& desc)
 // 頂点バッファ生成
 // 
 //=============================================================================
-HRESULT DXBuffer::CreateVertexBuffer(const void* pVtx, UINT size, UINT count, bool isWrite)
+HRESULT CDXBuffer::CreateVertexBuffer(const void* pVtx, UINT size, UINT count, bool isWrite)
 {
 	// 作成するバッファの情報
 	D3D11_BUFFER_DESC bufDesc = {};
@@ -92,7 +92,7 @@ HRESULT DXBuffer::CreateVertexBuffer(const void* pVtx, UINT size, UINT count, bo
 // インデックスバッファ生成
 // 
 //=============================================================================
-HRESULT DXBuffer::CreateIndexBuffer(const void* pIdx, UINT size, UINT count)
+HRESULT CDXBuffer::CreateIndexBuffer(const void* pIdx, UINT size, UINT count)
 {
 	// インデックスサイズの確認
 	switch (size)
@@ -132,7 +132,7 @@ HRESULT DXBuffer::CreateIndexBuffer(const void* pIdx, UINT size, UINT count)
 // 描画
 // 
 //=============================================================================
-void DXBuffer::Draw(int count)
+void CDXBuffer::Draw(int count)
 {
 	ID3D11DeviceContext* pContext = GetDeviceContext();
 	UINT stride = m_vtxSize;
@@ -166,7 +166,7 @@ void DXBuffer::Draw(int count)
 // バッファ更新
 // 
 //=============================================================================
-HRESULT DXBuffer::Write(void* pVtx)
+HRESULT CDXBuffer::Write(void* pVtx)
 {
 	HRESULT hr;
 	ID3D11Device* pDevice = GetDevice();

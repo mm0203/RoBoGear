@@ -1,5 +1,5 @@
 //=============================================================================
-// Ceffect.h
+// Effect.h
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -29,12 +29,12 @@ enum EffectID
 // クラス定義
 // 
 //=============================================================================
-class Effect : public BillBoard
+class CEffect : public CBillBoard
 {
-	friend class EffectManager;
+	friend class CEffectManager; // フレンドクラス
 public:
-	Effect() = default;
-	~Effect() = default;
+	CEffect() = default;
+	~CEffect() = default;
 
 	// setter 
 	void SetFrameNum(XMINT2 frame) { m_FrameNum = frame; }
@@ -60,28 +60,34 @@ private:
 	int m_SpeedCount;
 };
 
-class EffectManager : public Sprite
+// エフェクトマネージャークラス
+class CEffectManager : public CSprite
 {
 public:
-	EffectManager() = default;
-	~EffectManager() = default;
+	CEffectManager() = default;
+	~CEffectManager() = default;
 
 	void Init()   override;
 	void Uninit() override;
 	void Update(GameState state) override;
 	void Draw(GameState state)   override;
 
+	// エフェクト生成
 	static void CreateEffect(EffectID ID, XMFLOAT3 pos);
-	static void DeleteObject(Effect*);
-	std::vector<Effect*> GetActiveList() { return m_ActiveList; }
+	// エフェクト削除
+	static void DeleteObject(CEffect*);
+	// エフェクトリスト取得
+	std::vector<CEffect*> GetActiveList() { return m_ActiveList; }
 
 private:
-	static void AddObject(Effect);
+	// エフェクト追加
+	static void AddObject(CEffect);
+	// エフェクトオブジェクト生成
 	static void CreateObject(int num = 10);
 	static void UpdateObject();
 
 private:
-	static std::vector<Effect*> m_UnusedList;
-	static std::vector<Effect*> m_ActiveList;
-	static std::vector<Effect*> m_DeleteList;
+	static std::vector<CEffect*> m_UnusedList;	// 未使用リスト
+	static std::vector<CEffect*> m_ActiveList;	// 使うエフェクト
+	static std::vector<CEffect*> m_DeleteList;  // 削除するエフェクト
 };

@@ -1,5 +1,5 @@
 //=============================================================================
-// MeSsageManager.cpp
+// CMessageManager.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -12,36 +12,36 @@
 // 静的メンバ
 // 
 //=============================================================================
-std::vector<Message*> MessageManager::m_ActiveList;
-std::vector<Message*> MessageManager::m_UnusedList;
-std::vector<Message*> MessageManager::m_DeleteList;
-ID3D11ShaderResourceView* MessageManager::m_pFont = nullptr;
+std::vector<CMessage*> CMessageManager::m_ActiveList;
+std::vector<CMessage*> CMessageManager::m_UnusedList;
+std::vector<CMessage*> CMessageManager::m_DeleteList;
+ID3D11ShaderResourceView* CMessageManager::m_pFont = nullptr;
 
 //=============================================================================
 // 
 // 初期化処理
 // 
 //=============================================================================
-void MessageManager::Init()
+void CMessageManager::Init()
 {
 	// フォント読み込み
 	CreateTextureFromFile(GetDevice(), L"data/texture/EngFont.png", &m_pFont);
 
 	// オブジェクト作成
-	MessageManager::CreateObject();
+	CMessageManager::CreateObject();
 }
 //=============================================================================
 // 
 // 終了処理
 // 
 //=============================================================================
-void MessageManager::Uninit()
+void CMessageManager::Uninit()
 {
 	// 各リストのオブジェクト破棄
 	int num = (int)m_ActiveList.size();
 	for (int i = 0; i < num; i++)
 	{
-		Message* p;
+		CMessage* p;
 		p = *(m_ActiveList.begin());
 		p->Uninit();
 		m_ActiveList.erase(m_ActiveList.begin());
@@ -50,7 +50,7 @@ void MessageManager::Uninit()
 	num = (int)m_UnusedList.size();
 	for (int i = 0; i < num; i++)
 	{
-		Message* p;
+		CMessage* p;
 		p = *(m_UnusedList.begin());
 		p->Uninit();
 		m_UnusedList.erase(m_UnusedList.begin());
@@ -65,13 +65,13 @@ void MessageManager::Uninit()
 // 更新処理
 // 
 //=============================================================================
-void MessageManager::Update()
+void CMessageManager::Update()
 {
 	// オブジェクト更新
 	for (auto it : m_ActiveList)
 		it->Update();
 	// リスト更新
-	MessageManager::UpdateObject();
+	CMessageManager::UpdateObject();
 }
 
 //=============================================================================
@@ -79,7 +79,7 @@ void MessageManager::Update()
 // 描画処理
 // 
 //=============================================================================
-void MessageManager::Draw()
+void CMessageManager::Draw()
 {
 	// オブジェクト描画
 	for (auto it : m_ActiveList)
@@ -91,9 +91,9 @@ void MessageManager::Draw()
 // メッセージ生成処理
 // 
 //=============================================================================
-void MessageManager::CreateMessage(const char* message, XMFLOAT2 pos, int Mag, XMFLOAT3 Color)
+void CMessageManager::CreateMessage(const char* message, XMFLOAT2 pos, int Mag, XMFLOAT3 Color)
 {
-	Message obj;
+	CMessage obj;
 	strcpy(obj.m_Message, message);
 	obj.m_MessagePos = pos;
 	obj.SetFrameSize(FontFrameSizeX, FontFrameSizeY);
@@ -101,7 +101,7 @@ void MessageManager::CreateMessage(const char* message, XMFLOAT2 pos, int Mag, X
 	obj.SetColor(Color);
 	obj.m_Mag = Mag;
 	obj.SetTex(m_pFont);
-	MessageManager::AddObject(obj);
+	CMessageManager::AddObject(obj);
 }
 
 //=============================================================================
@@ -109,7 +109,7 @@ void MessageManager::CreateMessage(const char* message, XMFLOAT2 pos, int Mag, X
 // 削除処理
 // 
 //=============================================================================
-void MessageManager::DeleteObject(Message* pObj)
+void CMessageManager::DeleteObject(CMessage* pObj)
 {
 	// DeleteListに登録
 	m_DeleteList.push_back(pObj);
@@ -120,10 +120,10 @@ void MessageManager::DeleteObject(Message* pObj)
 // オブジェクト追加
 // 
 //=============================================================================
-void MessageManager::AddObject(Message obj)
+void CMessageManager::AddObject(CMessage obj)
 {
 	// 登録用オブジェクト
-	Message* pObj;
+	CMessage* pObj;
 	// 未使用オブジェクトが無ければエラー
 	if (m_UnusedList.empty())
 	{
@@ -148,7 +148,7 @@ void MessageManager::AddObject(Message obj)
 // オブジェクト更新
 // 
 //=============================================================================
-void MessageManager::UpdateObject()
+void CMessageManager::UpdateObject()
 {
 	// 空の場合スキップ
 	if (m_DeleteList.empty()) return;
@@ -162,7 +162,7 @@ void MessageManager::UpdateObject()
 			if (it == ite)
 			{
 				// ポインタをゲット
-				Message* pObj = ite;
+				CMessage* pObj = ite;
 
 				// アクティブリストから削除
 				m_ActiveList.erase(m_ActiveList.begin() + num);
@@ -184,12 +184,12 @@ void MessageManager::UpdateObject()
 // オブジェクト生成
 // 
 //=============================================================================
-void MessageManager::CreateObject(int num)
+void CMessageManager::CreateObject(int num)
 {
 	// オブジェクト作成
 	for (int i = 0; i < num; i++)
 	{
-		Message* pObj = new Message;
+		CMessage* pObj = new CMessage;
 		// 未使用リストに登録
 		m_UnusedList.push_back(pObj);
 	}

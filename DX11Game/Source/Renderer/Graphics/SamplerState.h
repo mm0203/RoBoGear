@@ -1,9 +1,9 @@
-#pragma once
 //=============================================================================
 // SamplerState.h
 //=============================================================================
 // Author  èºñÏ è´îV
 //=============================================================================
+#pragma once
 
 #include <main.h>
 
@@ -12,11 +12,11 @@
 // ÉNÉâÉXíËã`
 // 
 //=============================================================================
-class SamplerState
+class CSamplerState
 {
 public:
-	SamplerState();
-	~SamplerState();
+	CSamplerState();
+	~CSamplerState();
 
 	HRESULT Create(D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address);
 	void Bind();

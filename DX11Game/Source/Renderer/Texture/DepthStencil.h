@@ -12,13 +12,13 @@
 // クラス定義
 // 
 //=============================================================================
-class DepthStencil : public Texture
+class CDepthStencil : public Texture
 {
 public:
-	friend class TextureFactory;
+	friend class CTextureFactory; // フレンドクラス
 public:
-	DepthStencil();
-	~DepthStencil();
+	CDepthStencil();
+	~CDepthStencil();
 	virtual void Release();
 
 	ID3D11DepthStencilView* GetView() const;

@@ -24,20 +24,24 @@ public:
 	// setter
 	void SetAlpha(float alpha) { m_fAlpha = alpha; }
 
+	// フェードイン
 	void FadeIn(CPolygon& polygon);
 	void FadeIn(std::shared_ptr<CPolygon>& polygon);
+	// フェードアウト
 	void FadeOut(CPolygon& polygon);
 	void FadeOut(std::shared_ptr<CPolygon>& polygon);
+	// フェードインからアウト
 	void FadeInOut(CPolygon& polygon);
 	void FadeInOut(std::shared_ptr<CPolygon>& polygon);
 
 private:
+	// フェードの状態
 	enum class FadeState
 	{
 		eNone,
-		eFadeIn,
-		eFadeKeep,
-		eFadeOut,
+		eFadeIn,	// フェードイン
+		eFadeKeep,	// フェード待機状態
+		eFadeOut,	// フェードアウト
 
 		eMaxState,
 	};

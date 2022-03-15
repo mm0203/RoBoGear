@@ -1,5 +1,5 @@
 //=============================================================================
-// Graphics.cpp
+// CGraphics.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -107,22 +107,22 @@ HRESULT InitDX(HWND hWnd, UINT width, UINT height, bool fullscreen)
 // 初期化
 // 
 //=============================================================================
-void Graphics::Init()
+void CGraphics::Init()
 {
 	// レンダーターゲットビュー生成
-	m_pDefRenderTarget = TextureFactory::CreateRenderTargetFromScreen();
+	m_pDefRenderTarget = CTextureFactory::CreateRenderTargetFromScreen();
 	// テクスチャ->深度バッファターゲット
-	m_pDefDepthStencil = TextureFactory::CreateDepthStencil(SCREEN_WIDTH, SCREEN_HEIGHT, false);
+	m_pDefDepthStencil = CTextureFactory::CreateDepthStencil(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	m_pDefRenderTarget->GetResource();
 	// サンプラー初期化 生成
-	m_pDefSamplerState[SAMPLER_POINT] = new SamplerState;
+	m_pDefSamplerState[SAMPLER_POINT] = new CSamplerState;
 	m_pDefSamplerState[SAMPLER_POINT]->Create(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
-	m_pDefSamplerState[SAMPLER_LINEAR] = new SamplerState;
+	m_pDefSamplerState[SAMPLER_LINEAR] = new CSamplerState;
 	m_pDefSamplerState[SAMPLER_LINEAR]->Create(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP);
 	// デプスステンシル初期化 生成
-	m_pDefDepthStencilState[DEPTHSTENCIL_OFF] = new DepthStencilState;
+	m_pDefDepthStencilState[DEPTHSTENCIL_OFF] = new CDepthStencilState;
 	m_pDefDepthStencilState[DEPTHSTENCIL_OFF]->Create(false, false);
-	m_pDefDepthStencilState[DEPTHSTENCIL_ON] = new DepthStencilState;
+	m_pDefDepthStencilState[DEPTHSTENCIL_ON] = new CDepthStencilState;
 	m_pDefDepthStencilState[DEPTHSTENCIL_ON]->Create(true, false);
 
 	// 初期値設定
@@ -140,7 +140,7 @@ void Graphics::Init()
 // 終了
 // 
 //=============================================================================
-void Graphics::Uninit()
+void CGraphics::Uninit()
 {
 	SAFE_DELETE(m_pDefDepthStencilState[DEPTHSTENCIL_OFF]);
 	SAFE_DELETE(m_pDefDepthStencilState[DEPTHSTENCIL_ON]);
@@ -176,11 +176,11 @@ void Graphics::Uninit()
 // 描画初期設定
 // 
 //=============================================================================
-void Graphics::BeginDraw()
+void CGraphics::BeginDraw()
 {
 	float color[4] = { 0.8f, 0.8f, 0.9f, 1.0f };
-	ID3D11RenderTargetView* pRTV = reinterpret_cast<RenderTarget*>(m_pDefRenderTarget)->GetView();
-	ID3D11DepthStencilView* pDSV = reinterpret_cast<DepthStencil*>(m_pDefDepthStencil)->GetView();
+	ID3D11RenderTargetView* pRTV = reinterpret_cast<CRenderTarget*>(m_pDefRenderTarget)->GetView();
+	ID3D11DepthStencilView* pDSV = reinterpret_cast<CDepthStencil*>(m_pDefDepthStencil)->GetView();
 	g_pDeviceContext->ClearRenderTargetView(pRTV, color);
 	g_pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
@@ -190,7 +190,7 @@ void Graphics::BeginDraw()
 // スワップチェイン更新
 // 
 //=============================================================================
-void Graphics::EndDraw()
+void CGraphics::EndDraw()
 {
 	g_pSwapChain->Present(0, 0);
 }
@@ -200,7 +200,7 @@ void Graphics::EndDraw()
 // レンダラー設定
 // 
 //=============================================================================
-void Graphics::SetRenderTarget(Texture** ppRenderTarget, UINT numView, float* pClearColor)
+void CGraphics::SetRenderTarget(Texture** ppRenderTarget, UINT numView, float* pClearColor)
 {
 	// 更新チェック
 	if (!ppRenderTarget || !ppRenderTarget[0])	return;
@@ -229,7 +229,7 @@ void Graphics::SetRenderTarget(Texture** ppRenderTarget, UINT numView, float* pC
 	{
 		for (UINT i = 0; i < m_renderTargetNum; ++i)
 		{
-			ID3D11RenderTargetView* pRTV = reinterpret_cast<RenderTarget*>(m_pRenderTarget[i])->GetView();
+			ID3D11RenderTargetView* pRTV = reinterpret_cast<CRenderTarget*>(m_pRenderTarget[i])->GetView();
 			g_pDeviceContext->ClearRenderTargetView(pRTV, pClearColor);
 		}
 	}
@@ -239,7 +239,7 @@ void Graphics::SetRenderTarget(Texture** ppRenderTarget, UINT numView, float* pC
 // レンダラー初期設定
 // 
 //=============================================================================
-void Graphics::SetRenderTargetDefault(float* pClearColor)
+void CGraphics::SetRenderTargetDefault(float* pClearColor)
 {
 	SetRenderTarget(&m_pDefRenderTarget, 1, pClearColor);
 }
@@ -248,7 +248,7 @@ void Graphics::SetRenderTargetDefault(float* pClearColor)
 // 深度バッファ設定
 // 
 //=============================================================================
-void Graphics::SetDepthStencilView(Texture* pDepthStencilView, bool isClear)
+void CGraphics::SetDepthStencilView(Texture* pDepthStencilView, bool isClear)
 {
 	// 更新チェック
 	if (!pDepthStencilView || m_pDepthStencilView == pDepthStencilView)
@@ -263,7 +263,7 @@ void Graphics::SetDepthStencilView(Texture* pDepthStencilView, bool isClear)
 	// バッファクリア
 	if (isClear)
 	{
-		DepthStencil* pDSV = reinterpret_cast<DepthStencil*>(m_pDepthStencilView);
+		CDepthStencil* pDSV = reinterpret_cast<CDepthStencil*>(m_pDepthStencilView);
 		g_pDeviceContext->ClearDepthStencilView(
 			pDSV->GetView(),
 			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
@@ -280,7 +280,7 @@ void Graphics::SetDepthStencilView(Texture* pDepthStencilView, bool isClear)
 // 深度バッファ初期設定
 // 
 //=============================================================================
-void Graphics::SetDepthStencilViewDefault(bool isClear)
+void CGraphics::SetDepthStencilViewDefault(bool isClear)
 {
 	SetDepthStencilView(m_pDefDepthStencil, isClear);
 }
@@ -290,16 +290,16 @@ void Graphics::SetDepthStencilViewDefault(bool isClear)
 // レンダーターゲット更新
 // 
 //=============================================================================
-void Graphics::UpdateTargetView()
+void CGraphics::UpdateTargetView()
 {
 	// レンダーターゲット取得
 	ID3D11RenderTargetView* pRTV[4] = {};
 	for (UINT i = 0; i < m_renderTargetNum && i < 4; ++i)
 	{
-		pRTV[i] = reinterpret_cast<RenderTarget*>(m_pRenderTarget[i])->GetView();
+		pRTV[i] = reinterpret_cast<CRenderTarget*>(m_pRenderTarget[i])->GetView();
 	}
 	// 深度ステンシル取得
-	DepthStencil* pDSV = reinterpret_cast<DepthStencil*>(m_pDepthStencilView);
+	CDepthStencil* pDSV = reinterpret_cast<CDepthStencil*>(m_pDepthStencilView);
 	// 設定
 	g_pDeviceContext->OMSetRenderTargets(m_renderTargetNum, pRTV, pDSV->GetView());
 }
@@ -318,7 +318,6 @@ ID3D11Device* GetDevice()
 // スワップチェイン取得
 // 
 //=============================================================================
-
 IDXGISwapChain* GetSwapChain() 
 { 
 	return g_pSwapChain; 
@@ -356,25 +355,3 @@ void SetCulling(CullingMode cull)
 {
 	g_pDeviceContext->RSSetState(g_pRasterizer[cull]);
 }
-
-//
-//void Graphics::DrawPostEffect()
-//{
-//	// ポストエフェクトポストエフェクト描画
-//	UpdateTargetView();
-//	g_postEffect.Draw(g_pDeviceContext);
-//}
-//
-//void SetRenderTarget()
-//{
-//	// 各ターゲットビューをレンダーターゲットに設定
-//	g_pDeviceContext->OMSetRenderTargets(1, &g_postEffect.m_pRenderTargetView, g_postEffect.m_pDepthStencilView);
-//}
-//
-//void PostEffectBuffer()
-//{
-//	// ポストエフェクトバッファ
-//	float color[4] = { 0.8f, 0.8f, 0.9f, 1.0f };
-//	g_pDeviceContext->ClearRenderTargetView(g_postEffect.m_pRenderTargetView, color);
-//	g_pDeviceContext->ClearDepthStencilView(g_postEffect.m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-//}

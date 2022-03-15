@@ -1,5 +1,5 @@
 //=============================================================================
-// CEditor.cpp
+// Editor.cpp
 //=============================================================================
 // Author  松野 将之
 //=============================================================================
@@ -97,7 +97,7 @@ void CEditor::Init()
 	// マップチップサイズ
 	m_nChipsize = MapChipSize;
 	// メッセージ初期化
-	MessageManager::Init();
+	CMessageManager::Init();
 	// モードセレクト初期化
 	m_nCurrentMode = eMode_Create;
 	m_ModeSelect.Init();
@@ -120,7 +120,7 @@ void CEditor::Init()
 void CEditor::Uninit()
 {
 	m_pModel->ReleaseModelAll();
-	MessageManager::Uninit();
+	CMessageManager::Uninit();
 	m_Number.Uninit();
 	m_ModelCursor.Uninit();
 	m_ModeSelect.Uninit();
@@ -218,7 +218,7 @@ void CEditor::Draw()
 	// 操作説明描画
 	m_pEditOperationUI.Draw();
 	// メッセージ描画
-	MessageManager::Draw();
+	CMessageManager::Draw();
 }
 
 //=============================================================================
@@ -273,25 +273,25 @@ void CEditor::Create()
 		switch (m_type)
 		{
 		case eObject_Wall:
-			ObjectManager::CreateObject<CWall>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CWall>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Cube:
-			ObjectManager::CreateObject<CCube>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CCube>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Key:
-			ObjectManager::CreateObject<CKey>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CKey>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Gimic:
-			ObjectManager::CreateObject<CGimic>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CGimic>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Player:
-			ObjectManager::CreateObject<CPlayer>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CPlayer>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Trap:
-			ObjectManager::CreateObject<CTrap>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CTrap>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		case eObject_Clear:
-			ObjectManager::CreateObject<CClear>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
+			CObjectManager::CreateObject<CClear>(m_Trans.GetPos(), m_Trans.GetCoord(), m_Trans.GetScale());
 			break;
 		default:
 			break;
@@ -328,35 +328,35 @@ void CEditor::Delete()
 		switch (ObjectType)
 		{
 		case eObject_Wall:
-			Tag = "Wall";
+			Tag = TagWall;
 			break;
 		case eObject_Cube:
-			Tag = "Cube";
+			Tag = TagCube;
 			break;
 		case eObject_Key:
-			Tag = "Key";
+			Tag = TagKey;
 			break;
 		case eObject_Gimic:
-			Tag = "Gimic";
+			Tag = TagGimic;
 			break;
 		case eObject_Player:
-			Tag = "Player";
+			Tag = TagPlayer;
 			break;
 		case eObject_Trap:
-			Tag = "Trap";
+			Tag = TagTrap;
 			break;
 		case eObject_Clear:
-			Tag = "Clear";
+			Tag = TagClear;
 			break;
 		default:
 			break;
 		}
 		// オブジェクト削除
-		ObjectManager::DestroyEditObject(Tag, m_Trans.GetCoord());
+		CObjectManager::DestroyEditObject(Tag, m_Trans.GetCoord());
 
 		//for (auto it = m_pObj.begin(); it != m_pObj.end();)
 		//{
-		//	if (ObjectManager::DestroyEditObject(it->get()->GetTag(), m_Trans.GetCoord()))
+		//	if (CObjectManager::DestroyEditObject(it->get()->GetTag(), m_Trans.GetCoord()))
 		//	{
 		//		it->reset();
 		//		it = m_pObj.erase(it);
@@ -523,7 +523,7 @@ void CEditor::SaveStage()
 		StageNumberUpdate();
 
 		// ステージ読み込み
-		std::string StageFile = StageManager::LoadStage();
+		std::string StageFile = CStageManager::LoadStage();
 
 		//ファイルの出力
 		std::ofstream ofs(StageFile);
@@ -540,7 +540,7 @@ void CEditor::SaveStage()
 		ofs.close();
 
 		// 歩数更新
-		auto& Info = StageManager::GetStageInfo(m_nCurrentStage);
+		auto& Info = CStageManager::GetStageInfo(m_nCurrentStage);
 		std::get<eStageStep>(Info) = m_nStepCount;
 	}
 }
@@ -563,21 +563,21 @@ void CEditor::LoadStage()
 		MapInitialize();
 
 		//現在生成されているオブジェクトを消去
-		ObjectManager::UninitAll();
+		CObjectManager::UninitAll();
 
 		// ステージ番号更新
 		StageNumberUpdate();
 
-		std::string StageFile = StageManager::LoadStage();
+		std::string StageFile = CStageManager::LoadStage();
 
 		// ステージ格納用変数
 		std::vector<std::vector<int>> nMap;
 
 		// CSV読み込み
-		StageManager::ReadCSV(StageFile, nMap);
+		CStageManager::ReadCSV(StageFile, nMap);
 
 		// ステージ生成
-		StageManager::StageCreate(StageFile);
+		CStageManager::StageCreate(StageFile);
 
 		// エディット用変数に格納
 		for (int y = 0; y < HeightMax; y++)
@@ -588,7 +588,7 @@ void CEditor::LoadStage()
 			}
 		}
 		// 歩数初期値読み込み
-		auto& Info = StageManager::GetStageInfo(m_nCurrentStage);
+		auto& Info = CStageManager::GetStageInfo(m_nCurrentStage);
 		m_nStepCount = std::get<eStageStep>(Info);
 	}
 }
@@ -602,7 +602,7 @@ void CEditor::LoadTitle()
 	if (GetKeyTrigger(VK_RETURN))
 	{
 		CSound::Play(SE_CHOISE);
-		Singleton<SceneManager>::GetInstance().SetNextScene(new TitleScene());
+		CSingleton<CSceneManager>::GetInstance().SetNextScene(new CTitleScene());
 	}
 }
 
@@ -621,7 +621,7 @@ void CEditor::LoadGame()
 		// ステージ番号更新
 		StageNumberUpdate();
 
-		Singleton<SceneManager>::GetInstance().SetNextScene(new GameScene());
+		CSingleton<CSceneManager>::GetInstance().SetNextScene(new CGameScene());
 	}
 }
 

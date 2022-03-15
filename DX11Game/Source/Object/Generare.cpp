@@ -5,6 +5,8 @@
 //=============================================================================
 #include "Generare.h"
 #include <Manager/ObjectManager.h>
+#include "Player.h"
+
 
 #define MODEL_GENERARE	"data/model/Object/MainAnim_Blender/Generare_Anim_Blender.fbx"
 
@@ -15,7 +17,7 @@
 //=============================================================================
 CGenerare::CGenerare()
 {
-	m_tag = "Generare";
+	m_tag = TagGenerare;
 	m_Model.LoadModel(MODEL_GENERARE);
 }
 
@@ -36,7 +38,7 @@ void CGenerare::Init()
 void CGenerare::Update()
 {
 	// プレイヤーの座標と同じ場所に
-	const auto& player = ObjectManager::SearchObjectTag("Player");
+	const auto& player = CObjectManager::SearchObjectTag(TagPlayer);
 	m_Pos = player.lock()->GetPos();
 	m_Scale = player.lock()->GetScale();
 	m_Rot = player.lock()->GetRot();

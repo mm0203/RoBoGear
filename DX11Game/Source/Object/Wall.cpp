@@ -12,7 +12,7 @@
 //=============================================================================
 CWall::CWall()
 {
-	m_tag = "Wall";
+	m_tag = TagWall;
 	m_Model.LoadModel(MODEL_WALL);
 }
 

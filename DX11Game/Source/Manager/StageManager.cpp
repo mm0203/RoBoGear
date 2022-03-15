@@ -31,7 +31,7 @@
 // 静的メンバ
 // 
 //=============================================================================
-std::tuple<int, std::string, int> StageManager::m_StageInfo[] = {};
+std::tuple<int, std::string, int> CStageManager::m_StageInfo[] = {};
 
 //=============================================================================
 // 
@@ -50,7 +50,7 @@ namespace
 // 初期化
 // 
 //=============================================================================
-void StageManager::Init()
+void CStageManager::Init()
 {
 	// ステージ番号初期化
 	for (int i = 0; i < eStage_10 + 1; i++)
@@ -88,7 +88,7 @@ void StageManager::Init()
 // ステージ読み込み
 // 
 //=============================================================================
-std::string StageManager::LoadStage()
+std::string CStageManager::LoadStage()
 {
 	// ステージ番号取得
 	int StageNumber = CGameManager::GetStageMenu();
@@ -114,7 +114,7 @@ std::string StageManager::LoadStage()
 // ステージ生成
 // 
 //=============================================================================
-void  StageManager::StageCreate(std::string& fileName)
+void  CStageManager::StageCreate(std::string& fileName)
 {
 	// マップ格納用変数
 	std::vector<std::vector<int>> nMap;
@@ -153,33 +153,33 @@ void  StageManager::StageCreate(std::string& fileName)
 			{
 				// 壁	
 			case(eObject_Wall): // 1
-				ObjectManager::CreateObject<CWall>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CWall>(ObjectPos, Coord);
 				break;
 				// キューブ
 			case(eObject_Cube): // 2
-				ObjectManager::CreateObject<CCube>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CCube>(ObjectPos, Coord);
 				break;
 				// 鍵
 			case(eObject_Key):	 // 3
 				//TODO キーのサイズが合わないので大きく！
 				XMFLOAT3 keysize = XMFLOAT3(2.0f, 2.0f, 2.0f);
-				ObjectManager::CreateObject<CKey>(ObjectPos, Coord, keysize);
+				CObjectManager::CreateObject<CKey>(ObjectPos, Coord, keysize);
 				break;
 				// ギミック
 			case(eObject_Gimic): // 4
-				ObjectManager::CreateObject<CGimic>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CGimic>(ObjectPos, Coord);
 				break;
 				// プレイヤー
 			case(eObject_Player): // 5
-				ObjectManager::CreateObject<CPlayer>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CPlayer>(ObjectPos, Coord);
 				break;
 				// トラップ
 			case(eObject_Trap): // 6
-				ObjectManager::CreateObject<CTrap>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CTrap>(ObjectPos, Coord);
 				break;
 				// ゴール
 			case(eObject_Clear): // 7
-				ObjectManager::CreateObject<CClear>(ObjectPos, Coord);
+				CObjectManager::CreateObject<CClear>(ObjectPos, Coord);
 				break;
 			}
 		}
@@ -193,7 +193,7 @@ void  StageManager::StageCreate(std::string& fileName)
 // CSV読み込み
 // 
 //=============================================================================
-void  StageManager::ReadCSV(std::string& fileName,std::vector<std::vector<int>>& map)
+void  CStageManager::ReadCSV(std::string& fileName,std::vector<std::vector<int>>& map)
 {
 	// ファイル読み込み
 	std::ifstream csv(fileName);

@@ -14,7 +14,7 @@
 // 
 //=============================================================================
 // インスタンス破棄クラス
-class SingletonFinalizer
+class CSingletonFinalizer
 {
 public:
     // デリート用汎用ポインタ
@@ -27,7 +27,8 @@ public:
 
 // シングルトンクラス
 template <typename T>
-class Singleton
+
+class CSingleton
 {
 public:
     //オブジェクトのインスタンスはここににしか存在しない
@@ -45,7 +46,7 @@ private:
         Instance = new T;
 
         // インスタンス数をカウント
-        SingletonFinalizer::addFinalizer(&Singleton<T>::Destroy);
+        CSingletonFinalizer::addFinalizer(&CSingleton<T>::Destroy);
     }
 
     // インスタンス削除
@@ -60,12 +61,12 @@ private:
 
 protected:
     // コンストラクタの使用を外部から禁止する
-    Singleton() = default;
-    Singleton(const Singleton&) = delete;
-    Singleton& operator=(const Singleton&) = delete;
-    Singleton(Singleton&&) = delete;
-    Singleton& operator=(Singleton&&) = delete;
+    CSingleton() = default;
+    CSingleton(const CSingleton&) = delete;
+    CSingleton& operator=(const CSingleton&) = delete;
+    CSingleton(CSingleton&&) = delete;
+    CSingleton& operator=(CSingleton&&) = delete;
 };
 
 // 静的メンバ
-template <typename T> T* Singleton<T>::Instance = nullptr;
+template <typename T> T* CSingleton<T>::Instance = nullptr;

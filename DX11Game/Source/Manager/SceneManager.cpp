@@ -1,5 +1,5 @@
 //=============================================================================
-// SceneManager.cpp
+// CSceneManager.cpp
 //=============================================================================
 // Author  松野 将之
 // 
@@ -12,12 +12,12 @@
 // コンストラクタ
 // 
 //=============================================================================
-SceneManager::SceneManager()
+CSceneManager::CSceneManager()
 {
 	m_pCurrentScene = nullptr;
 	m_pNextScene = nullptr;
 	m_bDoSceneChange = false;
-	m_SceneNo = Scene_None;
+	m_SceneNo = eSceneNone;
 }
 
 //=============================================================================
@@ -25,7 +25,7 @@ SceneManager::SceneManager()
 // 初期化処理
 // 
 //=============================================================================
-const void SceneManager::Init()
+const void CSceneManager::Init()
 {
 	// 現在のシーン初期化
 	m_pCurrentScene->Init();
@@ -36,7 +36,7 @@ const void SceneManager::Init()
 // 終了処理
 // 
 //=============================================================================
-const void SceneManager::Uninit()
+const void CSceneManager::Uninit()
 {
 	// 現在のシーン終了
 	m_pCurrentScene->Uninit();
@@ -47,7 +47,7 @@ const void SceneManager::Uninit()
 // 終了処理
 // 
 //=============================================================================
-const void SceneManager::Update()
+const void CSceneManager::Update()
 {
 	//フェード中は更新しない
 	if (m_bDoSceneChange) return;
@@ -61,7 +61,7 @@ const void SceneManager::Update()
 // 描画処理
 // 
 //=============================================================================
-const void SceneManager::Draw()
+const void CSceneManager::Draw()
 {
 	// シーンが違ったら
 	if (!m_pCurrentScene) return;
@@ -75,7 +75,7 @@ const void SceneManager::Draw()
 // 次のシーン指定
 // 
 //=============================================================================
-const void SceneManager::SetNextScene(Scene* Next)
+const void CSceneManager::SetNextScene(CScene* Next)
 {
 	//フェード中は更新しない
 	if (m_bDoSceneChange) return;
@@ -84,7 +84,7 @@ const void SceneManager::SetNextScene(Scene* Next)
 	m_bDoSceneChange = true;
 
 	// フェード中に呼ぶ次のシーンをセット
-	Singleton<Fade>::GetInstance().SetFadeOut(Next);
+	CSingleton<CFade>::GetInstance().SetFadeOut(Next);
 }
 
 //=============================================================================
@@ -92,7 +92,7 @@ const void SceneManager::SetNextScene(Scene* Next)
 // フェード終了
 // 
 //=============================================================================
-const void SceneManager::EndFade(Scene* Next)
+const void CSceneManager::EndFade(CScene* Next)
 {
 	// 次のシーンをセット
 	m_pNextScene.reset(Next);
@@ -106,7 +106,7 @@ const void SceneManager::EndFade(Scene* Next)
 // シーン遷移
 // 
 //=============================================================================
-const bool SceneManager::ChangeNextScene()
+const bool CSceneManager::ChangeNextScene()
 {
 	//次のシーンが設定されていなければスキップ
 	if (m_pNextScene == nullptr)

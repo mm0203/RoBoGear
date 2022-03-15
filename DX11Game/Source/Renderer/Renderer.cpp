@@ -121,8 +121,8 @@ bool CRenderer::LoadModel(const char* FileName)
 	//m_pTexture = GetMaterial()->pTexture;
 
 	// カメラとライトをセット
-	m_pModel->SetLight(&Singleton<CLight>::GetInstance());
-	m_pModel->SetCamera(&Singleton<CCamera>::GetInstance());
+	m_pModel->SetLight(&CSingleton<CLight>::GetInstance());
+	m_pModel->SetCamera(&CSingleton<CCamera>::GetInstance());
 
 	return b;
 }

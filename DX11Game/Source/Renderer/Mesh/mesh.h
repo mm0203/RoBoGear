@@ -82,6 +82,7 @@ public:
 	static void Uninit();
 	void Update(CMesh* pMesh);
 	void Draw(ID3D11DeviceContext* pDeviceContext, CMesh* pMesh, int nTranslucntType = TT_NOAFFECT);
+	// 頂点生成
 	HRESULT MakeMeshVertex(ID3D11Device* pDevice, CMesh* pMesh, VERTEX_3D vertexWk[], int indexWk[]);
 	void Release(CMesh* pMesh);
 
@@ -105,7 +106,7 @@ private:
 	float m_fAlpha;	// 不透明度
 	bool m_bLight;	// ライティング
 
-	DXBuffer* m_pMeshBuffer; // 頂点&インデックスバッファ
+	CDXBuffer* m_pMeshBuffer; // 頂点&インデックスバッファ
 
 	static MATERIAL	m_Material;				// マテリアル
 	static ConstantBuffer* m_pWorldBuffer;	// シェーダ用バッファ

@@ -12,7 +12,7 @@
 // ƒNƒ‰ƒX’è‹`
 // 
 //=============================================================================
-class DXBuffer
+class CDXBuffer
 {
 public:
 
@@ -29,8 +29,8 @@ public:
 		D3D11_PRIMITIVE_TOPOLOGY topology;
 	};
 public:
-	DXBuffer();
-	~DXBuffer();
+	CDXBuffer();
+	~CDXBuffer();
 
 	HRESULT Create(const Desc& desc);
 

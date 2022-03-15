@@ -186,14 +186,14 @@ void CMesh::Draw(ID3D11DeviceContext* pDeviceContext, CMesh* pMesh, int nTranslu
 	// テクスチャ
 	ID3D11ShaderResourceView* pResource[3] = { pMesh->m_pTexture, pMesh->m_pNormalTexture, pMesh->m_pAmbientTexture };
 	// サンプラセット
-	Singleton<Graphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
+	CSingleton<CGraphics>::GetInstance().SetSamplerState(SAMPLER_LINEAR);
 	// テクスチャセット
 	pDeviceContext->PSSetShaderResources(0, 3, pResource);
 
 	SHADER_GLOBAL cb;
 	XMMATRIX m_MtxWorld = DirectX::XMLoadFloat4x4(&pMesh->m_MtxWorld);
-	CCamera& pCamera = Singleton<CCamera>::GetInstance();
-	CLight* pLight = &Singleton<CLight>::GetInstance();
+	CCamera& pCamera = CSingleton<CCamera>::GetInstance();
+	CLight* pLight = &CSingleton<CLight>::GetInstance();
 
 	//XMMATRIX SHADOW_BIAS = XMMATRIX(
 	//	0.5f, 0.0f, 0.0f, 0.0f,
@@ -267,7 +267,7 @@ HRESULT CMesh::MakeMeshVertex(ID3D11Device* pDevice, CMesh* pMesh, VERTEX_3D ver
 	}
 
 	// 頂点&インデックスバッファ 生成
-	DXBuffer::Desc desc;
+	CDXBuffer::Desc desc;
 	desc.vtxSize = sizeof(VERTEX_3D);
 	desc.vtxCount = pMesh->m_nNumVertex;
 	desc.idxSize = sizeof(int);
@@ -287,7 +287,7 @@ HRESULT CMesh::MakeMeshVertex(ID3D11Device* pDevice, CMesh* pMesh, VERTEX_3D ver
 		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 	};
 	desc.topology = pt[pMesh->m_PrimitiveType];
-	pMesh->m_pMeshBuffer = new DXBuffer();
+	pMesh->m_pMeshBuffer = new CDXBuffer();
 	hr = pMesh->m_pMeshBuffer->Create(desc);
 	if (FAILED(hr)) { return hr; }
 
