@@ -18,6 +18,12 @@
 #include <Scene/StageSelect/StageSelectScene.h>
 #include <System/Sound/Sound.h>
 
+// オブジェクト
+#include <Object/Player.h>
+#include <Object/Cube.h>
+#include <Object/Key.h>
+#include <Object/Gimic.h>
+
 //=============================================================================
 // 
 // 静的メンバ
@@ -27,6 +33,7 @@ GameState CGameManager::m_GameState;
 int CGameManager::m_nStep;
 int CGameManager::m_nStageMenuIndex;
 bool CGameManager::m_bDebugMode;
+CTimeLeap CGameManager::m_TimeLeaps[] = {};
 
 //=============================================================================
 // 
@@ -79,7 +86,14 @@ void CGameManager::Init()
 //=============================================================================
 void CGameManager::Uninit()
 {
+	// メッセージ終了
 	CMessageManager::Uninit();
+
+	// 巻き戻し用スタック解放
+	for (int i = 0; i < eObject_Max - 1; i++)
+	{
+		m_TimeLeaps[i].ReleaseStack();
+	}
 }
 
 //=============================================================================
@@ -114,6 +128,23 @@ void CGameManager::Update()
 
 	case GameState::eMove:	// 動ける
 	
+		// 巻き戻し
+		if (m_TimeLeaps[eObject_Player].GetCoordStack().size() > 1 && GetKeyTrigger(VK_Q))
+		{
+			// 巻き戻し音
+			CSound::Play(SE_TIMELEAP);
+
+			// プレイヤー
+			m_TimeLeaps[eObject_Player].RewindObject(TagPlayer);
+			m_TimeLeaps[eObject_Player].RewindRoationObject(TagPlayer);
+			// キューブ
+			m_TimeLeaps[eObject_Cube].RewindObject(TagCube);
+			// 鍵
+			m_TimeLeaps[eObject_Key].RevivalObject(TagKey);
+			// ギミック
+			m_TimeLeaps[eObject_Gimic].RevivalObject(TagGimic);
+		}
+
 		// ポーズ
 		if (GetKeyTrigger(VK_TAB) && m_GameState != GameState::eInstructions)
 		{

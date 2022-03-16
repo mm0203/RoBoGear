@@ -690,6 +690,12 @@ _NODISCARD static inline constexpr bool operator== (const DirectX::XMINT2& v1, c
     return v1.x == v2.x && v1.y == v2.y;
 }
 
+_NODISCARD static inline constexpr bool operator!= (const DirectX::XMINT2& v1, const DirectX::XMINT2& v2)
+{
+    //return (AdjEqual(v1.x, v2.x) && AdjEqual(v1.y, v2.y));
+    return v1.x != v2.x && v1.y != v2.y;
+}
+
 _NODISCARD static inline constexpr bool operator== (const DirectX::XMFLOAT3& v1, const DirectX::XMFLOAT3& v2)
 {
     return (AdjEqual(v1.x, v2.x) && AdjEqual(v1.y, v2.y) && AdjEqual(v1.z, v2.z));

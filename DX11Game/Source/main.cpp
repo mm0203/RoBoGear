@@ -52,8 +52,8 @@
 // 2020/02/10  デバッグモード実装(フリーカメラ　シェーダー切り替え)
 // 2022/02/11  仮完成
 // 2022/02/15  完成
-// 2022/03/02  一部モデル、テクスチャ差し替え
-//
+// 2022/03/16  巻き戻し機能実装
+// 
 //=============================================================================
 
 #include <main.h>
@@ -113,7 +113,7 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 
 	// タイトルシーン設定 -> タイトルシーン初期化
 	CSingleton<CSceneManager>::GetInstance().EndFade(new CTitleScene());
-	//CSingleton<SceneManager>::GetInstance().EndFade(new GameScene());
+	//CSingleton<CSceneManager>::GetInstance().EndFade(new CGameScene());
 	//CSingleton<SceneManager>::GetInstance().EndFade(new StageSelectScene());
 	//CSingleton<SceneManager>::GetInstance().EndFade(new EditScene());
 

@@ -10,6 +10,9 @@
 #include "Caterpillar.h"
 #include "Gear.h"
 #include "Generare.h"
+#include <Scene/Game/TimeLeap/TimeLeap.h>
+
+#include <stack>
 
 //=============================================================================
 // 
@@ -20,17 +23,6 @@
 #define MODEL_PLAYER "data/model/Object/MainAnim_Blender/Main_Re_Blender.fbx"
 // タグ名
 const std::string TagPlayer = "Player";
-
-// プレイヤー方向
-enum class PlayerDir
-{
-	eNone = 0,
-	eUp,
-	eDown,
-	eLeft,
-	eRight,
-	ePlayerDirMax
-};
 
 // プレイヤーアニメ
 enum class PlayerAnime
@@ -60,22 +52,23 @@ private:
 	// アニメ
 	void PlayerAnimetion();
 	// オブジェクト移動
-	void MoveObject(PlayerDir& dir, int& step);
+	void MoveObject(ObjectDir& dir, int& step);
 	// 次の移動座標
-	XMINT2 GetNextPosition(PlayerDir dir, XMINT2 Coord);
+	XMINT2 GetNextPosition(ObjectDir dir, XMINT2 Coord);
 	// 次の移動場所
-	void GetNextMove(PlayerDir dir, XMFLOAT3& move);
+	void GetNextMove(ObjectDir dir, XMFLOAT3& move);
 	// 歩数計算
 	void StepCalc(XMINT2 pos, int& step);
+
+
 
 private:
 	// 秒数
 	int m_nCount;
 	// 移動方向
-	PlayerDir m_Dir;
+	ObjectDir m_Dir;
 	// キューブ押しアニメ判定
 	bool m_bMoveCube;
-
 	// 各モデルパーツのオブジェクト
 	obj_shared m_Caterpillar;
 	obj_shared m_Gear;

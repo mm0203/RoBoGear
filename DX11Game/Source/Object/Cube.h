@@ -6,7 +6,7 @@
 #pragma once
 
 #include <Manager/Object.h>
-
+#include <stack>
 //=============================================================================
 // 
 // マクロ定義
@@ -32,8 +32,6 @@ public:
 	void Update() override;
 
 private:
-	//// 通電時のテクスチャ
-	//std::string m_energyOnTexture;
-	//// 非通電時のテクスチャ
-	//std::string m_energyOffTexture;
+	//std::stack<XMINT2> m_CoordStack;
+	//std::stack<int> m_DirStack;
 };

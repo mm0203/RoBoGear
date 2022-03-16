@@ -30,5 +30,6 @@ enum eSE
 	SE_EDIT_DELTE,			// エディットモードオブジェクト削除
 	SE_EDIT_CREATE_CURSOR,	// エディットモードカーソル音
 	SE_EDIT_ARROW,			// エディットモードオブジェクト移動
+	SE_TIMELEAP,			// 巻き戻し
 	MAX_SE
 };

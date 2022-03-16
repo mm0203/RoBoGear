@@ -169,6 +169,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{44378fd1-2c16-4430-8ad9-326f44cd4cef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Game\TimeLeap">
+      <UniqueIdentifier>{e59c60de-1d35-424a-8eda-ac6f39287ed6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Component\Texture\TextureColorChangeComponent.cpp">
@@ -448,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="Source\Renderer\Polygon\CPolygon.cpp">
       <Filter>Renderer\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Game\TimeLeap\TimeLeap.cpp">
+      <Filter>Scene\Game\TimeLeap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -742,6 +748,9 @@
     </ClInclude>
     <ClInclude Include="Source\Resource\resource.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\TimeLeap\TimeLeap.h">
+      <Filter>Scene\Game\TimeLeap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

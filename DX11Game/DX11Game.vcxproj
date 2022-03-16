@@ -225,6 +225,7 @@
     <ClCompile Include="Source\Scene\Game\Instructions\InstructionsBackGround.cpp" />
     <ClCompile Include="Source\Scene\Game\Instructions\InstructionsCursor.cpp" />
     <ClCompile Include="Source\Scene\Game\Instructions\InstructionsScreen.cpp" />
+    <ClCompile Include="Source\Scene\Game\TimeLeap\TimeLeap.cpp" />
     <ClCompile Include="Source\Scene\Pause\PauseMenu.cpp" />
     <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuBackGround.cpp" />
     <ClCompile Include="Source\Scene\Pause\PauseTexture\PauseMenuChoices.cpp" />
@@ -323,6 +324,7 @@
     <ClInclude Include="Source\Scene\Game\Instructions\InstructionsBackGround.h" />
     <ClInclude Include="Source\Scene\Game\Instructions\InstructionsCursor.h" />
     <ClInclude Include="Source\Scene\Game\Instructions\InstructionsScreen.h" />
+    <ClInclude Include="Source\Scene\Game\TimeLeap\TimeLeap.h" />
     <ClInclude Include="Source\Scene\Pause\PauseMenu.h" />
     <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuBackGround.h" />
     <ClInclude Include="Source\Scene\Pause\PauseTexture\PauseMenuChoices.h" />

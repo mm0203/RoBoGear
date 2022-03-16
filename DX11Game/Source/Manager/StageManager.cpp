@@ -72,6 +72,7 @@ void CStageManager::Init()
 
 	// ŠeƒXƒe[ƒW‚Ì•à”Ši”[
 	std::get<eStageStep>(m_StageInfo[eStage_1])  = 22;	// Z
+	//std::get<eStageStep>(m_StageInfo[eStage_1])  = 99;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_2])  = 25;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_3])  = 24;	// Z
 	std::get<eStageStep>(m_StageInfo[eStage_4])  = 20;	// Z

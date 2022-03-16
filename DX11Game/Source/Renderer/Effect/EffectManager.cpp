@@ -34,8 +34,9 @@ void CEffectManager::Init()
 //=============================================================================
 void CEffectManager::Uninit()
 {
-	// 各リストのオブジェクト破棄
+	// 各リストのオブジェクト削除
 	int num = (int)m_ActiveList.size();
+
 	for (int i = 0; i < num; i++)
 	{
 		CEffect* p;						//削除用ポインタ
@@ -44,12 +45,14 @@ void CEffectManager::Uninit()
 		m_ActiveList.erase(m_ActiveList.begin());	//リストから削除
 		delete p;						//インスタンス削除
 	}
+
+	// 未使用リストのオブジェクト削除
 	num = (int)m_UnusedList.size();
+
 	for (int i = 0; i < num; i++)
 	{
 		CEffect* p;						//削除用ポインタ
 		p = *(m_UnusedList.begin());	//要素のポインタ
-
 		p->Uninit();					//終了処理を呼ぶ
 		m_UnusedList.erase(m_UnusedList.begin());	//リストから削除
 		delete p;						//インスタンス削除

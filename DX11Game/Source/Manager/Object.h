@@ -11,6 +11,26 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <stack>
+
+//=============================================================================
+// 
+// マクロ定義
+// 
+//=============================================================================
+// 方向
+enum class ObjectDir
+{
+	eNone = 0,
+	eUp,
+	eDown,
+	eLeft,
+	eRight,
+	ePlayerDirMax
+};
+
+// 移動量
+const float MovementObject = 10.0f;
 
 //=============================================================================
 // 
@@ -62,4 +82,5 @@ protected:
 	XMFLOAT3 m_Move;	// 移動量
 	std::string m_tag;	// タグ名
 	CRenderer m_Model;	// モデル情報
+
 };

@@ -36,7 +36,7 @@ public:
 		XMFLOAT3 scale = XMFLOAT3(1.0f, 1.0f, 1.0f),
 		XMFLOAT3 rot = XMFLOAT3(0, 0, 0))
 	{
-		obj_shared ptr;
+		obj_shared ptr;	
 		ptr.reset(new T());
 
 		// インスタンス生成時に情報をセット
@@ -53,7 +53,7 @@ public:
 	// オブジェクトリストに追加
 	static void AddObjList(const obj_shared& pObj)
 	{
-		m_pObjList.emplace_back(pObj);
+		m_ActiveList.emplace_back(pObj);
 	}
 
 	static void InitAll();	 // 全初期化
@@ -67,13 +67,19 @@ public:
 	static bool DestroyEditObject(std::string tag, XMINT2 pos);
 	// タグサーチ
 	static std::weak_ptr<CObject> SearchObjectTag(std::string tag);
-	// 移動オブジェクト取得
+	// 使用リストから移動オブジェクト取得
 	static std::weak_ptr<CObject> GetObjectAtPosition(std::string tag ,XMINT2 pos);
+	// 未使用リストから移動オブジェクト取得
+	static std::weak_ptr<CObject> GetUnusedObjectAtPosition(std::string tag, XMINT2 pos);
 	// オブジェクトチェック
 	static bool IsObject(std::string tag, XMINT2 pos);
+	// 未使用リストから使用リストに移す
+	static void UnusedToActive(std::string tag);
 
 private:
-	//static std::vector<obj_shared> m_pObjList; // インスタンス格納用リスト
-	static std::list<obj_shared> m_pObjList; // インスタンス格納用リスト
+	// インスタンス使用リスト
+	static std::list<obj_shared> m_ActiveList;
+	// インスタンス未使用リスト
+	static std::list<obj_shared> m_UnusedList;
 
 };

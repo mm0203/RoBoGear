@@ -6,6 +6,7 @@
 #pragma once
 
 #include <Manager/StageManager.h>
+#include <Scene/Game/TimeLeap/TimeLeap.h>
 
 //=============================================================================
 // 
@@ -44,7 +45,7 @@ public:
 	static int& GetStep() { return m_nStep; }
 	static int& GetStageMenu() { return m_nStageMenuIndex; }
 	static bool GetDebug() { return m_bDebugMode; }
-	
+	static CTimeLeap& GetTimeLeap(int objindex) { return m_TimeLeaps[objindex]; }
 	// setter
 	static void SetState(GameState state) { m_GameState = state; }
 
@@ -62,4 +63,6 @@ private:
 	static int m_nStageMenuIndex;
 	// デバックモード
 	static bool m_bDebugMode;
+	// 巻き戻し用のスタックをオブジェクトの種類数用意
+	static CTimeLeap m_TimeLeaps[eObject_Max - 1];
 };
