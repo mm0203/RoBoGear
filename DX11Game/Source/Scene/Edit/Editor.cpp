@@ -590,6 +590,10 @@ void CEditor::LoadStage()
 		// 歩数初期値読み込み
 		auto& Info = CStageManager::GetStageInfo(m_nCurrentStage);
 		m_nStepCount = std::get<eStageStep>(Info);
+
+		// モデルのデフォルトモデルを壁にしておく
+		m_pModel->LoadModel(MODEL_WALL);
+
 	}
 }
 //=============================================================================
