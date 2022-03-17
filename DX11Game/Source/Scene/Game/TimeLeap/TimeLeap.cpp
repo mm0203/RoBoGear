@@ -13,6 +13,10 @@
 #include <Object/Player.h>
 #include <Object/Trap.h>
 
+// システム
+#include <Renderer/Effect/Effect.h>
+#include <System/Sound/Sound.h>
+
 //=============================================================================
 // 
 // スタック解放
@@ -128,7 +132,15 @@ void CTimeLeap::RevivalObject(std::string tag)
 	// 戻すオブジェクトが存在しているなら
 	else if (!obj.expired())
 	{
+		// 未使用リストから使用リストに戻す
 		CObjectManager::UnusedToActive(tag);
+
+		// 復活したオフジェクトの場所にエフェクト発生
+		XMFLOAT3 pos = obj.lock()->GetPos();
+		CEffectManager::CreateEffect(Effect_RevivalObject, pos);
+
+		// 復活音
+		CSound::Play(SE_REVIVALOBJECT);
 	}
 
 	// 前回の場所を削除

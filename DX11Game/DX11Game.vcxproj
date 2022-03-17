@@ -221,6 +221,7 @@
     <ClCompile Include="Source\Scene\Game\GameTexture\GameBackGround.cpp" />
     <ClCompile Include="Source\Scene\Game\GameTexture\GameStep.cpp" />
     <ClCompile Include="Source\Scene\Game\GameTexture\StartLogo.cpp" />
+    <ClCompile Include="Source\Scene\Game\GameTexture\TimeLeapTexture.cpp" />
     <ClCompile Include="Source\Scene\Game\Instructions\Instructions.cpp" />
     <ClCompile Include="Source\Scene\Game\Instructions\InstructionsBackGround.cpp" />
     <ClCompile Include="Source\Scene\Game\Instructions\InstructionsCursor.cpp" />
@@ -320,6 +321,7 @@
     <ClInclude Include="Source\Scene\Game\GameTexture\GameBackGround.h" />
     <ClInclude Include="Source\Scene\Game\GameTexture\GameStep.h" />
     <ClInclude Include="Source\Scene\Game\GameTexture\StartLogo.h" />
+    <ClInclude Include="Source\Scene\Game\GameTexture\TimeLeapTexture.h" />
     <ClInclude Include="Source\Scene\Game\Instructions\Instructions.h" />
     <ClInclude Include="Source\Scene\Game\Instructions\InstructionsBackGround.h" />
     <ClInclude Include="Source\Scene\Game\Instructions\InstructionsCursor.h" />

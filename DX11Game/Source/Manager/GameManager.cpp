@@ -103,10 +103,6 @@ void CGameManager::Uninit()
 //=============================================================================
 void CGameManager::Update()
 {
-	// デバッグ切り替え
-	if (GetKeyTrigger(VK_F1))
-		m_bDebugMode ^= 1;
-
 	// カウント用
 	static int nCount = 0;
 
@@ -128,13 +124,17 @@ void CGameManager::Update()
 
 	case GameState::eMove:	// 動ける
 	
-		// 巻き戻し
+		// デバッグ切り替え
+		if (GetKeyTrigger(VK_F1))
+			m_bDebugMode ^= 1;
+
+		// 動いた事があれば巻き戻し可能
 		if (m_TimeLeaps[eObject_Player].GetCoordStack().size() > 1 && GetKeyTrigger(VK_Q))
 		{
 			// 巻き戻し音
 			CSound::Play(SE_TIMELEAP);
 
-			// プレイヤー
+			// プレイヤー(位置と方向を戻す)
 			m_TimeLeaps[eObject_Player].RewindObject(TagPlayer);
 			m_TimeLeaps[eObject_Player].RewindRoationObject(TagPlayer);
 			// キューブ
@@ -146,7 +146,7 @@ void CGameManager::Update()
 		}
 
 		// ポーズ
-		if (GetKeyTrigger(VK_TAB) && m_GameState != GameState::eInstructions)
+		if (GetKeyTrigger(VK_TAB) && m_GameState != GameState::eInstructions && !m_bDebugMode)
 		{
 			// ポーズ音
 			CSound::Play(SE_PAUSE);
@@ -155,7 +155,7 @@ void CGameManager::Update()
 			m_GameState = GameState::ePause;
 		}
 		// 操作説明
-		if (GetKeyTrigger(VK_R) && m_GameState != GameState::ePause)
+		if (GetKeyTrigger(VK_R) && m_GameState != GameState::ePause && !m_bDebugMode)
 		{
 			// 操作説明音
 			CSound::Play(SE_PAUSE);

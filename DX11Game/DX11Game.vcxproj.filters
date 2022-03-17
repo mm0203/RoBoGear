@@ -455,6 +455,9 @@
     <ClCompile Include="Source\Scene\Game\TimeLeap\TimeLeap.cpp">
       <Filter>Scene\Game\TimeLeap</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\Game\GameTexture\TimeLeapTexture.cpp">
+      <Filter>Scene\Game\GameTexture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Component\Texture\TextureColorChangeComponent.h">
@@ -751,6 +754,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene\Game\TimeLeap\TimeLeap.h">
       <Filter>Scene\Game\TimeLeap</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Game\GameTexture\TimeLeapTexture.h">
+      <Filter>Scene\Game\GameTexture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

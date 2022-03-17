@@ -31,5 +31,6 @@ enum eSE
 	SE_EDIT_CREATE_CURSOR,	// エディットモードカーソル音
 	SE_EDIT_ARROW,			// エディットモードオブジェクト移動
 	SE_TIMELEAP,			// 巻き戻し
+	SE_REVIVALOBJECT,		// 巻き戻しのオブジェクト復活音
 	MAX_SE
 };

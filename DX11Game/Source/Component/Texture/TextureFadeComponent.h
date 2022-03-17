@@ -6,6 +6,7 @@
 #pragma once
 
 #include <Renderer/Polygon/CPolygon.h>
+#include <Manager/GameManager.h>
 
 //=============================================================================
 // 
@@ -32,7 +33,7 @@ public:
 	void FadeOut(std::shared_ptr<CPolygon>& polygon);
 	// フェードインからアウト
 	void FadeInOut(CPolygon& polygon);
-	void FadeInOut(std::shared_ptr<CPolygon>& polygon);
+	void FadeInOut(std::shared_ptr<CPolygon>& polygon, float FadeKeep = Second * 2);
 
 private:
 	// フェードの状態

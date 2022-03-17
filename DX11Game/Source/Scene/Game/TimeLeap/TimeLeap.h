@@ -47,6 +47,7 @@ public:
 
 	// getter
 	std::stack<XMINT2> GetCoordStack() { return m_CoordStack; }
+	// setter
 	std::stack<ObjectDir> GetDirStack() { return m_DirStack; }
 
 private:

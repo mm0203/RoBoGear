@@ -179,23 +179,15 @@ void CPlayer::Update()
 	// アニメーション更新
 	PlayerAnimetion();
 
+	// デバッグ用
 	PrintDebugProc("PosX%d:PosY%d:PosZ%d:\n", (int)m_Pos.x, (int)m_Pos.y, (int)m_Pos.z);
 	PrintDebugProc("RotX%d:RotY%d:RotZ%d:\n", (int)m_Rot.x, (int)m_Rot.y, (int)m_Rot.z);
 	PrintDebugProc("PlayerX:%d:PlayerY:%d:\n", (int)m_Coord.x, (int)m_Coord.y);
 	PrintDebugProc("PlayerAnim:%d\n", (int)m_Model.GetAnimeNo());
-
 	//std::stack<XMINT2> pc = CGameManager::GetTimeLeap(eObject_Player).GetCoordStack();
-	//std::stack<ObjectDir> pd = CGameManager::GetTimeLeap(eObject_Player).GetDirStack();
-	//PrintDebugProc("PlayerCoordStack:%d\n", (int)pc.size());
-	//PrintDebugProc("PlayerDirStack:%d\n", (int)pd.size());
-
 	//std::stack<XMINT2> cc = CGameManager::GetTimeLeap(eObject_Cube).GetCoordStack();
-	//std::stack<ObjectDir> cd = CGameManager::GetTimeLeap(eObject_Cube).GetDirStack();
+	//PrintDebugProc("PlayerCoordStack:%d\n", (int)pc.size());
 	//PrintDebugProc("CubeCoordStack:%d\n", (int)cc.size());
-	//PrintDebugProc("CubeDirStack:%d\n", (int)cd.size());
-
-	//std::stack<XMINT2> kc = CGameManager::GetTimeLeap(eObject_Key).GetCoordStack();
-	//PrintDebugProc("KeyCoordStack:%d\n", (int)kc.size());
 
 }
 
@@ -291,7 +283,6 @@ void CPlayer::MoveObject(ObjectDir& dir, int& step)
 		{
 			// 巻き戻し用スタックにキューブの位置と方向を保存
 			CGameManager::GetTimeLeap(eObject_Cube).AddCoordStack(nextCubepos);
-			//CGameManager::GetTimeLeap(eObject_Cube).AddDirStackAdd(dir);
 
 			// 巻き戻し用スタックに空の要素を追加
 			XMINT2 empty = XMINT2(-1, -1);
@@ -323,7 +314,6 @@ void CPlayer::MoveObject(ObjectDir& dir, int& step)
 		// 巻き戻し用スタックに空の要素を追加
 		XMINT2 empty = XMINT2(-1, -1);
 		CGameManager::GetTimeLeap(eObject_Cube).AddCoordStack(empty);
-		//CGameManager::GetTimeLeap(eObject_Cube).AddDirStackAdd(dir);
 
 		// プレイヤーの座標を位置を更新
 		m_Coord = nextPlayerPos;
@@ -354,7 +344,6 @@ void CPlayer::MoveObject(ObjectDir& dir, int& step)
 	else
 	{
 		// 巻き戻し用スタックに空の要素を追加
-		//CGameManager::GetTimeLeap(eObject_Cube).AddDirStackAdd(dir);
 		XMINT2 empty = XMINT2(-1, -1);
 		CGameManager::GetTimeLeap(eObject_Cube).AddCoordStack(empty);
 		CGameManager::GetTimeLeap(eObject_Key).AddCoordStack(empty);
@@ -370,7 +359,6 @@ void CPlayer::MoveObject(ObjectDir& dir, int& step)
 			CGameManager::SetState(GameState::eClear);
 		}
 	}
-
 	// プレイヤーが移動できるとき
 	if (m_Coord == nextPlayerPos)
 	{
@@ -385,13 +373,12 @@ void CPlayer::MoveObject(ObjectDir& dir, int& step)
 		CGameManager::GetTimeLeap(eObject_Player).AddDirStackAdd(dir);
 		CGameManager::GetTimeLeap(eObject_Player).AddRoationStackAdd(m_Rot);
 
-		// キューブの巻き戻し用スタックに要素を追加
+		// キューブの巻き戻し用スタックに方向を追加
 		CGameManager::GetTimeLeap(eObject_Cube).AddDirStackAdd(dir);
 
 		// エフェクト発生
 		CEffectManager::CreateEffect(Effect_PlayerMove, m_Pos);
 	}
-
 	// 移動音
 	CSound::Play(SE_PLAYER_MOVE);
 }

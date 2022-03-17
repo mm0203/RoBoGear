@@ -16,11 +16,12 @@
 //=============================================================================
 enum EffectID
 {
-	Effect_GimicBreak,	// ギミック破壊時
-	Effect_KeyBreak,	// 鍵を取った
-	Effect_PlayerMove,	// プレイヤー移動
-	Effect_CubeMove,	// キューブ移動
-	Effect_Trap,		// ダメージ床
+	Effect_GimicBreak,	  // ギミック破壊時
+	Effect_KeyBreak,	  // 鍵を取った
+	Effect_PlayerMove,	  // プレイヤー移動
+	Effect_CubeMove,	  // キューブ移動
+	Effect_Trap,		  // ダメージ床
+	Effect_RevivalObject, // 巻き戻しでオブジェクト復活
 	Effect_MAX
 };
 

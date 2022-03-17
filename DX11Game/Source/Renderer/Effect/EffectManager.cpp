@@ -105,7 +105,7 @@ void CEffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.Init();
 		obj.m_FrameNum = { 5,3 };
 		obj.m_MaxAnimNum = 15;
-		obj.m_Speed = 5;
+		obj.m_Speed = 3;
 		obj.SetPosition(pos);
 		obj.SetSize(75.0f, 75.0f);
 		obj.SetBillFrameNum(obj.m_FrameNum);
@@ -156,8 +156,17 @@ void CEffectManager::CreateEffect(EffectID ID, XMFLOAT3 pos)
 		obj.LoadBillTexture("data/texture/effect/Trap.png");
 		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
-
-
+	case Effect_RevivalObject:
+		obj.Init();
+		obj.m_FrameNum = { 5,2 };
+		obj.m_MaxAnimNum = 10;
+		obj.m_Speed = 2;
+		obj.SetPosition(pos);
+		obj.SetSize(100.0f, 100.0f);
+		obj.SetBillFrameNum(obj.m_FrameNum);
+		obj.LoadBillTexture("data/texture/effect/RevivalObject.png");
+		obj.SetBillDiffuse(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
+		break;
 	default:
 		break;
 	}

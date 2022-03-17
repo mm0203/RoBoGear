@@ -124,7 +124,7 @@ void CTextureFadeComponent::FadeInOut(CPolygon& polygon)
 		m_nFedeCount++;
 
 		// 2秒を超えたら
-		if (m_nFedeCount >= (FadeKeep * 60))
+		if (m_nFedeCount >= (Second * 2))
 		{
 			m_CurrentFade = FadeState::eFadeOut;
 			m_nFedeCount = 0;
@@ -150,7 +150,7 @@ void CTextureFadeComponent::FadeInOut(CPolygon& polygon)
 // テクスチャフェードインアウト
 // 
 //=============================================================================
-void CTextureFadeComponent::FadeInOut(std::shared_ptr<CPolygon>& polygon)
+void CTextureFadeComponent::FadeInOut(std::shared_ptr<CPolygon>& polygon, float FadeKeep)
 {
 	switch (m_CurrentFade)
 	{
@@ -174,7 +174,7 @@ void CTextureFadeComponent::FadeInOut(std::shared_ptr<CPolygon>& polygon)
 		m_nFedeCount++;
 
 		// 2秒を超えたら
-		if (m_nFedeCount >= (FadeKeep * 60))
+		if (m_nFedeCount >= (FadeKeep))
 		{
 			m_CurrentFade = FadeState::eFadeOut;
 			m_nFedeCount = 0;

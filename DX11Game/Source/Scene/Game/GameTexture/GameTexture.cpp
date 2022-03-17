@@ -106,7 +106,9 @@ void CGameTexture::Update(GameState state)
 void CGameTexture::Draw(GameState state)
 {
 	// デバッグモードで非表示
-	if(!CGameManager::GetDebug())
-	for (auto& it : m_pGameTextures)
-		it->Draw();
+	if (!CGameManager::GetDebug())
+	{
+		for (auto& it : m_pGameTextures)
+			it->Draw();
+	}
 }

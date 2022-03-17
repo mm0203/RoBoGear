@@ -30,5 +30,6 @@ LPCWSTR g_pszFileSE[MAX_SE] =
 	L"EditCursor.mp3",		// エディットモードカーソル音
 	L"EditArrow.mp3",		// エディットモードオブジェクト移動
 	L"TimeLeap.mp3",		// 巻き戻し
+	L"RevivalObject.mp3",	// 巻き戻しのオブジェクト復活音
 	
 };
